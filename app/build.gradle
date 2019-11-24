@@ -1,5 +1,10 @@
 apply plugin: 'com.android.application'
 
+// https://stackoverflow.com/q/35722904
+def keysFile = rootProject.file("my.keys")
+def keysProperties = new Properties()
+keysProperties.load(new FileInputStream(keysFile))
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -9,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'API_KEY_SPOONACULAR', '\"' + keysProperties['api_spoonacular'] + '\"'
     }
     buildTypes {
         release {
