@@ -3,12 +3,27 @@ package com.example.recipe_q;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.recipe_q.util.Http;
 
+public class MainActivity extends AppCompatActivity implements Http.Listener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new Http(this).getRandomJoke();
+    }
+
+    @Override
+    public void onInternetFailure(Throwable throwable) {
+        // Do nothing for now
+    }
+
+    @Override
+    public void onJokeRetrieved(String joke) {
+        TextView tv = findViewById(R.id.hello_world);
+        tv.setText(joke);
     }
 }
