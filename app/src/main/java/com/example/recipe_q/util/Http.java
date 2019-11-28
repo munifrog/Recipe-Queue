@@ -244,6 +244,45 @@ public class Http {
         });
     }
 
+    public void getRecipesSpecificList(long [] idList) {
+        if (idList != null && idList.length > 0) {
+            String list = Long.toString(idList[0]);
+            for (int i = 1; i < idList.length; i++) {
+                list += "," + idList[i];
+            }
+            getRecipesSpecificList(list);
+        }
+    }
+    public void getRecipesSpecificList(String commaSeparatedList) {
+        mSpoonacular.getRecipesSpecificList(commaSeparatedList).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody responseBody = response.body();
+                if (responseBody != null) {
+                    try {
+                        String jsonString = responseBody.string();
+                        JSONArray recipeArray = new JSONArray(jsonString);
+                        int numRecipes = recipeArray.length();
+                        JSONObject currentObject;
+                        for (int i = 0; i < numRecipes; i++) {
+                            currentObject = recipeArray.getJSONObject(i);
+                            getRecipeInformation(currentObject);
+                        }
+                    } catch (JSONException e) {
+                        // TODO: Handle appropriately
+                    } catch (IOException e) {
+                        // TODO: Handle appropriately
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                onInternetFailure(call, t);
+            }
+        });
+    }
+
     public void getRecipesComplexSearch(Map<String, String> searchTerms) {
         mSpoonacular.getRecipesComplexSearch(searchTerms).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -292,6 +331,9 @@ public class Http {
 
         @GET("recipes/{id}/information/?" + API_KEY)
         Call<ResponseBody> getRecipesSpecific(@Path("id") String recipeId);
+
+        @GET("recipes/informationBulk/?" + API_KEY)
+        Call<ResponseBody> getRecipesSpecificList(@Query("ids") String idList);
 
         @GET("recipes/complexSearch/?" + API_KEY)
         Call<ResponseBody> getRecipesComplexSearch(@QueryMap Map<String, String> queries);
