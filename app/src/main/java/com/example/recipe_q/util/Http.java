@@ -7,6 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -16,6 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public class Http {
     private static final String API_KEY = "apiKey=" + BuildConfig.API_KEY_SPOONACULAR;
@@ -29,6 +32,7 @@ public class Http {
     private static final String JSON_TAG_JOKE_TEXT = "text";
     private static final String JSON_TAG_READY_MINUTES = "readyInMinutes";
     private static final String JSON_TAG_RECIPES_LIST = "recipes";
+    private static final String JSON_TAG_RESULTS_LIST = "results";
     private static final String JSON_TAG_SERVINGS = "servings";
     private static final String JSON_TAG_STEP = "step";
     private static final String JSON_TAG_STEPS_LIST = "steps";
@@ -240,6 +244,41 @@ public class Http {
         });
     }
 
+    public void getRecipesComplexSearch(Map<String, String> searchTerms) {
+        mSpoonacular.getRecipesComplexSearch(searchTerms).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody responseBody = response.body();
+                if (responseBody != null) {
+                    try {
+                        String jsonString = responseBody.string();
+                        JSONObject searchResults  =new JSONObject(jsonString);
+                        JSONArray foundRecipes = searchResults.getJSONArray(JSON_TAG_RESULTS_LIST);
+                        if (foundRecipes != null) {
+                            int recipeCount = foundRecipes.length();
+                            JSONObject currentRecipe;
+                            long currentId;
+                            String currentTitle;
+                            for (int i =0; i < recipeCount; i++) {
+                                currentRecipe = foundRecipes.getJSONObject(i);
+                                currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
+                                currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
+                            }
+                        }
+                    } catch (JSONException e) {
+                        // TODO: Handle appropriately
+                    } catch (IOException e) {
+                        // TODO: Handle appropriately
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                onInternetFailure(call, t);
+            }
+        });
+    }
 
     private interface Spoonacular {
         @GET("food/jokes/random/?" + API_KEY)
@@ -253,5 +292,8 @@ public class Http {
 
         @GET("recipes/{id}/information/?" + API_KEY)
         Call<ResponseBody> getRecipesSpecific(@Path("id") String recipeId);
+
+        @GET("recipes/complexSearch/?" + API_KEY)
+        Call<ResponseBody> getRecipesComplexSearch(@QueryMap Map<String, String> queries);
     }
 }
