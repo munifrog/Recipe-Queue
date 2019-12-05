@@ -20,7 +20,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-public class Http {
+public class Api {
     private static final String API_KEY = "apiKey=" + BuildConfig.API_KEY_SPOONACULAR;
     private static final String API_PROTOCOL = "https";
     private static final String API_HOST = "api.spoonacular.com";
@@ -46,7 +46,7 @@ public class Http {
         void onJokeRetrieved(String joke);
     }
 
-    public Http(Listener listener) {
+    public Api(Listener listener) {
         mListener = listener;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_PROTOCOL + "://" + API_HOST)

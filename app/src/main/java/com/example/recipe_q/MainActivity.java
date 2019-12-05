@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.recipe_q.util.Http;
+import com.example.recipe_q.util.Api;
 
-public class MainActivity extends AppCompatActivity implements Http.Listener {
+public class MainActivity extends AppCompatActivity implements Api.Listener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new Http(this).getRandomJoke();
+        new Api(this)
+                .getRandomJoke()
+        ;
     }
 
     @Override
