@@ -12,20 +12,20 @@ import com.example.recipe_q.model.ListItem;
 import java.util.List;
 
 @Dao
-abstract class ListDataAccessObject {
+public interface ListDataAccessObject {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract long [] insertItems(List<ListItem> items);
+    long [] insertItems(List<ListItem> items);
 
     @Delete
-    abstract void deleteItems(List<ListItem> items);
+    void deleteItems(List<ListItem> items);
 
     @Query("SELECT * FROM items ORDER BY item_name ASC")
-    abstract LiveData<List<ListItem>> signaledLoadItems();
+    LiveData<List<ListItem>> signaledLoadItems();
     @Query("SELECT * FROM items ORDER BY item_name ASC")
-    abstract List<ListItem> immediateLoadItems();
+    List<ListItem> immediateLoadItems();
 
     @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC")
-    abstract LiveData<List<ListItem>> signaledLoadSwipedItems();
+    LiveData<List<ListItem>> signaledLoadSwipedItems();
     @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC")
-    abstract List<ListItem> immediateLoadSwipedItems();
+    List<ListItem> immediateLoadSwipedItems();
 }

@@ -50,7 +50,7 @@ public class ListItem {
     }
 
     @Ignore
-    ListItem(
+    public ListItem(
             String name,
             String unit,
             float quantity,
@@ -68,7 +68,7 @@ public class ListItem {
     }
 
     @Ignore
-    ListItem(
+    public ListItem(
             String name,
             String unit,
             float quantity,
@@ -84,7 +84,7 @@ public class ListItem {
     }
 
     @Ignore
-    ListItem(
+    public ListItem(
             String name,
             String unit,
             float quantity
