@@ -4,15 +4,15 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import com.example.recipe_q.db.ListDataBase;
 import com.example.recipe_q.model.ListItem;
-import com.example.recipe_q.model.ViewModel;
 
 public class ListInserter extends AsyncTask<List<ListItem>, Void, Void> {
-    private ViewModel mViewModel;
+    private ListDataBase mDatabaseList;
     private Listener mListener;
 
-    public ListInserter(ViewModel viewModel, Listener listener) {
-        mViewModel = viewModel;
+    public ListInserter(ListDataBase database, Listener listener) {
+        mDatabaseList = database;
         mListener = listener;
     }
 
@@ -22,7 +22,7 @@ public class ListInserter extends AsyncTask<List<ListItem>, Void, Void> {
 
     @Override
     protected Void doInBackground(List<ListItem>... items) {
-        mViewModel.getListDatabase().dao().insertItems(items[0]);
+        mDatabaseList.dao().insertItems(items[0]);
         return null;
     }
 

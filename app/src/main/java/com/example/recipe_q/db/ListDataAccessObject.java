@@ -20,12 +20,18 @@ public interface ListDataAccessObject {
     void deleteItems(List<ListItem> items);
 
     @Query("SELECT * FROM items ORDER BY item_name ASC")
-    LiveData<List<ListItem>> signaledLoadItems();
+    LiveData<List<ListItem>> signaledLoadAllItems();
     @Query("SELECT * FROM items ORDER BY item_name ASC")
-    List<ListItem> immediateLoadItems();
+    List<ListItem> immediateLoadAllItems();
 
-    @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC")
-    LiveData<List<ListItem>> signaledLoadSwipedItems();
-    @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC")
-    List<ListItem> immediateLoadSwipedItems();
+    @Query("SELECT * FROM items WHERE item_swiped == 0 ORDER BY item_name ASC, item_unit ASC")
+    LiveData<List<ListItem>> signaledLoadSoughtItems();
+    @Query("SELECT * FROM items WHERE item_swiped == 0 ORDER BY item_name ASC, item_unit ASC")
+    List<ListItem> immediateLoadSoughtItems();
+
+    // It is unlikely that timestamp will be same for two different names, but sort just in case ...
+    @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC, item_name ASC, item_unit ASC")
+    LiveData<List<ListItem>> signaledLoadFoundItems();
+    @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC, item_name ASC, item_unit ASC")
+    List<ListItem> immediateLoadFoundItems();
 }

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.recipe_q.R;
-import com.example.recipe_q.model.ListItem;
+import com.example.recipe_q.model.ListItemCombined;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements Api.Listener, Vie
 
     @Override
     public void onListDatabaseUpdated() {
-        List<ListItem> list = mViewModel.getListItems();
+        List<ListItemCombined> list = mViewModel.getSearchListItems();
 
         if (list != null) {
-            ListItem current;
+            ListItemCombined current;
             String text = "";
             for (int i = 0; i < list.size(); i++) {
                 current = list.get(i);
