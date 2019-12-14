@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorDivider">#575757</color>
+
+    <color name="colorItemName">#000000</color>
+    <color name="colorItemAmounts">@color/colorItemName</color>
+    <color name="colorItemOrigin">#c0404040</color>
+
 </resources>

@@ -9,9 +9,7 @@ import java.util.List;
 
 public class ViewModel extends AndroidViewModel implements ListManager.Listener {
     private ListManager mListManager;
-
     private Listener mListener;
-
 
     public interface Listener {
         void onInternetFailure(Throwable throwable);
@@ -21,9 +19,7 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
     ViewModel(@NonNull Application application, Listener listener) {
         super(application);
         mListener = listener;
-
         mListManager = new ListManager(application, this);
-
     }
 
     @Override
@@ -37,7 +33,7 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
         }
     }
 
-    public List<ListItemCombined> getSearchListItems() {
+    public List<ListItemCombined> getSoughtListItems() {
         if (mListManager != null) {
             return mListManager.getSoughtListItems();
         } else {

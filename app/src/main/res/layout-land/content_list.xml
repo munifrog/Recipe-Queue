@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.ListActivity"
+    tools:showIn="@layout/activity_list"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tv_label_to_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_label_sought"
+            android:textSize="@dimen/text_size_list_label"
+            android:paddingStart="@dimen/pad_horz_label"
+            android:paddingEnd="@dimen/pad_horz_label"
+            android:paddingTop="@dimen/pad_vert_label"
+            android:paddingBottom="@dimen/pad_vert_label"
+            android:layout_gravity="center" />
+
+        <View style="@style/DividerHorizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_to_find"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:paddingStart="@dimen/pad_horz_list"
+            android:paddingEnd="@dimen/pad_horz_list" />
+
+    </LinearLayout>
+
+    <View style="@style/DividerVertical" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/tv_label_already_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_label_found"
+            android:textSize="@dimen/text_size_list_label"
+            android:paddingStart="@dimen/pad_horz_label"
+            android:paddingEnd="@dimen/pad_horz_label"
+            android:paddingTop="@dimen/pad_vert_label"
+            android:paddingBottom="@dimen/pad_vert_label"
+            android:layout_gravity="center" />
+
+        <View style="@style/DividerHorizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_already_found"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:paddingStart="@dimen/pad_horz_list"
+            android:paddingEnd="@dimen/pad_horz_list" />
+
+    </LinearLayout>
+
+</LinearLayout>

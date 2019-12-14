@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="pad_vert_label">16dp</dimen>
+    <dimen name="pad_horz_label">16dp</dimen>
+
+    <dimen name="pad_vert_list">16dp</dimen>
+    <dimen name="pad_horz_list">16dp</dimen>
+    <dimen name="pad_vert_list_inside">4dp</dimen>
+    <dimen name="pad_horz_list_inside">8dp</dimen>
+
+    <dimen name="text_size_list_label">32sp</dimen>
+    <dimen name="text_size_list_name">32sp</dimen>
+    <dimen name="text_size_list_amounts">18sp</dimen>
+    <dimen name="text_size_item_origin">18sp</dimen>
+</resources>
