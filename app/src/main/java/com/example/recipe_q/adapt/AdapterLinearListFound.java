@@ -99,7 +99,7 @@ public class AdapterLinearListFound extends RecyclerView.Adapter<AdapterLinearLi
         }
 
         void bind(int position) {
-            ListItemCombined current = mLocalList.get(mLocalList.size() - position - 1);
+            ListItemCombined current = mLocalList.get(position);
             mName.setText(String.format(mTextName, current.getName()));
             mOrigin.setText(String.format(mTextOrigin, current.getSourceName()));
 

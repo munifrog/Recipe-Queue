@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListManager implements ListInserter.Listener {
+    public static final int LIST_SOUGHT = 1;
+    public static final int LIST_FOUND = 2;
+
     private ListDataBase mDatabaseList;
     private Listener mListener;
 
@@ -191,6 +194,72 @@ public class ListManager implements ListInserter.Listener {
     public void reloadList() {
         loadSoughtList();
         loadFoundList();
+    }
+
+    public void switchContainingList(int position, int list) {
+        if (list == LIST_SOUGHT) {
+            if (mSoughtListCombined != null) {
+                if (mSoughtListCombined.size() > position) {
+                    ListItemCombined switched = mSoughtListCombined.remove(position);
+                    switched.setTimestamp();
+                    mFoundListCombined.add(insertionPoint(switched, LIST_FOUND), switched);
+                }
+            }
+        } else if (list == LIST_FOUND) {
+            if (mFoundListCombined != null) {
+                if (mFoundListCombined.size() > position) {
+                    ListItemCombined switched = mFoundListCombined.remove(position);
+                    switched.resetTimestamp();
+                    mSoughtListCombined.add(insertionPoint(switched, LIST_SOUGHT), switched);
+                }
+            }
+        }
+    }
+
+    private int insertionPoint(ListItemCombined item, int list) {
+        if (list == LIST_FOUND) {
+            // Switching to the found list should always update the timestamp and place first
+            return 0;
+        } else if (list == LIST_SOUGHT) {
+            // We need to find the insertion location - using binary search for efficiency
+            int insertionPoint = 0;
+
+            if (mSoughtListCombined != null) {
+                // https://www.javatpoint.com/binary-search-in-java
+                int first = 0;
+                int last = mSoughtListCombined.size() - 1;
+                int mid = (first + last) / 2;
+
+                String insertionName = item.getName();
+                String currentName;
+                while (first <= last) {
+                    currentName = mSoughtListCombined.get(mid).getName();
+                    // Assume placement immediately before the midpoint
+                    insertionPoint = mid;
+                    if (currentName.compareTo(insertionName) < 0) {
+                        first = mid + 1;
+                        insertionPoint++;
+                    } else if (currentName.compareTo(insertionName) > 0) {
+                        last = mid - 1;
+                    } else {
+                        break;
+                    }
+                    mid = (first + last) / 2;
+                }
+
+                // Sanitize
+                if (insertionPoint < 0) {
+                    insertionPoint = 0;
+                } else if (insertionPoint > mSoughtListCombined.size()) {
+                    insertionPoint = mSoughtListCombined.size();
+                }
+            }
+
+            return insertionPoint;
+        } else {
+            // Shouldn't happen; insertion at the end
+            return mSoughtListCombined.size();
+        }
     }
 
     @Override

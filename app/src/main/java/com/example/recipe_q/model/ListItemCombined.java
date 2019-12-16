@@ -1,5 +1,6 @@
 package com.example.recipe_q.model;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -95,6 +96,8 @@ public class ListItemCombined {
     public String getQuantity() { return mQuantityCombined; }
     public String getSourceName() { return mOriginCombined; }
     public long getTimestamp() { return mTimestampCombined; }
+    public void resetTimestamp() { mTimestampCombined = 0; }
+    public void setTimestamp() { mTimestampCombined = Calendar.getInstance().getTimeInMillis(); }
     public String getUnit() { return mUnitCombined; }
     public long [] getIndices() { return mIndices; }
 }
