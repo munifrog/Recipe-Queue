@@ -19,7 +19,8 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
     ViewModel(@NonNull Application application, Listener listener) {
         super(application);
         mListener = listener;
-        mListManager = new ListManager(application, this);
+        ListManagerFactory lmf = new ListManagerFactory(application, this);
+        mListManager = lmf.getInstance();
     }
 
     @Override
