@@ -34,4 +34,8 @@ public interface ListDataAccessObject {
     LiveData<List<ListItem>> signaledLoadFoundItems();
     @Query("SELECT * FROM items WHERE item_swiped > 0 ORDER BY item_swiped DESC, item_name ASC, item_unit ASC")
     List<ListItem> immediateLoadFoundItems();
+
+    // https://sqlite.org/lang_update.html
+    @Query("UPDATE items SET item_swiped=:swipe_time WHERE item_id == :id")
+    void updateTimestamp(long id, long swipe_time);
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.recipe_q.db.ListDataBase;
 import com.example.recipe_q.thread.ListInserter;
+import com.example.recipe_q.thread.ListSwipeUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,6 +204,8 @@ public class ListManager implements ListInserter.Listener {
                     ListItemCombined switched = mSoughtListCombined.remove(position);
                     switched.setTimestamp();
                     mFoundListCombined.add(insertionPoint(switched, LIST_FOUND), switched);
+                    // noinspection unchecked
+                    new ListSwipeUpdater(mDatabaseList).execute(switched);
                 }
             }
         } else if (list == LIST_FOUND) {
@@ -211,6 +214,8 @@ public class ListManager implements ListInserter.Listener {
                     ListItemCombined switched = mFoundListCombined.remove(position);
                     switched.resetTimestamp();
                     mSoughtListCombined.add(insertionPoint(switched, LIST_SOUGHT), switched);
+                    // noinspection unchecked
+                    new ListSwipeUpdater(mDatabaseList).execute(switched);
                 }
             }
         }
