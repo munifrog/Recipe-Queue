@@ -37,6 +37,8 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
         setSupportActionBar(toolbar);
 
         setupViewModel();
+        setupFoundRecyclerView();
+        setupSoughtRecyclerView();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +48,42 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
                 onListDatabaseUpdated();
             }
         });
+    }
 
+    private void setupViewModel() {
+        ViewModelFactory vmf = new ViewModelFactory(getApplication(), this);
+        mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
+    }
+
+    private void setupFoundRecyclerView() {
+        // https://medium.com/@zackcosborn/step-by-step-recyclerview-swipe-to-delete-and-undo-7bbae1fce27e
+        ItemTouchHelper touchHelperFound = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.ACTION_STATE_IDLE,
+                ItemTouchHelper.END | ItemTouchHelper.START
+        ) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target
+            ) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                mViewModel.switchContainingList(viewHolder.getAdapterPosition(), LIST_FOUND);
+                onListDatabaseUpdated();
+            }
+        });
+
+        RecyclerView rvFound = findViewById(R.id.rv_already_found);
+        rvFound.setLayoutManager(new LinearLayoutManager(this));
+        mAdapterFound = new AdapterLinearListFound(mViewModel);
+        rvFound.setAdapter(mAdapterFound);
+        touchHelperFound.attachToRecyclerView(rvFound);
+    }
+
+    private void setupSoughtRecyclerView() {
         // https://medium.com/@zackcosborn/step-by-step-recyclerview-swipe-to-delete-and-undo-7bbae1fce27e
         ItemTouchHelper touchHelperSought = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
                 ItemTouchHelper.ACTION_STATE_IDLE,
@@ -67,41 +104,11 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
             }
         });
 
-        ItemTouchHelper touchHelperFound = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.ACTION_STATE_IDLE,
-                ItemTouchHelper.END | ItemTouchHelper.START
-        ) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView,
-                                  @NonNull RecyclerView.ViewHolder viewHolder,
-                                  @NonNull RecyclerView.ViewHolder target
-            ) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                mViewModel.switchContainingList(viewHolder.getAdapterPosition(), LIST_FOUND);
-                onListDatabaseUpdated();
-            }
-        });
-
         RecyclerView rvSought = findViewById(R.id.rv_to_find);
         rvSought.setLayoutManager(new LinearLayoutManager(this));
         mAdapterSought = new AdapterLinearListSought(mViewModel);
         rvSought.setAdapter(mAdapterSought);
         touchHelperSought.attachToRecyclerView(rvSought);
-
-        RecyclerView rvFound = findViewById(R.id.rv_already_found);
-        rvFound.setLayoutManager(new LinearLayoutManager(this));
-        mAdapterFound = new AdapterLinearListFound(mViewModel);
-        rvFound.setAdapter(mAdapterFound);
-        touchHelperFound.attachToRecyclerView(rvFound);
-    }
-
-    private void setupViewModel() {
-        ViewModelFactory vmf = new ViewModelFactory(getApplication(), this);
-        mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
     }
 
     @Override
