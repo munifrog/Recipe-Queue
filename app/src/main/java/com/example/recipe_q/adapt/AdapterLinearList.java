@@ -2,7 +2,6 @@ package com.example.recipe_q.adapt;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,22 +19,39 @@ import com.example.recipe_q.model.ViewModel;
 
 import java.util.List;
 
-public class AdapterLinearListFound extends RecyclerView.Adapter<AdapterLinearListFound.ListItemHolder> {
-    private static final String TAG = AdapterLinearListFound.class.getSimpleName();
+import static com.example.recipe_q.model.ListManager.LIST_FOUND;
+import static com.example.recipe_q.model.ListManager.LIST_SOUGHT;
 
+public class AdapterLinearList extends RecyclerView.Adapter<AdapterLinearList.ListItemHolder> {
     private static final String REGEX_SPLIT_PARAMETER = ", ";
 
     private ViewModel mViewModel;
     private List<ListItemCombined> mLocalList;
+    private int mListType;
 
-
-    public AdapterLinearListFound(@NonNull ViewModel viewModel) {
+    public AdapterLinearList(
+            @NonNull ViewModel viewModel,
+            int listType
+    ) {
         mViewModel = viewModel;
-        mLocalList = mViewModel.getFoundListItems();
+        mListType = listType;
+        getTargetList();
+    }
+
+    private void getTargetList() {
+        switch (mListType) {
+            case LIST_FOUND:
+                mLocalList = mViewModel.getFoundListItems();
+                break;
+            default:
+            case LIST_SOUGHT:
+                mLocalList = mViewModel.getSoughtListItems();
+                break;
+        }
     }
 
     public void onUpdated() {
-        mLocalList = mViewModel.getFoundListItems();
+        getTargetList();
         notifyDataSetChanged();
     }
 
@@ -116,7 +132,6 @@ public class AdapterLinearListFound extends RecyclerView.Adapter<AdapterLinearLi
 
             currentTableRow = new TableRow(mContext);
             for (int i = 0; i < quantities.length; i++) {
-                Log.v(TAG, "quantities[" + i + "]: " + quantities[i]);
                 currentTextView = new TextView(mContext);
                 currentTextView.setText(String.format(mTextQuantity, quantities[i]));
                 currentTextView.setPadding(
@@ -134,7 +149,6 @@ public class AdapterLinearListFound extends RecyclerView.Adapter<AdapterLinearLi
 
             currentTableRow = new TableRow(mContext);
             for (int i = 0; i < units.length; i++) {
-                Log.v(TAG, "units[" + i + "]: " + units[i]);
                 currentTextView = new TextView(mContext);
                 currentTextView.setText(String.format(mTextUnit, units[i]));
                 currentTextView.setPadding(

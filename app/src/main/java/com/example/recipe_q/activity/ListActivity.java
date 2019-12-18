@@ -2,8 +2,7 @@ package com.example.recipe_q.activity;
 
 import android.os.Bundle;
 
-import com.example.recipe_q.adapt.AdapterLinearListFound;
-import com.example.recipe_q.adapt.AdapterLinearListSought;
+import com.example.recipe_q.adapt.AdapterLinearList;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,8 +28,8 @@ import static com.example.recipe_q.model.ListManager.LIST_SOUGHT;
 public class ListActivity extends AppCompatActivity implements ViewModel.Listener {
     private ViewModel mViewModel;
 
-    private AdapterLinearListSought mAdapterSought;
-    private AdapterLinearListFound mAdapterFound;
+    private AdapterLinearList mAdapterSought;
+    private AdapterLinearList mAdapterFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +114,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
 
         RecyclerView rvFound = findViewById(R.id.rv_already_found);
         rvFound.setLayoutManager(new LinearLayoutManager(this));
-        mAdapterFound = new AdapterLinearListFound(mViewModel);
+        mAdapterFound = new AdapterLinearList(mViewModel, LIST_FOUND);
         rvFound.setAdapter(mAdapterFound);
         touchHelperFound.attachToRecyclerView(rvFound);
     }
@@ -143,7 +142,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
 
         RecyclerView rvSought = findViewById(R.id.rv_to_find);
         rvSought.setLayoutManager(new LinearLayoutManager(this));
-        mAdapterSought = new AdapterLinearListSought(mViewModel);
+        mAdapterSought = new AdapterLinearList(mViewModel, LIST_SOUGHT);
         rvSought.setAdapter(mAdapterSought);
         touchHelperSought.attachToRecyclerView(rvSought);
     }
