@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.recipe_q.db.ListDataBase;
 import com.example.recipe_q.thread.ListInserter;
+import com.example.recipe_q.thread.ListRemover;
 import com.example.recipe_q.thread.ListSwipeUpdater;
 
 import java.util.ArrayList;
@@ -204,7 +205,6 @@ public class ListManager implements ListInserter.Listener {
                     ListItemCombined switched = mSoughtListCombined.remove(position);
                     switched.setTimestamp();
                     mFoundListCombined.add(insertionPoint(switched, LIST_FOUND), switched);
-                    // noinspection unchecked
                     new ListSwipeUpdater(mDatabaseList).execute(switched);
                 }
             }
@@ -214,7 +214,6 @@ public class ListManager implements ListInserter.Listener {
                     ListItemCombined switched = mFoundListCombined.remove(position);
                     switched.resetTimestamp();
                     mSoughtListCombined.add(insertionPoint(switched, LIST_SOUGHT), switched);
-                    // noinspection unchecked
                     new ListSwipeUpdater(mDatabaseList).execute(switched);
                 }
             }
@@ -264,6 +263,24 @@ public class ListManager implements ListInserter.Listener {
         } else {
             // Shouldn't happen; insertion at the end
             return mSoughtListCombined.size();
+        }
+    }
+
+    public void clearList(int list) {
+        if (list == LIST_SOUGHT) {
+            if (mSoughtListCombined != null && mSoughtListCombined.size() > 0) {
+                List<ListItemCombined> toRemove = mSoughtListCombined;
+                mSoughtListCombined = new ArrayList<>();
+                // noinspection unchecked
+                new ListRemover(mDatabaseList).execute(toRemove);
+            }
+        } else if (list == LIST_FOUND) {
+            if (mFoundListCombined != null && mFoundListCombined.size() > 0) {
+                List<ListItemCombined> toRemove = mFoundListCombined;
+                mFoundListCombined = new ArrayList<>();
+                // noinspection unchecked
+                new ListRemover(mDatabaseList).execute(toRemove);
+            }
         }
     }
 

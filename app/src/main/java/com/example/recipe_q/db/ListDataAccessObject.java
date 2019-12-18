@@ -2,7 +2,6 @@ package com.example.recipe_q.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -16,8 +15,9 @@ public interface ListDataAccessObject {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long [] insertItems(List<ListItem> items);
 
-    @Delete
-    void deleteItems(List<ListItem> items);
+    // https://stackoverflow.com/a/55483157
+    @Query("DELETE FROM items WHERE item_id IN (:id_array)")
+    void deleteItems(long [] id_array);
 
     @Query("SELECT * FROM items ORDER BY item_name ASC")
     LiveData<List<ListItem>> signaledLoadAllItems();

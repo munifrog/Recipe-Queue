@@ -55,4 +55,10 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
             mListManager.switchContainingList(position, list);
         }
     }
+
+    public void clearList(int list) {
+        if (mListManager != null) {
+            mListManager.clearList(list);
+        }
+    }
 }

@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.recipe_q.R;
@@ -37,6 +40,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
         setSupportActionBar(toolbar);
 
         setupViewModel();
+        setupToolbarMenu();
         setupFoundRecyclerView();
         setupSoughtRecyclerView();
 
@@ -50,9 +54,42 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.list, menu);
+        return true;
+    }
+
     private void setupViewModel() {
         ViewModelFactory vmf = new ViewModelFactory(getApplication(), this);
         mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
+    }
+
+    private void setupToolbarMenu() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int action = item.getItemId();
+                switch(action) {
+                    case R.id.action_delete_all:
+                        mViewModel.clearList(LIST_SOUGHT);
+                        mViewModel.clearList(LIST_FOUND);
+                        onListDatabaseUpdated();
+                        return true;
+                    case R.id.action_delete_found:
+                        mViewModel.clearList(LIST_FOUND);
+                        onListDatabaseUpdated();
+                        return true;
+                    case R.id.action_delete_sought:
+                        mViewModel.clearList(LIST_SOUGHT);
+                        onListDatabaseUpdated();
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void setupFoundRecyclerView() {
