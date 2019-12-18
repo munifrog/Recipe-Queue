@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Recipe-Q</string>
     <string name="btn_show_list">Shopping List</string>
+    <string name="btn_add_recipe_01">Add Recipe #1</string>
+    <string name="btn_add_recipe_02">Add Recipe #2</string>
     <string name="title_activity_list">ListActivity</string>
     <string name="list_label_sought">Looking for</string>
     <string name="list_label_found">Found</string>
