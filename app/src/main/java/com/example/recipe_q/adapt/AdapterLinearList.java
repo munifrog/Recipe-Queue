@@ -28,14 +28,21 @@ public class AdapterLinearList extends RecyclerView.Adapter<AdapterLinearList.Li
     private ViewModel mViewModel;
     private List<ListItemCombined> mLocalList;
     private int mListType;
+    private Listener mListener;
 
     public AdapterLinearList(
             @NonNull ViewModel viewModel,
-            int listType
+            int listType,
+            Listener listener
     ) {
         mViewModel = viewModel;
         mListType = listType;
         getTargetList();
+        mListener = listener;
+    }
+
+    public interface Listener {
+        boolean onLongClick(int position, int list);
     }
 
     private void getTargetList() {
@@ -77,7 +84,7 @@ public class AdapterLinearList extends RecyclerView.Adapter<AdapterLinearList.Li
         }
     }
 
-    class ListItemHolder extends RecyclerView.ViewHolder {
+    class ListItemHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         private String mTextName;
         private String mTextQuantity;
         private String mTextOrigin;
@@ -112,6 +119,8 @@ public class AdapterLinearList extends RecyclerView.Adapter<AdapterLinearList.Li
             mName = itemView.findViewById(R.id.tv_item_name);
             mOrigin = itemView.findViewById(R.id.tv_item_origin);
             mAmountsTable = itemView.findViewById(R.id.tl_item_table);
+
+            itemView.setOnLongClickListener(this);
         }
 
         void bind(int position) {
@@ -163,6 +172,11 @@ public class AdapterLinearList extends RecyclerView.Adapter<AdapterLinearList.Li
                 currentTableRow.addView(currentTextView);
             }
             mAmountsTable.addView(currentTableRow);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return mListener.onLongClick(getAdapterPosition(), mListType);
         }
     }
 }

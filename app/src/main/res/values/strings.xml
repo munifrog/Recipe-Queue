@@ -12,5 +12,7 @@
     <string name="list_item_unit">%1$s</string>
     <string name="action_delete_all">Clear All Lists</string>
     <string name="action_delete_found">Clear Found</string>
+    <string name="action_delete_list">Clear List</string>
+    <string name="action_delete_selected">Remove Selected</string>
     <string name="action_delete_sought">Clear Missing</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,11 +26,18 @@ import com.example.recipe_q.R;
 import static com.example.recipe_q.model.ListManager.LIST_FOUND;
 import static com.example.recipe_q.model.ListManager.LIST_SOUGHT;
 
-public class ListActivity extends AppCompatActivity implements ViewModel.Listener {
-    private ViewModel mViewModel;
+public class ListActivity extends AppCompatActivity implements ViewModel.Listener,
+        AdapterLinearList.Listener
+{
+    private static final int INVALID_INDEX = -1;
 
+    private ViewModel mViewModel;
+    private ActionMode.Callback mContextMenuCallback;
     private AdapterLinearList mAdapterSought;
     private AdapterLinearList mAdapterFound;
+    private ActionMode mActionMode;
+    private int mSelectionListType;
+    private int mSelectionPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
         setSupportActionBar(toolbar);
 
         setupViewModel();
-        setupToolbarMenu();
+        setupContextMenuCallback();
         setupFoundRecyclerView();
         setupSoughtRecyclerView();
 
@@ -60,35 +68,86 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int action = item.getItemId();
+        switch(action) {
+            case R.id.action_delete_all:
+                mViewModel.clearList(LIST_SOUGHT);
+                mViewModel.clearList(LIST_FOUND);
+                onListDatabaseUpdated();
+                return true;
+            case R.id.action_delete_found:
+                mViewModel.clearList(LIST_FOUND);
+                onListDatabaseUpdated();
+                return true;
+            case R.id.action_delete_sought:
+                mViewModel.clearList(LIST_SOUGHT);
+                onListDatabaseUpdated();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void setupViewModel() {
         ViewModelFactory vmf = new ViewModelFactory(getApplication(), this);
         mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
     }
 
-    private void setupToolbarMenu() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+    private void setupContextMenuCallback() {
+        mActionMode = null;
+        mContextMenuCallback = new ActionMode.Callback() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int action = item.getItemId();
-                switch(action) {
-                    case R.id.action_delete_all:
-                        mViewModel.clearList(LIST_SOUGHT);
-                        mViewModel.clearList(LIST_FOUND);
-                        onListDatabaseUpdated();
-                        return true;
-                    case R.id.action_delete_found:
-                        mViewModel.clearList(LIST_FOUND);
-                        onListDatabaseUpdated();
-                        return true;
-                    case R.id.action_delete_sought:
-                        mViewModel.clearList(LIST_SOUGHT);
-                        onListDatabaseUpdated();
-                        return true;
-                }
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.list_context, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
                 return false;
             }
-        });
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                int action = item.getItemId();
+                switch(action) {
+                    case R.id.action_delete_list:
+                        if (mSelectionListType == LIST_SOUGHT) {
+                            mViewModel.clearList(LIST_SOUGHT);
+                            onListDatabaseUpdated();
+                            mode.finish();
+                            return true;
+                        } else if (mSelectionListType == LIST_FOUND) {
+                            mViewModel.clearList(LIST_FOUND);
+                            onListDatabaseUpdated();
+                            mode.finish();
+                            return true;
+                        }
+                        return false;
+                    case R.id.action_delete_selected:
+                        if (mSelectionPosition != INVALID_INDEX) {
+                            mViewModel.removeFromList(mSelectionListType, mSelectionPosition);
+                            onListDatabaseUpdated();
+                            mode.finish();
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    default:
+                        return false;
+                }
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                mSelectionListType = INVALID_INDEX;
+                mSelectionPosition = INVALID_INDEX;
+                mActionMode = null;
+            }
+        };
     }
 
     private void setupFoundRecyclerView() {
@@ -114,7 +173,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
 
         RecyclerView rvFound = findViewById(R.id.rv_already_found);
         rvFound.setLayoutManager(new LinearLayoutManager(this));
-        mAdapterFound = new AdapterLinearList(mViewModel, LIST_FOUND);
+        mAdapterFound = new AdapterLinearList(mViewModel, LIST_FOUND, this);
         rvFound.setAdapter(mAdapterFound);
         touchHelperFound.attachToRecyclerView(rvFound);
     }
@@ -142,7 +201,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
 
         RecyclerView rvSought = findViewById(R.id.rv_to_find);
         rvSought.setLayoutManager(new LinearLayoutManager(this));
-        mAdapterSought = new AdapterLinearList(mViewModel, LIST_SOUGHT);
+        mAdapterSought = new AdapterLinearList(mViewModel, LIST_SOUGHT, this);
         rvSought.setAdapter(mAdapterSought);
         touchHelperSought.attachToRecyclerView(rvSought);
     }
@@ -156,5 +215,16 @@ public class ListActivity extends AppCompatActivity implements ViewModel.Listene
     public void onListDatabaseUpdated() {
         mAdapterSought.onUpdated();
         mAdapterFound.onUpdated();
+    }
+
+    @Override
+    public boolean onLongClick(int position, int list) {
+        if (mActionMode == null) {
+            mSelectionListType = list;
+            mSelectionPosition = position;
+            mActionMode = startActionMode(mContextMenuCallback);
+            return true;
+        }
+        return false;
     }
 }

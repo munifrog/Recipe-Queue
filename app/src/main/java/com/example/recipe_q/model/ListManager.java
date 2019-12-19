@@ -266,6 +266,30 @@ public class ListManager implements ListInserter.Listener {
         }
     }
 
+    public void removeFromList(int list, int position) {
+        if (list == LIST_SOUGHT) {
+            if (mSoughtListCombined != null) {
+                if (mSoughtListCombined.size() > position) {
+                    ListItemCombined removed = mSoughtListCombined.remove(position);
+                    List<ListItemCombined> removedList = new ArrayList<>();
+                    removedList.add(removed);
+                    // noinspection unchecked
+                    new ListRemover(mDatabaseList).execute(removedList);
+                }
+            }
+        } else if (list == LIST_FOUND) {
+            if (mFoundListCombined != null) {
+                if (mFoundListCombined.size() > position) {
+                    ListItemCombined removed = mFoundListCombined.remove(position);
+                    List<ListItemCombined> removedList = new ArrayList<>();
+                    removedList.add(removed);
+                    // noinspection unchecked
+                    new ListRemover(mDatabaseList).execute(removedList);
+                }
+            }
+        }
+    }
+
     public void clearList(int list) {
         if (list == LIST_SOUGHT) {
             if (mSoughtListCombined != null && mSoughtListCombined.size() > 0) {

@@ -56,6 +56,12 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
         }
     }
 
+    public void removeFromList(int list, int position) {
+        if (mListManager != null) {
+            mListManager.removeFromList(list, position);
+        }
+    }
+
     public void clearList(int list) {
         if (mListManager != null) {
             mListManager.clearList(list);
