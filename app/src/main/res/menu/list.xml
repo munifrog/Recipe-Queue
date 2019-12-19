@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_delete_all"
+        android:title="@string/action_delete_all"
+        android:orderInCategory="1"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete_found"
+        android:title="@string/action_delete_found"
+        android:orderInCategory="2"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delete_sought"
+        android:title="@string/action_delete_sought"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+</menu>
