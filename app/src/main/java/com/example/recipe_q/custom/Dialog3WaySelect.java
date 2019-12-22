@@ -77,7 +77,7 @@ public class Dialog3WaySelect extends DialogFragment {
         View dialogView = inflater.inflate(R.layout.content_dialog_3_way, null);
         RecyclerView rvDialog = dialogView.findViewById(R.id.rv_dialog_list);
         rvDialog.setLayoutManager(new LinearLayoutManager(activity.getApplicationContext()));
-        final AdapterLinear3Way adapter = new AdapterLinear3Way(mEntries, mSelections);
+        final AdapterLinear3Way adapter = new AdapterLinear3Way(mEntries, mSelections.clone());
         rvDialog.setAdapter(adapter);
 
         Resources resources = activity.getResources();
@@ -98,7 +98,7 @@ public class Dialog3WaySelect extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Dialog cancelled; discard selections; probably do nothing
-                        adapter.setSelections(mSelections);
+                        adapter.setSelections(mSelections.clone());
                         mListener.onCancel();
                     }
                 })

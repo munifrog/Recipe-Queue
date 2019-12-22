@@ -1,6 +1,5 @@
 package com.example.recipe_q.adapt;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipe_q.R;
 
 public class AdapterLinear3Way extends RecyclerView.Adapter<AdapterLinear3Way.ListItemHolder> {
-    private static final String TAG = AdapterLinear3Way.class.getSimpleName();
-
     public static final int SELECTED_NEUTRAL = 0;
     public static final int SELECTED_NEGATIVE = 1;
     public static final int SELECTED_POSITIVE = 2;
@@ -69,21 +66,18 @@ public class AdapterLinear3Way extends RecyclerView.Adapter<AdapterLinear3Way.Li
             mNegative.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.v(TAG, "Negative (" + getAdapterPosition() + ")");
                     mSelections[getAdapterPosition()] = SELECTED_NEGATIVE;
                 }
             });
             mNeutral.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.v(TAG, "Neutral (" + getAdapterPosition() + ")");
                     mSelections[getAdapterPosition()] = SELECTED_NEUTRAL;
                 }
             });
             mPositive.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.v(TAG, "Positive (" + getAdapterPosition() + ")");
                     mSelections[getAdapterPosition()] = SELECTED_POSITIVE;
                 }
             });
@@ -92,19 +86,21 @@ public class AdapterLinear3Way extends RecyclerView.Adapter<AdapterLinear3Way.Li
         void bind(int position) {
             mName.setText(mNames[position]);
 
-            mNegative.setChecked(false);
-            mNeutral.setChecked(false);
-            mPositive.setChecked(false);
-
             switch (mSelections[position]) {
                 default:
                 case SELECTED_NEUTRAL:
+                    mNegative.setChecked(false);
                     mNeutral.setChecked(true);
+                    mPositive.setChecked(false);
                     break;
                 case SELECTED_NEGATIVE:
                     mNegative.setChecked(true);
+                    mNeutral.setChecked(false);
+                    mPositive.setChecked(false);
                     break;
                 case SELECTED_POSITIVE:
+                    mNegative.setChecked(false);
+                    mNeutral.setChecked(false);
                     mPositive.setChecked(true);
                     break;
             }
