@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_ingredients">
+        <item>5 spice powder</item>
+        <item>acorn squash</item>
+        <item>adobo sauce</item>
+        <item>agave nectar</item>
+        <item>ahi tuna</item>
+        <item>alfredo pasta sauce</item>
+        <item>almond extract</item>
+        <item>almond flour</item>
+        <item>almond milk</item>
+        <item>almonds</item>
+        <item>amaretto</item>
+        <item>ancho chiles</item>
+        <item>anchovies</item>
+        <item>andouille sausage</item>
+        <item>angel food cake mix</item>
+        <item>angel hair pasta</item>
+        <item>angostura bitters</item>
+        <item>apple</item>
+        <item>apple butter spread</item>
+        <item>apple cider</item>
+        <item>apple juice</item>
+        <item>apple pie spice</item>
+        <item>apricot preserves</item>
+        <item>apricots</item>
+        <item>arborio rice</item>
+        <item>arrowroot powder</item>
+        <item>artichoke heart quarters</item>
+        <item>artichokes</item>
+        <item>arugula</item>
+        <item>asafoetida</item>
+        <item>asafoetida powder</item>
+        <item>asiago cheese</item>
+        <item>asian pear</item>
+        <item>asparagus spears</item>
+        <item>avocado</item>
+        <item>avocado oil</item>
+        <item>baby bell peppers</item>
+        <item>baby bok choy</item>
+        <item>baby carrots</item>
+        <item>baby corn</item>
+        <item>baby spinach leaves</item>
+        <item>baby-back ribs</item>
+        <item>baby-back ribs</item>
+        <item>bacon</item>
+        <item>bacon fat</item>
+        <item>baguette</item>
+        <item>baking bar</item>
+        <item>baking powder</item>
+        <item>baking soda</item>
+        <item>balsamic glaze</item>
+        <item>balsamic vinegar</item>
+        <item>bamboo shoots</item>
+        <item>banana</item>
+        <item>basmati rice</item>
+        <item>bay leaves</item>
+        <item>bbq sauce</item>
+        <item>beans</item>
+        <item>beef</item>
+        <item>beef brisket</item>
+        <item>beef broth</item>
+        <item>beef chuck roast</item>
+        <item>beef stock</item>
+        <item>beef tenderloin</item>
+        <item>beer</item>
+        <item>beer</item>
+        <item>beets</item>
+        <item>bell pepper</item>
+        <item>berries</item>
+        <item>biscuit mix</item>
+        <item>biscuits</item>
+        <item>bittersweet chocolate</item>
+        <item>black bean sauce</item>
+        <item>black beans</item>
+        <item>black olives</item>
+        <item>black pepper</item>
+        <item>black sesame seeds</item>
+        <item>blackberries</item>
+        <item>blanched almonds</item>
+        <item>blood orange</item>
+        <item>blue cheese</item>
+        <item>blueberries</item>
+        <item>bok choy</item>
+        <item>boneless skinless chicken breast</item>
+        <item>bourbon</item>
+        <item>brandy</item>
+        <item>bread</item>
+        <item>bread flour</item>
+        <item>breakfast links</item>
+        <item>brie</item>
+        <item>broccoli</item>
+        <item>broccoli florets</item>
+        <item>brown rice</item>
+        <item>brown rice flour</item>
+        <item>brown sugar</item>
+        <item>brownie mix</item>
+        <item>brussel sprouts</item>
+        <item>bulgur</item>
+        <item>butter</item>
+        <item>butterhead lettuce</item>
+        <item>buttermilk</item>
+        <item>butternut squash</item>
+        <item>butterscotch chips</item>
+        <item>cabbage</item>
+        <item>caesar dressing</item>
+        <item>cajun seasoning</item>
+        <item>cake flour</item>
+        <item>candy canes</item>
+        <item>candy coating</item>
+        <item>candy melts</item>
+        <item>canned black beans</item>
+        <item>canned diced tomatoes</item>
+        <item>canned garbanzo beans</item>
+        <item>canned green chiles</item>
+        <item>canned kidney beans</item>
+        <item>canned mushrooms</item>
+        <item>canned pinto beans</item>
+        <item>canned red kidney beans</item>
+        <item>canned tomatoes</item>
+        <item>canned tuna</item>
+        <item>canned white beans</item>
+        <item>canned white cannellini beans</item>
+        <item>cannellini beans</item>
+        <item>cantaloupe</item>
+        <item>capers</item>
+        <item>caramel sauce</item>
+        <item>caramels</item>
+        <item>caraway seed</item>
+        <item>cardamom</item>
+        <item>cardamom pods</item>
+        <item>carp</item>
+        <item>carrots</item>
+        <item>cat fish filets</item>
+        <item>cauliflower</item>
+        <item>cauliflower florets</item>
+        <item>cauliflower rice</item>
+        <item>celery</item>
+        <item>celery ribs</item>
+        <item>celery root</item>
+        <item>celery salt</item>
+        <item>celery seed</item>
+        <item>cereal</item>
+        <item>champagne</item>
+        <item>chana dal</item>
+        <item>cheddar</item>
+        <item>cheese</item>
+        <item>cheese curds</item>
+        <item>cheese dip</item>
+        <item>cheese soup</item>
+        <item>cheese tortellini</item>
+        <item>cherry</item>
+        <item>cherry pie filling</item>
+        <item>cherry tomatoes</item>
+        <item>chestnuts</item>
+        <item>chia seeds</item>
+        <item>chicken base</item>
+        <item>chicken bouillon</item>
+        <item>chicken bouillon granules</item>
+        <item>chicken breasts</item>
+        <item>chicken broth</item>
+        <item>chicken drumsticks</item>
+        <item>chicken legs</item>
+        <item>chicken pieces</item>
+        <item>chicken sausage</item>
+        <item>chicken stock</item>
+        <item>chicken tenders</item>
+        <item>chicken thighs</item>
+        <item>chicken wings</item>
+        <item>chickpea</item>
+        <item>chile garlic sauce</item>
+        <item>chili paste</item>
+        <item>chili peppers</item>
+        <item>chili powder</item>
+        <item>chili sauce</item>
+        <item>chipotle chiles in adobo</item>
+        <item>chipotle chilies</item>
+        <item>chipotle peppers in adobo</item>
+        <item>chive &amp; onion cream cheese spread</item>
+        <item>chocolate</item>
+        <item>chocolate chip cookies</item>
+        <item>chocolate chunks</item>
+        <item>chocolate ice cream</item>
+        <item>chocolate milk</item>
+        <item>chocolate sandwich cookies</item>
+        <item>chocolate syrup</item>
+        <item>chocolate wafer cookies</item>
+        <item>chorizo sausage</item>
+        <item>cider vinegar</item>
+        <item>cilantro</item>
+        <item>cinnamon roll</item>
+        <item>cinnamon stick</item>
+        <item>cinnamon sugar</item>
+        <item>cinnamon swirl bread</item>
+        <item>clam juice</item>
+        <item>clams</item>
+        <item>clarified butter</item>
+        <item>clove</item>
+        <item>coarse salt</item>
+        <item>coarsely ground pepper</item>
+        <item>cocoa nibs</item>
+        <item>cocoa powder</item>
+        <item>coconut</item>
+        <item>coconut aminos</item>
+        <item>coconut butter</item>
+        <item>coconut cream</item>
+        <item>coconut extract</item>
+        <item>coconut flour</item>
+        <item>coconut milk</item>
+        <item>coconut oil</item>
+        <item>coconut water</item>
+        <item>cod</item>
+        <item>coffee</item>
+        <item>cognac</item>
+        <item>cola</item>
+        <item>colby jack</item>
+        <item>collard greens</item>
+        <item>condensed cream of celery soup</item>
+        <item>condensed cream of mushroom soup</item>
+        <item>confectioner\&apos;s swerve</item>
+        <item>cooked bacon</item>
+        <item>cooked brown rice</item>
+        <item>cooked chicken breast</item>
+        <item>cooked ham</item>
+        <item>cooked long grain rice</item>
+        <item>cooked pasta</item>
+        <item>cooked polenta</item>
+        <item>cooked quinoa</item>
+        <item>cooked wild rice</item>
+        <item>cookies</item>
+        <item>coriander</item>
+        <item>corn</item>
+        <item>corn bread mix</item>
+        <item>corn chips</item>
+        <item>corn flakes cereal</item>
+        <item>corn flour</item>
+        <item>corn kernels</item>
+        <item>corn oil</item>
+        <item>corn tortillas</item>
+        <item>cornbread</item>
+        <item>corned beef</item>
+        <item>cornish hens</item>
+        <item>cornmeal</item>
+        <item>cornstarch</item>
+        <item>cotija cheese</item>
+        <item>cottage cheese</item>
+        <item>country bread</item>
+        <item>courgettes</item>
+        <item>couscous</item>
+        <item>cow pea</item>
+        <item>crabmeat</item>
+        <item>cracked pepper</item>
+        <item>cranberries</item>
+        <item>cranberry juice</item>
+        <item>cream</item>
+        <item>cream cheese</item>
+        <item>cream cheese block</item>
+        <item>cream of chicken soup</item>
+        <item>cream of tartar</item>
+        <item>creamed corn</item>
+        <item>creamy peanut butter</item>
+        <item>creme fraiche</item>
+        <item>cremini mushrooms</item>
+        <item>creole seasoning</item>
+        <item>crisp rice cereal</item>
+        <item>croutons</item>
+        <item>crystallized ginger</item>
+        <item>cucumber</item>
+        <item>cumin seeds</item>
+        <item>cup cake</item>
+        <item>currants</item>
+        <item>curry leaves</item>
+        <item>dairy free milk</item>
+        <item>dark brown sugar</item>
+        <item>dark chocolate</item>
+        <item>dark chocolate candy bars</item>
+        <item>dark chocolate chips</item>
+        <item>dark sesame oil</item>
+        <item>dates</item>
+        <item>deep dish pie crust</item>
+        <item>deli ham</item>
+        <item>deli turkey</item>
+        <item>dessert oats</item>
+        <item>dessert wine</item>
+        <item>diced ham</item>
+        <item>diet pop</item>
+        <item>dijon mustard</item>
+        <item>dill</item>
+        <item>dill pickles</item>
+        <item>dog</item>
+        <item>double cream</item>
+        <item>dried apricots</item>
+        <item>dried basil</item>
+        <item>dried cherries</item>
+        <item>dried chorizo</item>
+        <item>dried cranberries</item>
+        <item>dried dill</item>
+        <item>dried onion</item>
+        <item>dried porcini mushrooms</item>
+        <item>dried rubbed sage</item>
+        <item>dried thyme</item>
+        <item>dried tomatoes</item>
+        <item>dry bread crumbs</item>
+        <item>dry milk</item>
+        <item>dry mustard</item>
+        <item>dry red wine</item>
+        <item>dry roasted peanuts</item>
+        <item>duck fat</item>
+        <item>dutch process cocoa powder</item>
+        <item>edamame</item>
+        <item>egg substitute</item>
+        <item>egg vermicelli</item>
+        <item>egg whites</item>
+        <item>egg yolk</item>
+        <item>eggnog</item>
+        <item>eggplant</item>
+        <item>elbow macaroni</item>
+        <item>enchilada sauce</item>
+        <item>english cucumber</item>
+        <item>english muffin</item>
+        <item>erythritol</item>
+        <item>escarole</item>
+        <item>espresso</item>
+        <item>evaporated milk</item>
+        <item>extra firm tofu</item>
+        <item>extra virgin olive oil</item>
+        <item>farfalle</item>
+        <item>farro</item>
+        <item>fat free mayo</item>
+        <item>fat-free less-sodium chicken broth</item>
+        <item>fennel</item>
+        <item>fennel seeds</item>
+        <item>fenugreek leaf</item>
+        <item>fenugreek seeds</item>
+        <item>feta cheese</item>
+        <item>fettuccine</item>
+        <item>fire roasted tomatoes</item>
+        <item>fish</item>
+        <item>fish sauce</item>
+        <item>fish stock</item>
+        <item>flank steak</item>
+        <item>flax seeds</item>
+        <item>fleur de sel</item>
+        <item>flour</item>
+        <item>flour tortillas</item>
+        <item>fontina cheese</item>
+        <item>food dye</item>
+        <item>frank\&apos;s redhot sauce</item>
+        <item>free range eggs</item>
+        <item>french bread</item>
+        <item>fresh basil</item>
+        <item>fresh bean sprouts</item>
+        <item>fresh chives</item>
+        <item>fresh corn</item>
+        <item>fresh corn kernels</item>
+        <item>fresh figs</item>
+        <item>fresh fruit</item>
+        <item>fresh herbs</item>
+        <item>fresh mint</item>
+        <item>fresh mozzarella</item>
+        <item>fresh rosemary</item>
+        <item>fresh thyme leaves</item>
+        <item>fried onions</item>
+        <item>frosting</item>
+        <item>froyo bars</item>
+        <item>frozen corn</item>
+        <item>frozen spinach</item>
+        <item>fudge</item>
+        <item>fudge topping</item>
+        <item>fun size almond joy bar</item>
+        <item>garam masala</item>
+        <item>garbanzo bean flour</item>
+        <item>garlic</item>
+        <item>garlic paste</item>
+        <item>garlic powder</item>
+        <item>garlic powder</item>
+        <item>garlic salt</item>
+        <item>gelatin</item>
+        <item>gf chocolate cake mix</item>
+        <item>gin</item>
+        <item>ginger</item>
+        <item>ginger ale</item>
+        <item>ginger paste</item>
+        <item>ginger-garlic paste</item>
+        <item>gingersnap cookies</item>
+        <item>gnocchi</item>
+        <item>goat cheese</item>
+        <item>golden raisins</item>
+        <item>gorgonzola</item>
+        <item>gouda cheese</item>
+        <item>graham cracker crumbs</item>
+        <item>graham cracker pie crust</item>
+        <item>graham crackers</item>
+        <item>grain blend</item>
+        <item>grand marnier</item>
+        <item>granny smith apples</item>
+        <item>granola</item>
+        <item>granulated garlic</item>
+        <item>grape tomatoes</item>
+        <item>grapefruit</item>
+        <item>grapeseed oil</item>
+        <item>gravy</item>
+        <item>great northern beans</item>
+        <item>greek yogurt</item>
+        <item>green beans</item>
+        <item>green bell pepper</item>
+        <item>green chili pepper</item>
+        <item>green food coloring</item>
+        <item>green grapes</item>
+        <item>green olives</item>
+        <item>green onions</item>
+        <item>greens</item>
+        <item>grill cheese</item>
+        <item>grill seasoning</item>
+        <item>ground allspice</item>
+        <item>ground ancho chili</item>
+        <item>ground beef</item>
+        <item>ground chicken</item>
+        <item>ground chipotle chile pepper</item>
+        <item>ground cinnamon</item>
+        <item>ground cinnamon</item>
+        <item>ground cloves</item>
+        <item>ground coriander seeds</item>
+        <item>ground cumin</item>
+        <item>ground flaxseed</item>
+        <item>ground ginger</item>
+        <item>ground lamb</item>
+        <item>ground mace</item>
+        <item>ground nutmeg</item>
+        <item>ground pork</item>
+        <item>ground pork sausage</item>
+        <item>ground veal</item>
+        <item>gruyere</item>
+        <item>guacamole</item>
+        <item>half n half</item>
+        <item>halibut fillet</item>
+        <item>ham</item>
+        <item>hamburger buns</item>
+        <item>hard cooked eggs</item>
+        <item>harissa</item>
+        <item>hash brown potatoes</item>
+        <item>hazelnuts</item>
+        <item>healthy request cream of celery soup</item>
+        <item>hemp seeds</item>
+        <item>herbes de provence</item>
+        <item>herbs</item>
+        <item>hershey\&apos;s kisses brand milk chocolates</item>
+        <item>hoisin sauce</item>
+        <item>honey mustard</item>
+        <item>horseradish</item>
+        <item>hot sauce</item>
+        <item>hummus</item>
+        <item>ice</item>
+        <item>ice cream</item>
+        <item>instant chocolate pudding mix</item>
+        <item>instant coffee powder</item>
+        <item>instant espresso powder</item>
+        <item>instant lemon pudding mix</item>
+        <item>instant yeast</item>
+        <item>irish cream</item>
+        <item>italian bread</item>
+        <item>italian cheese blend</item>
+        <item>italian sausages</item>
+        <item>italian seasoning</item>
+        <item>jaggery</item>
+        <item>jalapeno</item>
+        <item>jasmine rice</item>
+        <item>jelly</item>
+        <item>jicama</item>
+        <item>jimmies</item>
+        <item>juice</item>
+        <item>jumbo shell pasta</item>
+        <item>kaffir lime leaves</item>
+        <item>kahlua</item>
+        <item>kalamata olives</item>
+        <item>kale</item>
+        <item>ketchup</item>
+        <item>kitchen bouquet</item>
+        <item>kiwis</item>
+        <item>kosher salt</item>
+        <item>ladyfingers</item>
+        <item>lamb</item>
+        <item>lasagna noodles</item>
+        <item>lb cake</item>
+        <item>lean ground beef</item>
+        <item>lean ground turkey</item>
+        <item>lean pork tenderloin</item>
+        <item>leeks</item>
+        <item>leg of lamb</item>
+        <item>lemon</item>
+        <item>lemon curd</item>
+        <item>lemon extract</item>
+        <item>lemon juice</item>
+        <item>lemon peel</item>
+        <item>lemon pepper</item>
+        <item>lemon wedges</item>
+        <item>lemongrass</item>
+        <item>lettuce</item>
+        <item>lettuce leaves</item>
+        <item>light butter</item>
+        <item>light coconut milk</item>
+        <item>light corn syrup</item>
+        <item>light cream cheese</item>
+        <item>light mayonnaise</item>
+        <item>light olive oil</item>
+        <item>light soy sauce</item>
+        <item>lime</item>
+        <item>lime juice</item>
+        <item>lime wedges</item>
+        <item>lime zest</item>
+        <item>linguine</item>
+        <item>liquid smoke</item>
+        <item>liquid stevia</item>
+        <item>liquor</item>
+        <item>live lobster</item>
+        <item>long-grain rice</item>
+        <item>low fat buttermilk</item>
+        <item>low fat milk</item>
+        <item>low fat milk</item>
+        <item>low fat plain yogurt</item>
+        <item>low fat ricotta cheese</item>
+        <item>low fat sour cream</item>
+        <item>low sodium chicken broth</item>
+        <item>low sodium soy sauce</item>
+        <item>low-sodium chicken stock</item>
+        <item>lower sodium beef broth</item>
+        <item>lump crab</item>
+        <item>m&amp;m candies</item>
+        <item>macadamia nuts</item>
+        <item>macaroni and cheese mix</item>
+        <item>madras curry powder</item>
+        <item>malt drink mix</item>
+        <item>mandarin orange sections</item>
+        <item>mandarin oranges</item>
+        <item>mango</item>
+        <item>maple syrup</item>
+        <item>maraschino cherries</item>
+        <item>margarine</item>
+        <item>marinara sauce</item>
+        <item>marjoram</item>
+        <item>marsala wine</item>
+        <item>marshmallow fluff</item>
+        <item>marshmallows</item>
+        <item>masa harina</item>
+        <item>mascarpone</item>
+        <item>mat beans</item>
+        <item>matcha tea</item>
+        <item>mayonnaise</item>
+        <item>meat</item>
+        <item>meat</item>
+        <item>meatballs</item>
+        <item>medjool dates</item>
+        <item>mexican cream</item>
+        <item>meyer lemon juice</item>
+        <item>milk</item>
+        <item>milk chocolate chips</item>
+        <item>mint chutney</item>
+        <item>minute rice</item>
+        <item>miracle whip</item>
+        <item>mirin</item>
+        <item>miso</item>
+        <item>molasses</item>
+        <item>monterey jack cheese</item>
+        <item>mushroom</item>
+        <item>mussels</item>
+        <item>mustard</item>
+        <item>mustard seeds</item>
+        <item>napa cabbage</item>
+        <item>navel oranges</item>
+        <item>nectarine</item>
+        <item>new potatoes</item>
+        <item>non-fat greek yogurt</item>
+        <item>nonfat cool whip</item>
+        <item>nonfat milk</item>
+        <item>nori</item>
+        <item>nut butter</item>
+        <item>nut meal</item>
+        <item>nutella</item>
+        <item>nutritional yeast</item>
+        <item>oat flour</item>
+        <item>oats</item>
+        <item>oil</item>
+        <item>oil packed sun dried tomatoes</item>
+        <item>okra</item>
+        <item>old bay seasoning</item>
+        <item>olive oil</item>
+        <item>olives</item>
+        <item>onion</item>
+        <item>onion powder</item>
+        <item>onion soup mix</item>
+        <item>orange</item>
+        <item>orange bell pepper</item>
+        <item>orange juice</item>
+        <item>orange juice concentrate</item>
+        <item>orange liqueur</item>
+        <item>orange marmalade</item>
+        <item>orange oil</item>
+        <item>orange zest</item>
+        <item>oregano</item>
+        <item>oreo cookies</item>
+        <item>orzo</item>
+        <item>oyster sauce</item>
+        <item>oysters</item>
+        <item>palm sugar</item>
+        <item>pancetta</item>
+        <item>paneer</item>
+        <item>panko</item>
+        <item>papaya</item>
+        <item>paprika</item>
+        <item>parmigiano reggiano</item>
+        <item>parsley</item>
+        <item>parsley flakes</item>
+        <item>parsnip</item>
+        <item>part-skim mozzarella cheese</item>
+        <item>pasta</item>
+        <item>pasta salad mix</item>
+        <item>pasta sauce</item>
+        <item>pastry flour</item>
+        <item>peach</item>
+        <item>peanut butter</item>
+        <item>peanut butter chips</item>
+        <item>peanut butter cups</item>
+        <item>peanut oil</item>
+        <item>peanuts</item>
+        <item>pear liqueur</item>
+        <item>pearl barley</item>
+        <item>pearl onions</item>
+        <item>peas</item>
+        <item>pecan</item>
+        <item>pecan pieces</item>
+        <item>pecorino</item>
+        <item>penne</item>
+        <item>peperoncino</item>
+        <item>pepper jack cheese</item>
+        <item>peppercorns</item>
+        <item>peppermint baking chips</item>
+        <item>peppermint extract</item>
+        <item>pepperoni</item>
+        <item>peppers</item>
+        <item>pesto</item>
+        <item>pickle relish</item>
+        <item>pickles</item>
+        <item>pico de gallo</item>
+        <item>pie crust</item>
+        <item>pimento stuffed olives</item>
+        <item>pimientos</item>
+        <item>pine nuts</item>
+        <item>pineapple</item>
+        <item>pineapple chunks</item>
+        <item>pineapple in juice</item>
+        <item>pineapple juice</item>
+        <item>pink himalayan salt</item>
+        <item>pinto beans</item>
+        <item>pistachios</item>
+        <item>pita</item>
+        <item>pizza crust</item>
+        <item>pizza mix</item>
+        <item>plain greek yogurt</item>
+        <item>plain nonfat yogurt</item>
+        <item>plain yogurt</item>
+        <item>plantain</item>
+        <item>plum</item>
+        <item>plum tomatoes</item>
+        <item>poblano peppers</item>
+        <item>polenta</item>
+        <item>polish sausage</item>
+        <item>pomegranate juice</item>
+        <item>pomegranate molasses</item>
+        <item>pomegranate seeds</item>
+        <item>popcorn</item>
+        <item>poppy seeds</item>
+        <item>pork</item>
+        <item>Pork &amp; Beans</item>
+        <item>pork belly</item>
+        <item>pork butt</item>
+        <item>pork chops</item>
+        <item>pork links</item>
+        <item>pork loin chops</item>
+        <item>pork loin roast</item>
+        <item>pork roast</item>
+        <item>pork shoulder</item>
+        <item>pork tenderloin</item>
+        <item>port</item>
+        <item>portabella mushrooms</item>
+        <item>pot roast</item>
+        <item>potato chips</item>
+        <item>potato starch</item>
+        <item>potatoes</item>
+        <item>poultry seasoning</item>
+        <item>powdered sugar</item>
+        <item>pretzel sandwiches</item>
+        <item>processed american cheese</item>
+        <item>prosciutto</item>
+        <item>provolone cheese</item>
+        <item>prunes</item>
+        <item>puff pastry</item>
+        <item>pumpkin</item>
+        <item>pumpkin pie filling</item>
+        <item>pumpkin pie spice</item>
+        <item>pumpkin puree</item>
+        <item>pumpkin seeds</item>
+        <item>queso fresco</item>
+        <item>quick cooking oats</item>
+        <item>quinoa</item>
+        <item>quinoa flour</item>
+        <item>radicchio</item>
+        <item>radishes</item>
+        <item>raisins</item>
+        <item>rajma masala</item>
+        <item>ramen noodles</item>
+        <item>ranch dressing</item>
+        <item>ranch dressing mix</item>
+        <item>raspberries</item>
+        <item>raspberry jam</item>
+        <item>raw cashews</item>
+        <item>raw shrimp</item>
+        <item>ready-to-serve Asian fried rice</item>
+        <item>real bacon recipe pieces</item>
+        <item>red apples</item>
+        <item>red bell peppers</item>
+        <item>red cabbage</item>
+        <item>red chilli</item>
+        <item>red delicious apples</item>
+        <item>red food coloring</item>
+        <item>red grapefruit juice</item>
+        <item>red grapes</item>
+        <item>red kidney beans</item>
+        <item>red lentils</item>
+        <item>red onion</item>
+        <item>red pepper flakes</item>
+        <item>red pepper powder</item>
+        <item>red potatoes</item>
+        <item>red velvet cookie</item>
+        <item>red wine</item>
+        <item>red wine vinegar</item>
+        <item>reduced fat shredded cheddar cheese</item>
+        <item>refried beans</item>
+        <item>refrigerated crescent rolls</item>
+        <item>refrigerated pizza dough</item>
+        <item>refrigerated sugar cookie dough</item>
+        <item>rhubarb</item>
+        <item>rib tips</item>
+        <item>rice</item>
+        <item>rice flour</item>
+        <item>rice krispies cereal</item>
+        <item>rice milk</item>
+        <item>rice noodles</item>
+        <item>rice paper</item>
+        <item>rice syrup</item>
+        <item>rice vinegar</item>
+        <item>rice wine</item>
+        <item>ricotta salata</item>
+        <item>ritz crackers</item>
+        <item>roast beef</item>
+        <item>roasted chicken</item>
+        <item>roasted nuts</item>
+        <item>roasted peanuts</item>
+        <item>roasted red peppers</item>
+        <item>roma tomatoes</item>
+        <item>romaine lettuce</item>
+        <item>root vegetables</item>
+        <item>rosemary</item>
+        <item>rotini pasta</item>
+        <item>rotisserie chicken</item>
+        <item>round steak</item>
+        <item>rub</item>
+        <item>rum extract</item>
+        <item>runny honey</item>
+        <item>russet potatoes</item>
+        <item>rutabaga</item>
+        <item>rye bread</item>
+        <item>rye meal</item>
+        <item>saffron threads</item>
+        <item>sage</item>
+        <item>sage leaves</item>
+        <item>salad dressing</item>
+        <item>salami</item>
+        <item>salmon fillet</item>
+        <item>salsa</item>
+        <item>salsa verde</item>
+        <item>salt</item>
+        <item>salt and pepper</item>
+        <item>salted butter</item>
+        <item>saltine crackers</item>
+        <item>sandwich bun</item>
+        <item>sauerkraut</item>
+        <item>sausage</item>
+        <item>sausage links</item>
+        <item>scotch bonnet chili</item>
+        <item>sea salt</item>
+        <item>sea scallops</item>
+        <item>seasoned bread crumbs</item>
+        <item>seasoned rice vinegar</item>
+        <item>seasoned salt</item>
+        <item>seasoning</item>
+        <item>seasoning blend</item>
+        <item>seeds</item>
+        <item>self-rising flour</item>
+        <item>semi sweet chocolate chips</item>
+        <item>serrano chile</item>
+        <item>sesame oil</item>
+        <item>sesame seed hamburger buns</item>
+        <item>sesame seeds</item>
+        <item>shallot</item>
+        <item>sharp cheddar cheese</item>
+        <item>sheeps milk cheese</item>
+        <item>shells</item>
+        <item>sherry</item>
+        <item>sherry</item>
+        <item>sherry vinegar</item>
+        <item>shiitake mushroom caps</item>
+        <item>short grain rice</item>
+        <item>short pasta</item>
+        <item>short ribs</item>
+        <item>shortbread cookies</item>
+        <item>shortcrust pastry</item>
+        <item>shortening</item>
+        <item>shredded cheddar cheese</item>
+        <item>shredded cheese</item>
+        <item>shredded chicken</item>
+        <item>shredded coconut</item>
+        <item>shredded mexican cheese blend</item>
+        <item>shredded mexican cheese blend</item>
+        <item>shredded mozzarella</item>
+        <item>silken tofu</item>
+        <item>sirloin steak</item>
+        <item>skim milk ricotta</item>
+        <item>skim vanilla greek yogurt</item>
+        <item>skin-on bone-in chicken leg quarters</item>
+        <item>skinless boneless chicken breast halves</item>
+        <item>skinless boneless chicken thighs</item>
+        <item>skinned black gram</item>
+        <item>slaw dressing</item>
+        <item>slaw mix</item>
+        <item>slivered almonds</item>
+        <item>smoked paprika</item>
+        <item>smoked salmon</item>
+        <item>smoked sausage</item>
+        <item>smooth peanut butter</item>
+        <item>snapper fillets</item>
+        <item>snow peas</item>
+        <item>soda water</item>
+        <item>sour cream</item>
+        <item>sourdough bowl</item>
+        <item>sourdough bread</item>
+        <item>soy milk</item>
+        <item>soy protein powder</item>
+        <item>soy sauce</item>
+        <item>spaghetti</item>
+        <item>spaghetti squash</item>
+        <item>sparkling wine</item>
+        <item>spelt flour</item>
+        <item>spicy brown mustard</item>
+        <item>spinach</item>
+        <item>sprite</item>
+        <item>sprouts</item>
+        <item>squash</item>
+        <item>sriracha sauce</item>
+        <item>steaks</item>
+        <item>steel cut oats</item>
+        <item>stevia</item>
+        <item>stew meat</item>
+        <item>stew vegetables</item>
+        <item>stock</item>
+        <item>store-bought phyllo</item>
+        <item>stout</item>
+        <item>strawberries</item>
+        <item>strawberry jam</item>
+        <item>strawberry jello</item>
+        <item>stuffing</item>
+        <item>stuffing mix</item>
+        <item>sub rolls</item>
+        <item>sugar</item>
+        <item>sugar snap peas</item>
+        <item>sugar syrup</item>
+        <item>sukrin sweetener</item>
+        <item>summer savory</item>
+        <item>summer squash</item>
+        <item>sunflower oil</item>
+        <item>sunflower seeds</item>
+        <item>sweet chilli sauce</item>
+        <item>sweet onion</item>
+        <item>sweet paprika</item>
+        <item>sweet pickle juice</item>
+        <item>sweet pickle relish</item>
+        <item>sweet potato</item>
+        <item>sweet tea</item>
+        <item>sweetened coconut</item>
+        <item>sweetened condensed milk</item>
+        <item>sweetened shredded coconut</item>
+        <item>swiss chard</item>
+        <item>swiss cheese</item>
+        <item>taco seasoning mix</item>
+        <item>taco shells</item>
+        <item>tahini</item>
+        <item>tamari</item>
+        <item>tapioca flour</item>
+        <item>tarragon</item>
+        <item>tart apple</item>
+        <item>tea bags</item>
+        <item>tequila</item>
+        <item>teriyaki sauce</item>
+        <item>thai basil</item>
+        <item>thai chiles</item>
+        <item>thai red curry paste</item>
+        <item>thick-cut bacon</item>
+        <item>tilapia fillets</item>
+        <item>toast</item>
+        <item>toffee bits</item>
+        <item>tofu</item>
+        <item>tomatillos</item>
+        <item>tomato juice</item>
+        <item>tomato paste</item>
+        <item>tomato puree</item>
+        <item>tomato sauce</item>
+        <item>tomato soup</item>
+        <item>tomatoes</item>
+        <item>top blade steak</item>
+        <item>top round steak</item>
+        <item>Top Sirloin</item>
+        <item>tortilla</item>
+        <item>tortilla chips</item>
+        <item>triple sec</item>
+        <item>truffle oil</item>
+        <item>tuna</item>
+        <item>turbinado sugar</item>
+        <item>turkey</item>
+        <item>turkey breast</item>
+        <item>turkey kielbasa</item>
+        <item>turmeric</item>
+        <item>turnips</item>
+        <item>unbleached flour</item>
+        <item>unsalted butter</item>
+        <item>unsmoked back bacon</item>
+        <item>unsweetened applesauce</item>
+        <item>unsweetened coconut milk</item>
+        <item>unsweetened shredded coconut</item>
+        <item>vanilla bean</item>
+        <item>vanilla bean paste</item>
+        <item>vanilla essence</item>
+        <item>vanilla extract</item>
+        <item>vanilla frosting</item>
+        <item>vanilla instant pudding mix</item>
+        <item>vanilla protein powder</item>
+        <item>vanilla wafers</item>
+        <item>vanilla yogurt</item>
+        <item>vegan cheese</item>
+        <item>vegan chocolate chips</item>
+        <item>vegan margarine</item>
+        <item>vegetable broth</item>
+        <item>vegetable oil</item>
+        <item>vegetarian bacon</item>
+        <item>vermouth</item>
+        <item>vinaigrette</item>
+        <item>vinegar</item>
+        <item>vodka</item>
+        <item>walnuts</item>
+        <item>water</item>
+        <item>water chestnuts</item>
+        <item>water-packed tuna</item>
+        <item>watercress</item>
+        <item>watermelon chunks</item>
+        <item>wheat bran</item>
+        <item>wheat germ</item>
+        <item>whipped cream</item>
+        <item>whipped topping</item>
+        <item>whipping cream</item>
+        <item>whiskey</item>
+        <item>white balsamic vinegar</item>
+        <item>white bread</item>
+        <item>white cake mix</item>
+        <item>white cheddar</item>
+        <item>white chocolate</item>
+        <item>white chocolate chips</item>
+        <item>white onion</item>
+        <item>white pepper</item>
+        <item>white whole wheat flour</item>
+        <item>white wine</item>
+        <item>white wine vinegar</item>
+        <item>whole allspice berries</item>
+        <item>whole chicken</item>
+        <item>whole coriander seeds</item>
+        <item>whole cranberry sauce</item>
+        <item>whole kernel corn</item>
+        <item>whole star anise</item>
+        <item>whole wheat bread</item>
+        <item>whole wheat flour</item>
+        <item>whole wheat tortillas</item>
+        <item>whole-grain mustard</item>
+        <item>wine</item>
+        <item>wine vinegar</item>
+        <item>winter squash</item>
+        <item>won ton wraps</item>
+        <item>worcestershire sauce</item>
+        <item>wraps</item>
+        <item>xanthan gum</item>
+        <item>yeast</item>
+        <item>yellow bell pepper</item>
+        <item>yellow cake mix</item>
+        <item>yellow onion</item>
+        <item>yogurt</item>
+        <item>yukon gold potato</item>
+    </string-array>
+</resources>

@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Recipe-Q</string>
+    <string name="activity_list_title">ListActivity</string>
+    <string name="activity_search_title">Search</string>
     <string name="btn_show_list">Shopping List</string>
+    <string name="btn_show_search">Start Search</string>
     <string name="btn_add_recipe_01">Add Recipe #1</string>
     <string name="btn_add_recipe_02">Add Recipe #2</string>
-    <string name="title_activity_list">ListActivity</string>
     <string name="list_label_sought">Looking for</string>
     <string name="list_label_found">Found</string>
     <string name="list_item_name">%1$s &#8212;</string>
@@ -15,4 +17,22 @@
     <string name="action_delete_list">Clear List</string>
     <string name="action_delete_selected">Remove Selected</string>
     <string name="action_delete_sought">Clear Missing</string>
+
+    <string name="empty"/>
+    <string name="summary_include">Include: %1$s</string>
+    <string name="summary_exclude">Exclude: %1$s</string>
+
+    <string name="dialog_title_3_way">[&#160;-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+&#160;]&#160;&#160;&#160;&#160;%1$s</string>
+    <string name="dialog_btn_positive">OK</string>
+    <string name="dialog_btn_negative">Cancel</string>
+
+    <string name="search_common_title">Common Search Criteria</string>
+    <string name="search_common_selection_list">%1$s</string>
+    <string name="search_common_selection_any">Any</string>
+    <string name="search_common_selection_none">None</string>
+
+    <string name="search_common_cuisine_title">Cuisine</string>
+    <string name="search_common_diet_title">Diet</string>
+    <string name="search_common_exclude_title">Exclusions</string>
+    <string name="search_common_intolerance_title">Intolerances</string>
 </resources>

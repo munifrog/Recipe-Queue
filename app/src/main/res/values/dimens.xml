@@ -9,6 +9,13 @@
     <dimen name="pad_vert_list_inside">4dp</dimen>
     <dimen name="pad_horz_list_inside">8dp</dimen>
 
+    <dimen name="pad_vert_dialog">8dp</dimen>
+    <dimen name="pad_horz_dialog">0dp</dimen>
+
+    <dimen name="text_size_list_search_title">24sp</dimen>
+    <dimen name="text_size_list_search_summary">16sp</dimen>
+
+    <dimen name="text_size_list_dialog">16sp</dimen>
     <dimen name="text_size_list_label">32sp</dimen>
     <dimen name="text_size_list_name">32sp</dimen>
     <dimen name="text_size_list_amounts">18sp</dimen>

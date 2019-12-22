@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/pad_horz_list_inside"
+    android:paddingBottom="@dimen/pad_horz_list_inside" >
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/pad_horz_dialog"
+        android:paddingLeft="@dimen/pad_horz_dialog"
+        android:paddingEnd="@dimen/pad_horz_dialog"
+        android:paddingRight="@dimen/pad_horz_dialog" >
+
+        <RadioButton
+            android:id="@+id/radio_negative"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/radio_neutral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/radio_positive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_option_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="@dimen/text_size_list_dialog"
+        android:paddingStart="@dimen/pad_horz_list"
+        android:paddingLeft="@dimen/pad_horz_list"
+        android:paddingEnd="@dimen/pad_horz_list"
+        android:paddingRight="@dimen/pad_horz_list"
+        tool:text="Option Name" />
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Control3WaySelect">
+        <attr name="criteriaTitle" format="string" />
+        <attr name="criteriaIncluded" format="string" />
+        <attr name="criteriaExcluded" format="string" />
+        <attr name="criteriaItems" format="string" />
+        <attr name="android:onClick" />
+    </declare-styleable>
+</resources>

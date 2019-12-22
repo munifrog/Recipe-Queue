@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity implements Api.Listener, Vie
             }
         });
 
+        Button launchSearch = findViewById(R.id.btn_launch_search);
+        launchSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchSearch();
+            }
+        });
+
         Button recipe01 = findViewById(R.id.btn_add_recipe_01);
         recipe01.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements Api.Listener, Vie
 
     private void launchShoppingList() {
         startActivity(new Intent(this, ListActivity.class));
+    }
+
+    private void launchSearch() {
+        startActivity(new Intent(this, SearchActivity.class));
     }
 
     private void addRecipe01() {
