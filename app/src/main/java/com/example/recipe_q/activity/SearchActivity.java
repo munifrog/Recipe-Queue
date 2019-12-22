@@ -18,12 +18,22 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onCuisineClick(View view) {
-        Control3WaySelect diets = findViewById(R.id.custom_cuisine);
-        Dialog3WaySelect dialog = diets.getDialog();
+        Control3WaySelect cuisines = findViewById(R.id.custom_cuisine);
+        Dialog3WaySelect dialog = cuisines.getDialog();
         if (dialog != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
-            diets.updateSummaries();
+            cuisines.updateSummaries();
+        }
+    }
+
+    public void onIngredientClick(View view) {
+        Control3WaySelect ingredients = findViewById(R.id.custom_ingredients);
+        Dialog3WaySelect dialog = ingredients.getDialog();
+        if (dialog != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            ingredients.updateSummaries();
         }
     }
 }

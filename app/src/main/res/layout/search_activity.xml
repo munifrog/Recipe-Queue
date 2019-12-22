@@ -16,4 +16,14 @@
         app:criteriaExcluded="@string/search_common_selection_none"
         app:criteriaItems="@array/search_common_cuisines" />
 
+    <com.example.recipe_q.custom.Control3WaySelect
+        android:id="@+id/custom_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onIngredientClick"
+        app:criteriaTitle="@string/search_common_ingredient_title"
+        app:criteriaIncluded="@string/search_common_selection_any"
+        app:criteriaExcluded="@string/search_common_selection_none"
+        app:criteriaItems="@array/search_ingredients" />
+
 </LinearLayout>
