@@ -6,6 +6,9 @@
     <string name="btn_show_search">Start Search</string>
     <string name="btn_add_recipe_01">Add Recipe #1</string>
     <string name="btn_add_recipe_02">Add Recipe #2</string>
+    <string name="switch_search_common">Common</string>
+    <string name="switch_search_nutrition">Nutrition</string>
+    <string name="switch_search_ingredient">Ingredient</string>
     <string name="list_label_sought">Looking for</string>
     <string name="list_label_found">Found</string>
     <string name="list_item_name">%1$s &#8212;</string>

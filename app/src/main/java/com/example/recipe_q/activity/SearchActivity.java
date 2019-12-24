@@ -2,38 +2,30 @@ package com.example.recipe_q.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.recipe_q.R;
-import com.example.recipe_q.custom.Dialog3WaySelect;
-import com.example.recipe_q.custom.Control3WaySelect;
+import com.example.recipe_q.fragment.SearchCommonFragment;
 
 public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_activity);
-    }
+        setContentView(R.layout.activity_search);
 
-    public void onCuisineClick(View view) {
-        Control3WaySelect cuisines = findViewById(R.id.custom_cuisine);
-        Dialog3WaySelect dialog = cuisines.getDialog();
-        if (dialog != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
-            cuisines.updateSummaries();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_search_common, new SearchCommonFragment())
+                    .commit();
         }
     }
 
-    public void onIngredientClick(View view) {
-        Control3WaySelect ingredients = findViewById(R.id.custom_ingredients);
-        Dialog3WaySelect dialog = ingredients.getDialog();
-        if (dialog != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
-            ingredients.updateSummaries();
-        }
+    public void onCommonClick(View view) {
+        Switch toggle = findViewById(R.id.switch_search_common);
+        View fragment = findViewById(R.id.fragment_search_common);
+        fragment.setVisibility(toggle.isChecked() ? View.VISIBLE : View.GONE);
     }
 }

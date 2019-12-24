@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Switch
+        android:id="@+id/switch_search_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/switch_search_common"
+        android:textSize="@dimen/text_size_list_search_title"
+        android:padding="@dimen/pad_horz_label"
+        android:textStyle="bold"
+        android:checked="true"
+        android:onClick="onCommonClick" />
+
+    <FrameLayout
+        android:id="@+id/fragment_search_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
