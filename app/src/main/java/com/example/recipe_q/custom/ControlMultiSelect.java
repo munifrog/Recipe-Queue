@@ -38,10 +38,11 @@ public class ControlMultiSelect extends LinearLayout implements DialogMultiSelec
         String title = a.getString(R.styleable.ControlMultiSelect_criteriaTitle);
         int titleRef = a.getResourceId(R.styleable.ControlMultiSelect_criteriaTitle, R.string.empty);
         int optionsRef = a.getResourceId(R.styleable.ControlMultiSelect_criteriaItems, R.array.empty);
+        int summaryRef = a.getResourceId(R.styleable.ControlMultiSelect_criteriaSummary, R.string.empty);
         a.recycle();
 
         Resources res = context.getResources();
-        mTextSummary = res.getString(R.string.summary_intolerance);
+        mTextSummary = res.getString(summaryRef);
         mTextEmptyList = res.getString(R.string.search_common_selection_none);
 
         mDialog = new DialogMultiSelect(context, titleRef, optionsRef, this);

@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:criteriaTitle="@string/search_common_intolerance_title"
+            app:criteriaSummary="@string/summary_intolerance"
             app:criteriaItems="@array/search_common_intolerances" />
 
         <com.example.recipe_q.custom.Control3WaySelect
