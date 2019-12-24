@@ -40,4 +40,5 @@
     <string name="search_common_exclude_title">Exclusions</string>
     <string name="search_common_intolerance_title">Intolerances</string>
     <string name="search_common_ingredient_title">Ingredients</string>
+    <string name="search_common_meal_type_title">Meal Type</string>
 </resources>

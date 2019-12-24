@@ -58,4 +58,21 @@
         <item>Tree Nut</item>
         <item>Wheat</item>
     </string-array>
+
+    <string-array name="search_common_meal_types">
+        <item>Any</item>
+        <item>main course</item>
+        <item>side dish</item>
+        <item>dessert</item>
+        <item>appetizer</item>
+        <item>bread</item>
+        <item>breakfast</item>
+        <item>soup</item>
+        <item>beverage</item>
+        <item>sauce</item>
+        <item>marinade</item>
+        <item>fingerfood</item>
+        <item>snack</item>
+        <item>drink</item>
+    </string-array>
 </resources>

@@ -24,6 +24,7 @@ public class SearchCommonFragment extends Fragment {
     private ControlSingleSelect mDiet;
     private ControlMultiSelect mIntolerance;
     private Control3WaySelect mIngredients;
+    private ControlSingleSelect mMealType;
 
     public SearchCommonFragment() {}
 
@@ -61,6 +62,13 @@ public class SearchCommonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 onIngredientClick();
+            }
+        });
+        mMealType = rootView.findViewById(R.id.custom_meal_type);
+        mMealType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMealTypeClick();
             }
         });
         return rootView;
@@ -103,6 +111,16 @@ public class SearchCommonFragment extends Fragment {
 
     private void onIngredientClick() {
         Dialog3WaySelect dialog = mIngredients.getDialog();
+        if (dialog != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            }
+        }
+    }
+
+    private void onMealTypeClick() {
+        DialogSingleSelect dialog = mMealType.getDialog();
         if (dialog != null) {
             FragmentManager fragmentManager = getFragmentManager();
             if (fragmentManager != null) {
