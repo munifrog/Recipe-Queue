@@ -14,6 +14,7 @@
         android:layout_weight="1"
         android:textStyle="bold"
         android:textSize="@dimen/text_size_list_search_title"
+        android:textColor="@color/colorItemOrigin"
         tool:text="Title" />
 
     <TextView

@@ -15,6 +15,7 @@ import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.Control3WaySelect;
 import com.example.recipe_q.custom.ControlMultiSelect;
 import com.example.recipe_q.custom.ControlSingleSelect;
+import com.example.recipe_q.custom.ControlSwitch;
 import com.example.recipe_q.custom.Dialog3WaySelect;
 import com.example.recipe_q.custom.DialogMultiSelect;
 import com.example.recipe_q.custom.DialogSingleSelect;
@@ -25,6 +26,7 @@ public class SearchCommonFragment extends Fragment {
     private ControlMultiSelect mIntolerance;
     private Control3WaySelect mIngredients;
     private ControlSingleSelect mMealType;
+    private ControlSwitch mRequireIngredients;
 
     public SearchCommonFragment() {}
 
@@ -71,6 +73,7 @@ public class SearchCommonFragment extends Fragment {
                 onMealTypeClick();
             }
         });
+        mRequireIngredients = rootView.findViewById(R.id.switch_require_ingredients);
         return rootView;
     }
 

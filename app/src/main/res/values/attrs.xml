@@ -3,6 +3,7 @@
     <!--https://stackoverflow.com/a/4464966-->
     <attr name="criteriaTitle" format="string" />
     <attr name="criteriaItems" format="string" />
+    <attr name="criteriaChecked" format="boolean" />
     <attr name="criteriaSelection" format="integer" />
     <attr name="criteriaSummary" format="string" />
 
@@ -26,5 +27,12 @@
         <attr name="criteriaItems" />
         <attr name="criteriaSelection" />
         <attr name="android:onClick" />
+    </declare-styleable>
+
+    <declare-styleable name="ControlSwitch">
+        <attr name="criteriaTitle" />
+        <attr name="criteriaChecked" />
+        <attr name="summaryCheckOff" format="string" />
+        <attr name="summaryCheckOn" format="string" />
     </declare-styleable>
 </resources>

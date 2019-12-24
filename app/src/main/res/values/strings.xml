@@ -25,6 +25,8 @@
     <string name="summary_include">Include: %1$s</string>
     <string name="summary_exclude">Exclude: %1$s</string>
     <string name="summary_intolerance">Intolerances: %1$s</string>
+    <string name="summary_no">No</string>
+    <string name="summary_yes">Yes</string>
 
     <string name="dialog_title_3_way">[&#160;-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+&#160;]&#160;&#160;&#160;&#160;%1$s</string>
     <string name="dialog_btn_positive">OK</string>
@@ -41,4 +43,5 @@
     <string name="search_common_intolerance_title">Intolerances</string>
     <string name="search_common_ingredient_title">Ingredients</string>
     <string name="search_common_meal_type_title">Meal Type</string>
+    <string name="search_common_require_instructions_title">Require Instructions</string>
 </resources>

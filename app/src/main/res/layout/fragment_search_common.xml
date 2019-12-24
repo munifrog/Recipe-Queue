@@ -50,6 +50,15 @@
             app:criteriaTitle="@string/search_common_meal_type_title"
             app:criteriaItems="@array/search_common_meal_types" />
 
+        <com.example.recipe_q.custom.ControlSwitch
+            android:id="@+id/switch_require_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:summaryCheckOff="@string/summary_no"
+            app:summaryCheckOn="@string/summary_yes"
+            app:criteriaTitle="@string/search_common_require_instructions_title"
+            app:criteriaChecked="false" />
+
     </LinearLayout>
 
 </ScrollView>
