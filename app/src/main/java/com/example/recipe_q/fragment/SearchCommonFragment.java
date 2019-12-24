@@ -13,13 +13,16 @@ import androidx.fragment.app.FragmentManager;
 import com.example.recipe_q.R;
 import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.Control3WaySelect;
+import com.example.recipe_q.custom.ControlMultiSelect;
 import com.example.recipe_q.custom.ControlSingleSelect;
 import com.example.recipe_q.custom.Dialog3WaySelect;
+import com.example.recipe_q.custom.DialogMultiSelect;
 import com.example.recipe_q.custom.DialogSingleSelect;
 
 public class SearchCommonFragment extends Fragment {
     private Control3WaySelect mCuisine;
     private ControlSingleSelect mDiet;
+    private ControlMultiSelect mIntolerance;
     private Control3WaySelect mIngredients;
 
     public SearchCommonFragment() {}
@@ -44,6 +47,13 @@ public class SearchCommonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 onDietClick();
+            }
+        });
+        mIntolerance = rootView.findViewById(R.id.custom_intolerance);
+        mIntolerance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onIntoleranceClick();
             }
         });
         mIngredients = rootView.findViewById(R.id.custom_ingredients);
@@ -73,6 +83,16 @@ public class SearchCommonFragment extends Fragment {
 
     private void onDietClick() {
         DialogSingleSelect dialog = mDiet.getDialog();
+        if (dialog != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            }
+        }
+    }
+
+    private void onIntoleranceClick() {
+        DialogMultiSelect dialog = mIntolerance.getDialog();
         if (dialog != null) {
             FragmentManager fragmentManager = getFragmentManager();
             if (fragmentManager != null) {

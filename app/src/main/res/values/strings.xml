@@ -24,6 +24,7 @@
     <string name="empty"/>
     <string name="summary_include">Include: %1$s</string>
     <string name="summary_exclude">Exclude: %1$s</string>
+    <string name="summary_intolerance">Intolerances: %1$s</string>
 
     <string name="dialog_title_3_way">[&#160;-&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;+&#160;]&#160;&#160;&#160;&#160;%1$s</string>
     <string name="dialog_btn_positive">OK</string>

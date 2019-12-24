@@ -22,6 +22,13 @@
         app:criteriaTitle="@string/search_common_diet_title"
         app:criteriaItems="@array/search_common_diets" />
 
+    <com.example.recipe_q.custom.ControlMultiSelect
+        android:id="@+id/custom_intolerance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:criteriaTitle="@string/search_common_intolerance_title"
+        app:criteriaItems="@array/search_common_intolerances" />
+
     <com.example.recipe_q.custom.Control3WaySelect
         android:id="@+id/custom_ingredients"
         android:layout_width="match_parent"

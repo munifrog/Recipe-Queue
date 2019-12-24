@@ -3,6 +3,7 @@
     <!--https://stackoverflow.com/a/4464966-->
     <attr name="criteriaTitle" format="string" />
     <attr name="criteriaItems" format="string" />
+    <attr name="criteriaSelection" format="integer" />
 
     <declare-styleable name="Control3WaySelect">
         <attr name="criteriaTitle" />
@@ -12,10 +13,16 @@
         <attr name="android:onClick" />
     </declare-styleable>
 
+    <declare-styleable name="ControlMultiSelect">
+        <attr name="criteriaTitle" />
+        <attr name="criteriaItems" />
+        <attr name="android:onClick" />
+    </declare-styleable>
+
     <declare-styleable name="ControlSingleSelect">
         <attr name="criteriaTitle" />
         <attr name="criteriaItems" />
-        <attr name="criteriaSelection" format="integer" />
+        <attr name="criteriaSelection" />
         <attr name="android:onClick" />
     </declare-styleable>
 </resources>
