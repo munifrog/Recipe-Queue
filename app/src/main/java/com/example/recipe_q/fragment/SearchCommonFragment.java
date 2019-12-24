@@ -13,10 +13,13 @@ import androidx.fragment.app.FragmentManager;
 import com.example.recipe_q.R;
 import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.Control3WaySelect;
+import com.example.recipe_q.custom.ControlSingleSelect;
 import com.example.recipe_q.custom.Dialog3WaySelect;
+import com.example.recipe_q.custom.DialogSingleSelect;
 
 public class SearchCommonFragment extends Fragment {
     private Control3WaySelect mCuisine;
+    private ControlSingleSelect mDiet;
     private Control3WaySelect mIngredients;
 
     public SearchCommonFragment() {}
@@ -34,6 +37,13 @@ public class SearchCommonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 onCuisineClick();
+            }
+        });
+        mDiet = rootView.findViewById(R.id.custom_diet);
+        mDiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDietClick();
             }
         });
         mIngredients = rootView.findViewById(R.id.custom_ingredients);
@@ -55,7 +65,19 @@ public class SearchCommonFragment extends Fragment {
         Dialog3WaySelect dialog = mCuisine.getDialog();
         if (dialog != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            }
+        }
+    }
+
+    private void onDietClick() {
+        DialogSingleSelect dialog = mDiet.getDialog();
+        if (dialog != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            }
         }
     }
 
@@ -63,7 +85,9 @@ public class SearchCommonFragment extends Fragment {
         Dialog3WaySelect dialog = mIngredients.getDialog();
         if (dialog != null) {
             FragmentManager fragmentManager = getFragmentManager();
-            dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            if (fragmentManager != null) {
+                dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
+            }
         }
     }
 }

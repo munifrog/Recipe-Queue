@@ -15,6 +15,13 @@
         app:criteriaExcluded="@string/search_common_selection_none"
         app:criteriaItems="@array/search_common_cuisines" />
 
+    <com.example.recipe_q.custom.ControlSingleSelect
+        android:id="@+id/custom_diet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:criteriaTitle="@string/search_common_diet_title"
+        app:criteriaItems="@array/search_common_diets" />
+
     <com.example.recipe_q.custom.Control3WaySelect
         android:id="@+id/custom_ingredients"
         android:layout_width="match_parent"

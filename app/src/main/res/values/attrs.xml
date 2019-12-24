@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--https://stackoverflow.com/a/4464966-->
+    <attr name="criteriaTitle" format="string" />
+    <attr name="criteriaItems" format="string" />
+
     <declare-styleable name="Control3WaySelect">
-        <attr name="criteriaTitle" format="string" />
+        <attr name="criteriaTitle" />
         <attr name="criteriaIncluded" format="string" />
         <attr name="criteriaExcluded" format="string" />
-        <attr name="criteriaItems" format="string" />
+        <attr name="criteriaItems" />
+        <attr name="android:onClick" />
+    </declare-styleable>
+
+    <declare-styleable name="ControlSingleSelect">
+        <attr name="criteriaTitle" />
+        <attr name="criteriaItems" />
+        <attr name="criteriaSelection" format="integer" />
         <attr name="android:onClick" />
     </declare-styleable>
 </resources>
