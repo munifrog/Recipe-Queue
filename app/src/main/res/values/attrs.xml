@@ -15,6 +15,16 @@
         <attr name="android:onClick" />
     </declare-styleable>
 
+    <declare-styleable name="ControlMinMax">
+        <attr name="criteriaTitle" />
+        <attr name="criteriaUnit" />
+        <attr name="labelMinimum" format="string" />
+        <attr name="labelMaximum" format="string" />
+        <attr name="valueMinimum" format="string" />
+        <attr name="valueMaximum" format="string" />
+        <attr name="android:onClick" />
+    </declare-styleable>
+
     <declare-styleable name="ControlMultiSelect">
         <attr name="criteriaTitle" />
         <attr name="criteriaItems" />

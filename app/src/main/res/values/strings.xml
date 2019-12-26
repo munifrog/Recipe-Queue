@@ -32,7 +32,6 @@
     <string name="dialog_btn_positive">OK</string>
     <string name="dialog_btn_negative">Cancel</string>
 
-    <string name="search_common_title">Common Search Criteria</string>
     <string name="search_common_selection_list">%1$s</string>
     <string name="search_common_selection_any">Any</string>
     <string name="search_common_selection_none">None</string>
@@ -44,4 +43,25 @@
     <string name="search_common_ingredient_title">Ingredients</string>
     <string name="search_common_meal_type_title">Meal Type</string>
     <string name="search_common_require_instructions_title">Require Instructions</string>
+
+    <string name="search_nutrient_auto_fill_min">10</string>
+    <string name="search_nutrient_auto_fill_max">90</string>
+    <string name="search_nutrient_default_min">0</string>
+    <string name="search_nutrient_default_max">0</string>
+
+    <string name="search_nutrient_unit_grams">g</string>
+    <string name="search_nutrient_unit_milli_grams">mg</string>
+    <string name="search_nutrient_unit_micro_grams">\u00b5g</string>
+
+    <string name="min_max_label_minimum">Minimum</string>
+    <string name="min_max_label_maximum">Maximum</string>
+    <string name="min_max_default_minimum">0</string>
+    <string name="min_max_default_maximum"/>
+
+    <string name="min_max_summary_restrict_completely">No amount</string>
+    <string name="min_max_summary_restrict_min">At least %1$d%2$s</string>
+    <string name="min_max_summary_restrict_max">At most %1$d%2$s</string>
+    <string name="min_max_summary_restrict_same">Exactly %1$d%2$s</string>
+    <string name="min_max_summary_restrict_both">Between %1$d and %2$d %3$s</string>
+    <string name="min_max_summary_no_restriction">Any amount</string>
 </resources>

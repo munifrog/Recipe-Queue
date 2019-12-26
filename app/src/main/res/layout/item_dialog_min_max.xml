@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/pad_horz_list"
+        android:paddingStart="@dimen/pad_horz_list"
+        android:paddingRight="@dimen/pad_horz_list"
+        android:paddingEnd="@dimen/pad_horz_list"
+        android:layout_gravity="center"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_minimum_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:text="@string/min_max_label_minimum" />
+
+        <EditText
+            android:id="@+id/et_minimum_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/search_nutrient_default_min"
+            android:hint="@string/search_nutrient_auto_fill_min"
+            android:layout_marginLeft="@dimen/pad_horz_list"
+            android:layout_marginStart="@dimen/pad_horz_list"
+            android:layout_marginRight="@dimen/pad_horz_list"
+            android:layout_marginEnd="@dimen/pad_horz_list"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:inputType="number"
+            android:gravity="center"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/tv_minimum_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:text="@string/search_nutrient_unit_micro_grams" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/pad_horz_list"
+        android:paddingStart="@dimen/pad_horz_list"
+        android:paddingRight="@dimen/pad_horz_list"
+        android:paddingEnd="@dimen/pad_horz_list"
+        android:layout_gravity="center"
+        android:gravity="center"  >
+
+        <TextView
+            android:id="@+id/tv_maximum_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:text="@string/min_max_label_maximum" />
+
+        <EditText
+            android:id="@+id/et_maximum_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/search_nutrient_auto_fill_max"
+            android:layout_marginLeft="@dimen/pad_horz_list"
+            android:layout_marginStart="@dimen/pad_horz_list"
+            android:layout_marginRight="@dimen/pad_horz_list"
+            android:layout_marginEnd="@dimen/pad_horz_list"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:inputType="number"
+            android:gravity="center"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/tv_maximum_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_list_search_summary"
+            tool:text="mg" />
+
+    </LinearLayout>
+
+</LinearLayout>
