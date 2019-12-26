@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <Switch
-        android:id="@+id/switch_search_common"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/switch_search_common"
-        android:textSize="@dimen/text_size_list_search_title"
-        android:padding="@dimen/pad_horz_label"
-        android:textStyle="bold"
-        android:checked="true"
-        android:onClick="onCommonClick" />
+        android:orientation="vertical" >
 
-    <FrameLayout
-        android:id="@+id/fragment_search_common"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Switch
+            android:id="@+id/switch_search_common"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_search_common"
+            android:textSize="@dimen/text_size_list_search_title"
+            android:padding="@dimen/pad_horz_label"
+            android:textStyle="bold"
+            android:checked="true"
+            android:onClick="onCommonClick" />
 
-</LinearLayout>
+        <FrameLayout
+            android:id="@+id/fragment_search_common"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Switch
+            android:id="@+id/switch_search_nutrition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_search_nutrition"
+            android:textSize="@dimen/text_size_list_search_title"
+            android:padding="@dimen/pad_horz_label"
+            android:textStyle="bold"
+            android:checked="true"
+            android:onClick="onNutritionClick" />
+
+        <FrameLayout
+            android:id="@+id/fragment_search_nutrition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</ScrollView>

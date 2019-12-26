@@ -64,4 +64,6 @@
     <string name="min_max_summary_restrict_same">Exactly %1$d%2$s</string>
     <string name="min_max_summary_restrict_both">Between %1$d and %2$d %3$s</string>
     <string name="min_max_summary_no_restriction">Any amount</string>
+
+    <string name="search_nutrient_alcohol_title">Alcohol</string>
 </resources>
