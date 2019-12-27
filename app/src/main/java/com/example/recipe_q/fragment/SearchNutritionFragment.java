@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.recipe_q.R;
 import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.ControlMinMax;
-import com.example.recipe_q.custom.DialogMinMax;
 
 public class SearchNutritionFragment extends Fragment {
     private static final int MEASURE_ALCOHOL           =  0;
@@ -354,8 +354,8 @@ public class SearchNutritionFragment extends Fragment {
         return rootView;
     }
 
-    private void onControlClick(int type) {
-        DialogMinMax dialog;
+    private DialogFragment getDialog(int type) {
+        DialogFragment dialog;
         switch (type) {
             default:
                 dialog = null;
@@ -469,6 +469,11 @@ public class SearchNutritionFragment extends Fragment {
                 dialog = mZinc.getDialog();
                 break;
         }
+        return dialog;
+    }
+
+    private void onControlClick(int type) {
+        DialogFragment dialog = getDialog(type);
         if (dialog != null) {
             FragmentManager fragmentManager = getFragmentManager();
             if (fragmentManager != null) {
