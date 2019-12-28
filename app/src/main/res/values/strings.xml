@@ -38,11 +38,12 @@
 
     <string name="search_common_cuisine_title">Cuisine</string>
     <string name="search_common_diet_title">Diet</string>
-    <string name="search_common_exclude_title">Exclusions</string>
-    <string name="search_common_intolerance_title">Intolerances</string>
-    <string name="search_common_ingredient_title">Ingredients</string>
     <string name="search_common_meal_type_title">Meal Type</string>
     <string name="search_common_require_instructions_title">Require Instructions</string>
+
+    <string name="search_ingredient_intolerance_title">Intolerances</string>
+    <string name="search_ingredient_ingredient_title">Ingredients</string>
+    <string name="search_ingredient_ignore_pantry_title">Ignore Pantry Ingredients</string>
 
     <string name="search_nutrient_auto_fill_min">10</string>
     <string name="search_nutrient_auto_fill_max">90</string>

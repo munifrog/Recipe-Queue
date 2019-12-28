@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recipe_q.R;
 import com.example.recipe_q.fragment.SearchCommonFragment;
+import com.example.recipe_q.fragment.SearchIngredientFragment;
 import com.example.recipe_q.fragment.SearchNutritionFragment;
 
 public class SearchActivity extends AppCompatActivity {
@@ -24,6 +25,11 @@ public class SearchActivity extends AppCompatActivity {
 
             getSupportFragmentManager()
                     .beginTransaction()
+                    .replace(R.id.fragment_search_ingredient, new SearchIngredientFragment())
+                    .commit();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.fragment_search_nutrition, new SearchNutritionFragment())
                     .commit();
         }
@@ -32,6 +38,12 @@ public class SearchActivity extends AppCompatActivity {
     public void onCommonClick(View view) {
         Switch toggle = findViewById(R.id.switch_search_common);
         View fragment = findViewById(R.id.fragment_search_common);
+        fragment.setVisibility(toggle.isChecked() ? View.VISIBLE : View.GONE);
+    }
+
+    public void onIngredientClick(View view) {
+        Switch toggle = findViewById(R.id.switch_search_ingredient);
+        View fragment = findViewById(R.id.fragment_search_ingredient);
         fragment.setVisibility(toggle.isChecked() ? View.VISIBLE : View.GONE);
     }
 

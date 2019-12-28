@@ -14,24 +14,19 @@ import androidx.fragment.app.FragmentManager;
 import com.example.recipe_q.R;
 import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.Control3WaySelect;
-import com.example.recipe_q.custom.ControlMultiSelect;
 import com.example.recipe_q.custom.ControlSingleSelect;
 import com.example.recipe_q.custom.ControlSwitch;
 
 public class SearchCommonFragment extends Fragment {
     private static final int COMMON_CUISINE                 =  0;
     private static final int COMMON_DIET                    =  1;
-    private static final int COMMON_INTOLERANCE             =  2;
-    private static final int COMMON_INGREDIENTS             =  3;
-    private static final int COMMON_MEAL_TYPE               =  4;
-    private static final int COMMON_REQUIRE_INGREDIENTS     =  5;
+    private static final int COMMON_MEAL_TYPE               =  2;
+    private static final int COMMON_REQUIRE_INSTRUCTIONS    =  3;
 
     private Control3WaySelect mCuisine;
     private ControlSingleSelect mDiet;
-    private ControlMultiSelect mIntolerance;
-    private Control3WaySelect mIngredients;
     private ControlSingleSelect mMealType;
-    private ControlSwitch mRequireIngredients;
+    private ControlSwitch mRequireInstructions;
 
     public SearchCommonFragment() {}
 
@@ -57,20 +52,6 @@ public class SearchCommonFragment extends Fragment {
                 onControlClick(COMMON_DIET);
             }
         });
-        mIntolerance = rootView.findViewById(R.id.custom_intolerance);
-        mIntolerance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onControlClick(COMMON_INTOLERANCE);
-            }
-        });
-        mIngredients = rootView.findViewById(R.id.custom_ingredients);
-        mIngredients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onControlClick(COMMON_INGREDIENTS);
-            }
-        });
         mMealType = rootView.findViewById(R.id.custom_meal_type);
         mMealType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +59,7 @@ public class SearchCommonFragment extends Fragment {
                 onControlClick(COMMON_MEAL_TYPE);
             }
         });
-        mRequireIngredients = rootView.findViewById(R.id.switch_require_ingredients);
+        mRequireInstructions = rootView.findViewById(R.id.switch_require_instructions);
         return rootView;
     }
 
@@ -96,17 +77,11 @@ public class SearchCommonFragment extends Fragment {
             case COMMON_DIET:
                 dialog = mDiet.getDialog();
                 break;
-            case COMMON_INTOLERANCE:
-                dialog = mIntolerance.getDialog();
-                break;
-            case COMMON_INGREDIENTS:
-                dialog = mIngredients.getDialog();
-                break;
             case COMMON_MEAL_TYPE:
                 dialog = mMealType.getDialog();
                 break;
             default:
-            case COMMON_REQUIRE_INGREDIENTS:
+            case COMMON_REQUIRE_INSTRUCTIONS:
                 dialog = null;
                 break;
         }

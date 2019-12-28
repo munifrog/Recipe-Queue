@@ -26,6 +26,22 @@
             android:layout_height="wrap_content" />
 
         <Switch
+            android:id="@+id/switch_search_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_search_ingredient"
+            android:textSize="@dimen/text_size_list_search_title"
+            android:padding="@dimen/pad_horz_label"
+            android:textStyle="bold"
+            android:checked="true"
+            android:onClick="onIngredientClick" />
+
+        <FrameLayout
+            android:id="@+id/fragment_search_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Switch
             android:id="@+id/switch_search_nutrition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
