@@ -1,12 +1,15 @@
 package com.example.recipe_q.util;
 
 import com.example.recipe_q.BuildConfig;
+import com.example.recipe_q.model.Recipe;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -33,14 +36,18 @@ public class Api {
     private static final String JSON_TAG_RECIPES_LIST = "recipes";
     private static final String JSON_TAG_RESULTS_LIST = "results";
     private static final String JSON_TAG_SERVINGS = "servings";
+    private static final String JSON_TAG_SOURCE_URL_ORIGINAL = "sourceUrl";
+    private static final String JSON_TAG_SOURCE_URL_SPOONACULAR = "spoonacularSourceUrl";
     private static final String JSON_TAG_STEP = "step";
     private static final String JSON_TAG_STEPS_LIST = "steps";
     private static final String JSON_TAG_TITLE = "title";
 
+    public static final String QUERY_COMPLEX_COUNT_NUMBER = "number";
     public static final String QUERY_COMPLEX_CUISINE_INCLUDE = "cuisine";
     public static final String QUERY_COMPLEX_CUISINE_EXCLUDE = "excludeCuisine";
     public static final String QUERY_COMPLEX_DIET = "diet";
     public static final String QUERY_COMPLEX_INGREDIENTS_EXCLUDE = "excludeIngredients";
+    public static final String QUERY_COMPLEX_INGREDIENTS_FILL = "fillIngredients";
     public static final String QUERY_COMPLEX_INGREDIENTS_INCLUDE = "includeIngredients";
     public static final String QUERY_COMPLEX_INTOLERANCE = "intolerances";
     public static final String QUERY_COMPLEX_MEAL_TYPE = "type";
@@ -117,17 +124,25 @@ public class Api {
     public static final String QUERY_COMPLEX_MEASURE_ZINC_MIN = "minZinc";
     public static final String QUERY_COMPLEX_MEASURE_ZINC_MAX = "maxZinc";
     public static final String QUERY_COMPLEX_PANTRY_IGNORE = "ignorePantry";
+    public static final String QUERY_COMPLEX_RECIPE_ADD_INFO = "addRecipeInformation";
     public static final String QUERY_COMPLEX_REQUIRE_INSTRUCTIONS = "instructionsRequired";
 
     private Spoonacular mSpoonacular;
-    private Listener mListener;
+    private BaseListener mListener;
 
-    public interface Listener {
+    public interface BaseListener {
         void onInternetFailure(Throwable throwable);
+    }
+
+    public interface JokeListener extends BaseListener {
         void onJokeRetrieved(String joke);
     }
 
-    public Api(Listener listener) {
+    public interface RecipeListener extends BaseListener {
+        void onRecipesReturned(List<Recipe> recipes);
+    }
+
+    public Api(BaseListener listener) {
         mListener = listener;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_PROTOCOL + "://" + API_HOST)
@@ -142,6 +157,12 @@ public class Api {
     }
 
     public void getRandomJoke() {
+        if (!(mListener instanceof JokeListener)) {
+            throw new ClassCastException(mListener.getClass().getSimpleName() +
+                    " does not implement " + JokeListener.class.getName()
+            );
+        }
+
         mSpoonacular.getRandomJoke().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -151,7 +172,7 @@ public class Api {
                         String json = responseBody.string();
                         JSONObject jsonJoke = new JSONObject(json);
                         String joke = jsonJoke.getString(JSON_TAG_JOKE_TEXT);
-                        mListener.onJokeRetrieved(joke);
+                        ((JokeListener) mListener).onJokeRetrieved(joke);
                     } catch (JSONException e) {
                         // TODO: Handle appropriately
                     } catch (IOException e) {
@@ -365,28 +386,20 @@ public class Api {
     }
 
     public void getRecipesComplexSearch(Map<String, String> searchTerms) {
+        if (!(mListener instanceof RecipeListener)) {
+            throw new ClassCastException(mListener.getClass().getSimpleName() +
+                    " does not implement " + RecipeListener.class.getName()
+            );
+        }
+
         mSpoonacular.getRecipesComplexSearch(searchTerms).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
-                        String jsonString = responseBody.string();
-                        JSONObject searchResults  =new JSONObject(jsonString);
-                        JSONArray foundRecipes = searchResults.getJSONArray(JSON_TAG_RESULTS_LIST);
-                        if (foundRecipes != null) {
-                            int recipeCount = foundRecipes.length();
-                            JSONObject currentRecipe;
-                            long currentId;
-                            String currentTitle;
-                            for (int i =0; i < recipeCount; i++) {
-                                currentRecipe = foundRecipes.getJSONObject(i);
-                                currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
-                                currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
-                            }
-                        }
-                    } catch (JSONException e) {
-                        // TODO: Handle appropriately
+                        List<Recipe> recipes = parseComplex(responseBody.string());
+                        ((RecipeListener) mListener).onRecipesReturned(recipes);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
                     }
@@ -398,6 +411,49 @@ public class Api {
                 onInternetFailure(call, t);
             }
         });
+    }
+
+    private List<Recipe> parseComplex(String json) {
+        List<Recipe> recipes = new ArrayList<>();
+        try {
+            JSONObject searchResults = new JSONObject(json);
+            JSONArray foundRecipes = searchResults.getJSONArray(JSON_TAG_RESULTS_LIST);
+            if (foundRecipes != null) {
+                int recipeCount = foundRecipes.length();
+                JSONObject currentRecipe;
+                long currentId;
+                String currentSourceUrl;
+                String currentSourceUrlSpoonacular;
+                String currentImageUrl;
+                int currentReadyInMinutes;
+                int currentServings;
+                String currentTitle;
+                Recipe oneRecipe;
+                for (int i =0; i < recipeCount; i++) {
+                    currentRecipe = foundRecipes.getJSONObject(i);
+                    currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
+                    currentSourceUrl = currentRecipe.getString(JSON_TAG_SOURCE_URL_ORIGINAL);
+                    currentSourceUrlSpoonacular = currentRecipe.getString(JSON_TAG_SOURCE_URL_SPOONACULAR);
+                    currentImageUrl = currentRecipe.getString(JSON_TAG_IMAGE_MAIN);
+                    currentReadyInMinutes = currentRecipe.getInt(JSON_TAG_READY_MINUTES);
+                    currentServings = currentRecipe.getInt(JSON_TAG_SERVINGS);
+                    currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
+                    oneRecipe = new Recipe(
+                            currentId,
+                            currentSourceUrl,
+                            currentSourceUrlSpoonacular,
+                            currentImageUrl,
+                            currentReadyInMinutes,
+                            currentServings,
+                            currentTitle
+                    );
+                    recipes.add(oneRecipe);
+                }
+            }
+        } catch (JSONException e) {
+            // TODO: Handle appropriately
+        }
+        return recipes;
     }
 
     private interface Spoonacular {

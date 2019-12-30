@@ -19,7 +19,7 @@ import com.example.recipe_q.util.Api;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Api.Listener, ViewModel.Listener {
+public class MainActivity extends AppCompatActivity implements Api.JokeListener, ViewModel.Listener {
     ViewModel mViewModel;
 
     @Override

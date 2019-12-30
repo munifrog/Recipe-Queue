@@ -11,11 +11,20 @@ import com.example.recipe_q.R;
 import com.example.recipe_q.fragment.SearchCommonFragment;
 import com.example.recipe_q.fragment.SearchIngredientFragment;
 import com.example.recipe_q.fragment.SearchNutritionFragment;
+import com.example.recipe_q.model.Recipe;
+import com.example.recipe_q.util.Api;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class SearchActivity extends AppCompatActivity {
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_COUNT_NUMBER;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INGREDIENTS_FILL;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_RECIPE_ADD_INFO;
+
+public class SearchActivity extends AppCompatActivity implements Api.RecipeListener {
+    private static final int RECIPE_COUNT_MAXIMUM = 20;
+
     private Switch mSwitchCommon;
     private Switch mSwitchIngredient;
     private Switch mSwitchNutrition;
@@ -25,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     private SearchCommonFragment mFragmentCommon;
     private SearchIngredientFragment mFragmentIngredient;
     private SearchNutritionFragment mFragmentNutrition;
+    private Api mApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,7 @@ public class SearchActivity extends AppCompatActivity {
         mFragmentCommon = new SearchCommonFragment();
         mFragmentIngredient = new SearchIngredientFragment();
         mFragmentNutrition = new SearchNutritionFragment();
+        mApi = new Api(this);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -125,6 +136,9 @@ public class SearchActivity extends AppCompatActivity {
 
     private void onLaunchClick() {
         Map<String, String> searchTerms = new HashMap<>();
+        searchTerms.put(QUERY_COMPLEX_COUNT_NUMBER, Integer.toString(RECIPE_COUNT_MAXIMUM));
+        searchTerms.put(QUERY_COMPLEX_INGREDIENTS_FILL, Boolean.toString(true));
+        searchTerms.put(QUERY_COMPLEX_RECIPE_ADD_INFO, Boolean.toString(true));
         if (isEnabledCommon()) {
             mFragmentCommon.addSearchTerms(searchTerms);
         }
@@ -134,5 +148,21 @@ public class SearchActivity extends AppCompatActivity {
         if (isEnabledNutrition()) {
             mFragmentNutrition.addSearchTerms(searchTerms);
         }
+
+        performSearch(searchTerms);
+    }
+
+    private void performSearch(Map<String, String> searchTerms) {
+        mApi.getRecipesComplexSearch(searchTerms);
+    }
+
+    @Override
+    public void onInternetFailure(Throwable throwable) {
+        // TODO: Handle appropriately
+    }
+
+    @Override
+    public void onRecipesReturned(List<Recipe> recipes) {
+        // TODO: Launch the view of the returned results, if any returned
     }
 }
