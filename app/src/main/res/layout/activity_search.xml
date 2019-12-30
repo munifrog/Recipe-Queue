@@ -17,8 +17,7 @@
             android:textSize="@dimen/text_size_list_search_title"
             android:padding="@dimen/pad_horz_label"
             android:textStyle="bold"
-            android:checked="true"
-            android:onClick="onCommonClick" />
+            android:checked="true" />
 
         <FrameLayout
             android:id="@+id/fragment_search_common"
@@ -33,8 +32,7 @@
             android:textSize="@dimen/text_size_list_search_title"
             android:padding="@dimen/pad_horz_label"
             android:textStyle="bold"
-            android:checked="true"
-            android:onClick="onIngredientClick" />
+            android:checked="true" />
 
         <FrameLayout
             android:id="@+id/fragment_search_ingredient"
@@ -49,13 +47,20 @@
             android:textSize="@dimen/text_size_list_search_title"
             android:padding="@dimen/pad_horz_label"
             android:textStyle="bold"
-            android:checked="true"
-            android:onClick="onNutritionClick" />
+            android:checked="true" />
 
         <FrameLayout
             android:id="@+id/fragment_search_nutrition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_execute_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/btn_execute_search"
+            android:layout_margin="@dimen/margin_button" />
 
     </LinearLayout>
 

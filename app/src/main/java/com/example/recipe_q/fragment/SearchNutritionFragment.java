@@ -14,6 +14,83 @@ import androidx.fragment.app.FragmentManager;
 import com.example.recipe_q.R;
 import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.ControlMinMax;
+import com.example.recipe_q.custom.DialogMinMax;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_ALCOHOL_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_ALCOHOL_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CAFFEINE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CAFFEINE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CALCIUM_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CALCIUM_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CALORY_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CALORY_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CARBOHYDRATE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CARBOHYDRATE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CHOLESTEROL_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CHOLESTEROL_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CHOLINE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_CHOLINE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_COPPER_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_COPPER_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FAT_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FAT_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FAT_SATURATED_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FAT_SATURATED_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FIBER_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FIBER_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FLUORIDE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FLUORIDE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FOLATE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FOLATE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FOLIC_ACID_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_FOLIC_ACID_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_IODINE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_IODINE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_IRON_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_IRON_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_MAGNESIUM_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_MAGNESIUM_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_MANGANESE_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_MANGANESE_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_PHOSPHORUS_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_PHOSPHORUS_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_POTASSIUM_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_POTASSIUM_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_PROTEIN_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_PROTEIN_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_SELENIUM_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_SELENIUM_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_SODIUM_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_SODIUM_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_SUGAR_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_SUGAR_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_A_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_A_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B01_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B01_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B02_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B02_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B03_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B03_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B05_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B05_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B06_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B06_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B12_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_B12_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_C_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_C_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_D_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_D_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_E_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_E_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_K_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_VITAMIN_K_MIN;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_ZINC_MAX;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEASURE_ZINC_MIN;
 
 public class SearchNutritionFragment extends Fragment {
     private static final int MEASURE_ALCOHOL           =  0;
@@ -52,6 +129,9 @@ public class SearchNutritionFragment extends Fragment {
     private static final int MEASURE_VITAMIN_E         = 33;
     private static final int MEASURE_VITAMIN_K         = 34;
     private static final int MEASURE_ZINC              = 35;
+
+    private static final int MEASURE_INDEX_FIRST = MEASURE_ALCOHOL;
+    private static final int MEASURE_INDEX_LAST = MEASURE_ZINC;
 
     private ControlMinMax mAlcohol;
     private ControlMinMax mCaffeine;
@@ -480,5 +560,263 @@ public class SearchNutritionFragment extends Fragment {
                 dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
             }
         }
+    }
+
+    public void addSearchTerms(@NonNull Map<String, String> searchTerms) {
+        for (int i = MEASURE_INDEX_FIRST; i <= MEASURE_INDEX_LAST; i++) {
+            getSingleQuery(searchTerms, i);
+        }
+    }
+
+    private void getSingleQuery(@NonNull Map<String, String> searchTerms, int type) {
+        DialogMinMax dialog = (DialogMinMax) getDialog(type);
+        if (dialog != null) {
+            String stringMinimum = dialog.getMinimum();
+            int integerMinimum = stringMinimum.isEmpty() ? 0 : Integer.parseInt(stringMinimum);
+            if (integerMinimum > 0) {
+                searchTerms.put(getMinimumTerm(type), Integer.toString(integerMinimum));
+            }
+            String stringMaximum = dialog.getMaximum();
+            if (!stringMaximum.isEmpty()) {
+                int integerMaximum = Integer.parseInt(stringMaximum);
+                searchTerms.put(getMaximumTerm(type), Integer.toString(integerMaximum));
+            }
+        }
+    }
+
+    private String getMinimumTerm(int type) {
+        String term;
+        switch (type) {
+            default:
+                term = null;
+                break;
+            case MEASURE_ALCOHOL:
+                term = QUERY_COMPLEX_MEASURE_ALCOHOL_MIN;
+                break;
+            case MEASURE_CAFFEINE:
+                term = QUERY_COMPLEX_MEASURE_CAFFEINE_MIN;
+                break;
+            case MEASURE_CALCIUM:
+                term = QUERY_COMPLEX_MEASURE_CALCIUM_MIN;
+                break;
+            case MEASURE_CALORIES:
+                term = QUERY_COMPLEX_MEASURE_CALORY_MIN;
+                break;
+            case MEASURE_CARBOHYDRATES:
+                term = QUERY_COMPLEX_MEASURE_CARBOHYDRATE_MIN;
+                break;
+            case MEASURE_CHOLESTEROL:
+                term = QUERY_COMPLEX_MEASURE_CHOLESTEROL_MIN;
+                break;
+            case MEASURE_CHOLINE:
+                term = QUERY_COMPLEX_MEASURE_CHOLINE_MIN;
+                break;
+            case MEASURE_COPPER:
+                term = QUERY_COMPLEX_MEASURE_COPPER_MIN;
+                break;
+            case MEASURE_FAT:
+                term = QUERY_COMPLEX_MEASURE_FAT_MIN;
+                break;
+            case MEASURE_FIBER:
+                term = QUERY_COMPLEX_MEASURE_FIBER_MIN;
+                break;
+            case MEASURE_FLUORIDE:
+                term = QUERY_COMPLEX_MEASURE_FLUORIDE_MIN;
+                break;
+            case MEASURE_FOLATE:
+                term = QUERY_COMPLEX_MEASURE_FOLATE_MIN;
+                break;
+            case MEASURE_FOLIC_ACID:
+                term = QUERY_COMPLEX_MEASURE_FOLIC_ACID_MIN;
+                break;
+            case MEASURE_IODINE:
+                term = QUERY_COMPLEX_MEASURE_IODINE_MIN;
+                break;
+            case MEASURE_IRON:
+                term = QUERY_COMPLEX_MEASURE_IRON_MIN;
+                break;
+            case MEASURE_MAGNESIUM:
+                term = QUERY_COMPLEX_MEASURE_MAGNESIUM_MIN;
+                break;
+            case MEASURE_MANGANESE:
+                term = QUERY_COMPLEX_MEASURE_MANGANESE_MIN;
+                break;
+            case MEASURE_PHOSPHOROUS:
+                term = QUERY_COMPLEX_MEASURE_PHOSPHORUS_MIN;
+                break;
+            case MEASURE_POTASSIUM:
+                term = QUERY_COMPLEX_MEASURE_POTASSIUM_MIN;
+                break;
+            case MEASURE_PROTEIN:
+                term = QUERY_COMPLEX_MEASURE_PROTEIN_MIN;
+                break;
+            case MEASURE_SATURATED_FAT:
+                term = QUERY_COMPLEX_MEASURE_FAT_SATURATED_MIN;
+                break;
+            case MEASURE_SELENIUM:
+                term = QUERY_COMPLEX_MEASURE_SELENIUM_MIN;
+                break;
+            case MEASURE_SODIUM:
+                term = QUERY_COMPLEX_MEASURE_SODIUM_MIN;
+                break;
+            case MEASURE_SUGAR:
+                term = QUERY_COMPLEX_MEASURE_SUGAR_MIN;
+                break;
+            case MEASURE_VITAMIN_A:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_A_MIN;
+                break;
+            case MEASURE_VITAMIN_B01:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B01_MIN;
+                break;
+            case MEASURE_VITAMIN_B02:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B02_MIN;
+                break;
+            case MEASURE_VITAMIN_B03:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B03_MIN;
+                break;
+            case MEASURE_VITAMIN_B05:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B05_MIN;
+                break;
+            case MEASURE_VITAMIN_B06:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B06_MIN;
+                break;
+            case MEASURE_VITAMIN_B12:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B12_MIN;
+                break;
+            case MEASURE_VITAMIN_C:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_C_MIN;
+                break;
+            case MEASURE_VITAMIN_D:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_D_MIN;
+                break;
+            case MEASURE_VITAMIN_E:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_E_MIN;
+                break;
+            case MEASURE_VITAMIN_K:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_K_MIN;
+                break;
+            case MEASURE_ZINC:
+                term = QUERY_COMPLEX_MEASURE_ZINC_MIN;
+                break;
+        }
+        return term;
+    }
+
+    private String getMaximumTerm(int type) {
+        String term;
+        switch (type) {
+            default:
+                term = null;
+                break;
+            case MEASURE_ALCOHOL:
+                term = QUERY_COMPLEX_MEASURE_ALCOHOL_MAX;
+                break;
+            case MEASURE_CAFFEINE:
+                term = QUERY_COMPLEX_MEASURE_CAFFEINE_MAX;
+                break;
+            case MEASURE_CALCIUM:
+                term = QUERY_COMPLEX_MEASURE_CALCIUM_MAX;
+                break;
+            case MEASURE_CALORIES:
+                term = QUERY_COMPLEX_MEASURE_CALORY_MAX;
+                break;
+            case MEASURE_CARBOHYDRATES:
+                term = QUERY_COMPLEX_MEASURE_CARBOHYDRATE_MAX;
+                break;
+            case MEASURE_CHOLESTEROL:
+                term = QUERY_COMPLEX_MEASURE_CHOLESTEROL_MAX;
+                break;
+            case MEASURE_CHOLINE:
+                term = QUERY_COMPLEX_MEASURE_CHOLINE_MAX;
+                break;
+            case MEASURE_COPPER:
+                term = QUERY_COMPLEX_MEASURE_COPPER_MAX;
+                break;
+            case MEASURE_FAT:
+                term = QUERY_COMPLEX_MEASURE_FAT_MAX;
+                break;
+            case MEASURE_FIBER:
+                term = QUERY_COMPLEX_MEASURE_FIBER_MAX;
+                break;
+            case MEASURE_FLUORIDE:
+                term = QUERY_COMPLEX_MEASURE_FLUORIDE_MAX;
+                break;
+            case MEASURE_FOLATE:
+                term = QUERY_COMPLEX_MEASURE_FOLATE_MAX;
+                break;
+            case MEASURE_FOLIC_ACID:
+                term = QUERY_COMPLEX_MEASURE_FOLIC_ACID_MAX;
+                break;
+            case MEASURE_IODINE:
+                term = QUERY_COMPLEX_MEASURE_IODINE_MAX;
+                break;
+            case MEASURE_IRON:
+                term = QUERY_COMPLEX_MEASURE_IRON_MAX;
+                break;
+            case MEASURE_MAGNESIUM:
+                term = QUERY_COMPLEX_MEASURE_MAGNESIUM_MAX;
+                break;
+            case MEASURE_MANGANESE:
+                term = QUERY_COMPLEX_MEASURE_MANGANESE_MAX;
+                break;
+            case MEASURE_PHOSPHOROUS:
+                term = QUERY_COMPLEX_MEASURE_PHOSPHORUS_MAX;
+                break;
+            case MEASURE_POTASSIUM:
+                term = QUERY_COMPLEX_MEASURE_POTASSIUM_MAX;
+                break;
+            case MEASURE_PROTEIN:
+                term = QUERY_COMPLEX_MEASURE_PROTEIN_MAX;
+                break;
+            case MEASURE_SATURATED_FAT:
+                term = QUERY_COMPLEX_MEASURE_FAT_SATURATED_MAX;
+                break;
+            case MEASURE_SELENIUM:
+                term = QUERY_COMPLEX_MEASURE_SELENIUM_MAX;
+                break;
+            case MEASURE_SODIUM:
+                term = QUERY_COMPLEX_MEASURE_SODIUM_MAX;
+                break;
+            case MEASURE_SUGAR:
+                term = QUERY_COMPLEX_MEASURE_SUGAR_MAX;
+                break;
+            case MEASURE_VITAMIN_A:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_A_MAX;
+                break;
+            case MEASURE_VITAMIN_B01:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B01_MAX;
+                break;
+            case MEASURE_VITAMIN_B02:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B02_MAX;
+                break;
+            case MEASURE_VITAMIN_B03:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B03_MAX;
+                break;
+            case MEASURE_VITAMIN_B05:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B05_MAX;
+                break;
+            case MEASURE_VITAMIN_B06:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B06_MAX;
+                break;
+            case MEASURE_VITAMIN_B12:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_B12_MAX;
+                break;
+            case MEASURE_VITAMIN_C:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_C_MAX;
+                break;
+            case MEASURE_VITAMIN_D:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_D_MAX;
+                break;
+            case MEASURE_VITAMIN_E:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_E_MAX;
+                break;
+            case MEASURE_VITAMIN_K:
+                term = QUERY_COMPLEX_MEASURE_VITAMIN_K_MAX;
+                break;
+            case MEASURE_ZINC:
+                term = QUERY_COMPLEX_MEASURE_ZINC_MAX;
+                break;
+        }
+        return term;
     }
 }

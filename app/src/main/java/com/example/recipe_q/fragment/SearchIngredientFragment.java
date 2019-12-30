@@ -17,6 +17,8 @@ import com.example.recipe_q.custom.Control3WaySelect;
 import com.example.recipe_q.custom.ControlMultiSelect;
 import com.example.recipe_q.custom.ControlSwitch;
 
+import java.util.Map;
+
 public class SearchIngredientFragment extends Fragment {
     private static final int INGREDIENTS_INTOLERANCE         =  0;
     private static final int INGREDIENTS_INCLUDE_EXCLUDE     =  1;
@@ -77,5 +79,9 @@ public class SearchIngredientFragment extends Fragment {
                 dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
             }
         }
+    }
+
+    public void addSearchTerms(@NonNull Map<String, String> searchTerms) {
+
     }
 }

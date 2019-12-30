@@ -4,6 +4,7 @@
     <string name="activity_search_title">Search</string>
     <string name="btn_show_list">Shopping List</string>
     <string name="btn_show_search">Start Search</string>
+    <string name="btn_execute_search">Launch Search</string>
     <string name="btn_add_recipe_01">Add Recipe #1</string>
     <string name="btn_add_recipe_02">Add Recipe #2</string>
     <string name="switch_search_common">Common</string>

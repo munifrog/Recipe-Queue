@@ -17,6 +17,8 @@ import com.example.recipe_q.custom.Control3WaySelect;
 import com.example.recipe_q.custom.ControlSingleSelect;
 import com.example.recipe_q.custom.ControlSwitch;
 
+import java.util.Map;
+
 public class SearchCommonFragment extends Fragment {
     private static final int COMMON_CUISINE                 =  0;
     private static final int COMMON_DIET                    =  1;
@@ -96,5 +98,9 @@ public class SearchCommonFragment extends Fragment {
                 dialog.show(fragmentManager, SearchActivity.class.getSimpleName());
             }
         }
+    }
+
+    public void addSearchTerms(@NonNull Map<String, String> searchTerms) {
+
     }
 }

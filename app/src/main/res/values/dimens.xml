@@ -12,6 +12,8 @@
     <dimen name="pad_vert_dialog">8dp</dimen>
     <dimen name="pad_horz_dialog">0dp</dimen>
 
+    <dimen name="margin_button">16dp</dimen>
+
     <dimen name="text_size_list_search_title">24sp</dimen>
     <dimen name="text_size_list_search_summary">16sp</dimen>
 

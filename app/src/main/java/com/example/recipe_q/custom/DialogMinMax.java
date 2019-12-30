@@ -115,11 +115,11 @@ public class DialogMinMax extends DialogFragment {
         mValueMinimum = Integer.toString(integerMin);
     }
 
-    String getMinimum() {
+    public String getMinimum() {
         return mValueMinimum;
     }
 
-    String getMaximum() {
+    public String getMaximum() {
         return mValueMaximum;
     }
 }
