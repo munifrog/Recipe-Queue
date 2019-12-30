@@ -16,10 +16,23 @@ import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.Control3WaySelect;
 import com.example.recipe_q.custom.ControlSingleSelect;
 import com.example.recipe_q.custom.ControlSwitch;
+import com.example.recipe_q.custom.Dialog3WaySelect;
+import com.example.recipe_q.custom.DialogSingleSelect;
 
 import java.util.Map;
 
+import static com.example.recipe_q.adapt.AdapterLinear3Way.SELECTED_NEGATIVE;
+import static com.example.recipe_q.adapt.AdapterLinear3Way.SELECTED_POSITIVE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_CUISINE_EXCLUDE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_CUISINE_INCLUDE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_DIET;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_MEAL_TYPE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_REQUIRE_INSTRUCTIONS;
+
 public class SearchCommonFragment extends Fragment {
+    private static final String EMPTY_STRING                = "";
+    private static final String LIST_SEPARATOR_REPLACED     = ",";
+
     private static final int COMMON_CUISINE                 =  0;
     private static final int COMMON_DIET                    =  1;
     private static final int COMMON_MEAL_TYPE               =  2;
@@ -101,6 +114,33 @@ public class SearchCommonFragment extends Fragment {
     }
 
     public void addSearchTerms(@NonNull Map<String, String> searchTerms) {
+        String selection;
+        Dialog3WaySelect threeWayDialog = mCuisine.getDialog();
+        selection = threeWayDialog.getSelectionList(SELECTED_NEGATIVE, EMPTY_STRING);
+        if (!selection.isEmpty()) {
+            selection = selection.replaceAll(Dialog3WaySelect.LIST_SEPARATOR, LIST_SEPARATOR_REPLACED);
+            searchTerms.put(QUERY_COMPLEX_CUISINE_EXCLUDE, selection);
+        }
+        selection = threeWayDialog.getSelectionList(SELECTED_POSITIVE, EMPTY_STRING);
+        if (!selection.isEmpty()) {
+            selection = selection.replaceAll(Dialog3WaySelect.LIST_SEPARATOR, LIST_SEPARATOR_REPLACED);
+            searchTerms.put(QUERY_COMPLEX_CUISINE_INCLUDE, selection);
+        }
 
+        DialogSingleSelect singleDialog = mDiet.getDialog();
+        selection = singleDialog.getSelection();
+        if (!selection.isEmpty()) {
+            searchTerms.put(QUERY_COMPLEX_DIET, selection);
+        }
+
+        singleDialog = mMealType.getDialog();
+        selection = singleDialog.getSelection();
+        if (!selection.isEmpty()) {
+            searchTerms.put(QUERY_COMPLEX_MEAL_TYPE, selection);
+        }
+
+        if (mRequireInstructions.getChecked()) {
+            searchTerms.put(QUERY_COMPLEX_REQUIRE_INSTRUCTIONS, Boolean.toString(true));
+        }
     }
 }

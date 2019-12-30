@@ -23,6 +23,7 @@
             android:id="@+id/custom_diet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:noSelectionText="@string/search_common_selection_any"
             app:criteriaTitle="@string/search_common_diet_title"
             app:criteriaItems="@array/search_common_diets" />
 
@@ -30,6 +31,7 @@
             android:id="@+id/custom_meal_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:noSelectionText="@string/search_common_selection_any"
             app:criteriaTitle="@string/search_common_meal_type_title"
             app:criteriaItems="@array/search_common_meal_types" />
 

@@ -6,6 +6,7 @@
     <attr name="criteriaChecked" format="boolean" />
     <attr name="criteriaSelection" format="integer" />
     <attr name="criteriaSummary" format="string" />
+    <attr name="noSelectionText" format="string" />
 
     <declare-styleable name="Control3WaySelect">
         <attr name="criteriaTitle" />
@@ -36,6 +37,7 @@
         <attr name="criteriaTitle" />
         <attr name="criteriaItems" />
         <attr name="criteriaSelection" />
+        <attr name="noSelectionText" />
         <attr name="android:onClick" />
     </declare-styleable>
 

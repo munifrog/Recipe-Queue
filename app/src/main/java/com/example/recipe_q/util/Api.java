@@ -37,6 +37,13 @@ public class Api {
     private static final String JSON_TAG_STEPS_LIST = "steps";
     private static final String JSON_TAG_TITLE = "title";
 
+    public static final String QUERY_COMPLEX_CUISINE_INCLUDE = "cuisine";
+    public static final String QUERY_COMPLEX_CUISINE_EXCLUDE = "excludeCuisine";
+    public static final String QUERY_COMPLEX_DIET = "diet";
+    public static final String QUERY_COMPLEX_INGREDIENTS_EXCLUDE = "excludeIngredients";
+    public static final String QUERY_COMPLEX_INGREDIENTS_INCLUDE = "includeIngredients";
+    public static final String QUERY_COMPLEX_INTOLERANCE = "intolerances";
+    public static final String QUERY_COMPLEX_MEAL_TYPE = "type";
     public static final String QUERY_COMPLEX_MEASURE_ALCOHOL_MIN = "minAlcohol";
     public static final String QUERY_COMPLEX_MEASURE_ALCOHOL_MAX = "maxAlcohol";
     public static final String QUERY_COMPLEX_MEASURE_CAFFEINE_MIN = "minCaffeine";
@@ -109,6 +116,8 @@ public class Api {
     public static final String QUERY_COMPLEX_MEASURE_VITAMIN_K_MAX = "maxVitaminK";
     public static final String QUERY_COMPLEX_MEASURE_ZINC_MIN = "minZinc";
     public static final String QUERY_COMPLEX_MEASURE_ZINC_MAX = "maxZinc";
+    public static final String QUERY_COMPLEX_PANTRY_IGNORE = "ignorePantry";
+    public static final String QUERY_COMPLEX_REQUIRE_INSTRUCTIONS = "instructionsRequired";
 
     private Spoonacular mSpoonacular;
     private Listener mListener;

@@ -14,7 +14,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.recipe_q.R;
 
 public class DialogMultiSelect extends DialogFragment {
-    private static final String LIST_SEPARATOR = ", ";
+    public static final String LIST_SEPARATOR = ", ";
 
     private String mTitle;
     private String [] mEntries;
@@ -78,7 +78,7 @@ public class DialogMultiSelect extends DialogFragment {
         return dialogBuilder.create();
     }
 
-    String getSelectionList(String noneList) {
+    public String getSelectionList(String noneList) {
         int count = 0;
         StringBuilder listBuilder = new StringBuilder();
         for (int i = 0; i < mSelectionAuthority.length; i++) {

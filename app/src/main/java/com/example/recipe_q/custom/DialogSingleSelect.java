@@ -71,7 +71,7 @@ public class DialogSingleSelect extends DialogFragment {
         return dialogBuilder.create();
     }
 
-    String getSelection() {
+    public String getSelection() {
         return mEntries[mSelectionAuthority];
     }
 }

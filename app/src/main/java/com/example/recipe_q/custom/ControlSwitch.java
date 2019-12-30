@@ -55,8 +55,12 @@ public class ControlSwitch extends LinearLayout {
         updateSummary();
     }
 
+    public boolean getChecked() {
+        return mSwitch.isChecked();
+    }
+
     private void updateSummary() {
-        mTvSummary.setText(mSwitch.isChecked() ? mTextCheckOn : mTextCheckOff);
+        mTvSummary.setText(getChecked() ? mTextCheckOn : mTextCheckOff);
     }
 
     private void onCommit() {

@@ -22,7 +22,7 @@ import com.example.recipe_q.adapt.AdapterLinear3Way;
 import static com.example.recipe_q.adapt.AdapterLinear3Way.SELECTED_NEUTRAL;
 
 public class Dialog3WaySelect extends DialogFragment {
-    private static final String LIST_SEPARATOR = ", ";
+    public static final String LIST_SEPARATOR = ", ";
 
     private static final String SAVED_ENTRIES = "entries";
     private static final String SAVED_TITLE = "title";
@@ -115,7 +115,7 @@ public class Dialog3WaySelect extends DialogFragment {
         outState.putIntArray(SAVED_SELECTIONS, mSelections);
     }
 
-    String getSelectionList(int selection, String noneList) {
+    public String getSelectionList(int selection, String noneList) {
         int count = 0;
         StringBuilder listBuilder = new StringBuilder();
         for (int i = 0; i < mSelections.length; i++) {

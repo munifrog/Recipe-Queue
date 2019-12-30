@@ -16,10 +16,22 @@ import com.example.recipe_q.activity.SearchActivity;
 import com.example.recipe_q.custom.Control3WaySelect;
 import com.example.recipe_q.custom.ControlMultiSelect;
 import com.example.recipe_q.custom.ControlSwitch;
+import com.example.recipe_q.custom.Dialog3WaySelect;
+import com.example.recipe_q.custom.DialogMultiSelect;
 
 import java.util.Map;
 
+import static com.example.recipe_q.adapt.AdapterLinear3Way.SELECTED_NEGATIVE;
+import static com.example.recipe_q.adapt.AdapterLinear3Way.SELECTED_POSITIVE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INGREDIENTS_EXCLUDE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INGREDIENTS_INCLUDE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INTOLERANCE;
+import static com.example.recipe_q.util.Api.QUERY_COMPLEX_PANTRY_IGNORE;
+
 public class SearchIngredientFragment extends Fragment {
+    private static final String EMPTY_STRING                = "";
+    private static final String LIST_SEPARATOR_REPLACED     = ",";
+
     private static final int INGREDIENTS_INTOLERANCE         =  0;
     private static final int INGREDIENTS_INCLUDE_EXCLUDE     =  1;
     private static final int INGREDIENTS_IGNORE_PANTRY       =  2;
@@ -82,6 +94,27 @@ public class SearchIngredientFragment extends Fragment {
     }
 
     public void addSearchTerms(@NonNull Map<String, String> searchTerms) {
+        DialogMultiSelect multiDialog = mIntolerance.getDialog();
+        String selection = multiDialog.getSelectionList(EMPTY_STRING);
+        if (!selection.isEmpty()) {
+            selection = selection.replaceAll(DialogMultiSelect.LIST_SEPARATOR, LIST_SEPARATOR_REPLACED);
+            searchTerms.put(QUERY_COMPLEX_INTOLERANCE, selection);
+        }
 
+        Dialog3WaySelect threeWayDialog = mIngredients.getDialog();
+        selection = threeWayDialog.getSelectionList(SELECTED_NEGATIVE, EMPTY_STRING);
+        if (!selection.isEmpty()) {
+            selection = selection.replaceAll(Dialog3WaySelect.LIST_SEPARATOR, LIST_SEPARATOR_REPLACED);
+            searchTerms.put(QUERY_COMPLEX_INGREDIENTS_INCLUDE, selection);
+        }
+        selection = threeWayDialog.getSelectionList(SELECTED_POSITIVE, EMPTY_STRING);
+        if (!selection.isEmpty()) {
+            selection = selection.replaceAll(Dialog3WaySelect.LIST_SEPARATOR, LIST_SEPARATOR_REPLACED);
+            searchTerms.put(QUERY_COMPLEX_INGREDIENTS_EXCLUDE, selection);
+        }
+
+        if (mIgnorePantry.getChecked()) {
+            searchTerms.put(QUERY_COMPLEX_PANTRY_IGNORE, Boolean.toString(true));
+        }
     }
 }

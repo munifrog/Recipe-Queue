@@ -14,6 +14,7 @@ import com.example.recipe_q.R;
 public class ControlSingleSelect extends LinearLayout implements DialogSingleSelect.Listener {
     private DialogSingleSelect mDialog;
     private TextView mTvSummary;
+    private String mTextNoSelection;
 
     public ControlSingleSelect(Context context) {
         super(context);
@@ -36,6 +37,7 @@ public class ControlSingleSelect extends LinearLayout implements DialogSingleSel
         int titleRef = a.getResourceId(R.styleable.ControlSingleSelect_criteriaTitle, R.string.empty);
         int optionsRef = a.getResourceId(R.styleable.ControlSingleSelect_criteriaItems, R.array.empty);
         int selection = a.getInt(R.styleable.ControlSingleSelect_criteriaSelection, 0);
+        mTextNoSelection = a.getString(R.styleable.ControlSingleSelect_noSelectionText);
         a.recycle();
 
         mDialog = new DialogSingleSelect(context, titleRef, optionsRef, selection, this);
@@ -52,7 +54,8 @@ public class ControlSingleSelect extends LinearLayout implements DialogSingleSel
     }
 
     private void updateSummary() {
-        mTvSummary.setText(mDialog.getSelection());
+        String selection = mDialog.getSelection();
+        mTvSummary.setText(selection.isEmpty() ? mTextNoSelection : selection);
     }
 
     @Override
