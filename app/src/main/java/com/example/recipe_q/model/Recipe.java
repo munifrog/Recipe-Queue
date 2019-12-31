@@ -3,6 +3,10 @@ package com.example.recipe_q.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
+import static com.example.recipe_q.model.IngredientConverter.convertToIngredientArrayList;
+
 public class Recipe implements Parcelable {
     private long mIdSpoonacular;
     private String mImage;
@@ -11,6 +15,7 @@ public class Recipe implements Parcelable {
     private int mReadyInMinutes;
     private float mServings;
     private String mRecipeTitle;
+    private ArrayList<Ingredient> mIngredients;
 
     public Recipe(
             long id,
@@ -19,7 +24,8 @@ public class Recipe implements Parcelable {
             String image,
             int readyInMinutes,
             float servings,
-            String title
+            String title,
+            ArrayList<Ingredient> ingredients
     ) {
         mIdSpoonacular = id;
         mSourceUrl = sourceUrl;
@@ -28,6 +34,7 @@ public class Recipe implements Parcelable {
         mReadyInMinutes = readyInMinutes;
         mServings = servings;
         mRecipeTitle = title;
+        mIngredients = ingredients;
     }
 
     public long getIdSpoonacular() { return mIdSpoonacular; }
@@ -51,6 +58,9 @@ public class Recipe implements Parcelable {
     public String getRecipeTitle() { return mRecipeTitle; }
     public void setRecipeTitle(String title) { this.mRecipeTitle = title; }
 
+    public ArrayList<Ingredient> getIngredients() { return mIngredients; }
+    public void setIngredients(ArrayList<Ingredient> ingredients) { this.mIngredients = ingredients; }
+
     public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
         @Override
         public Recipe createFromParcel(Parcel source) {
@@ -72,6 +82,7 @@ public class Recipe implements Parcelable {
         dest.writeInt(mReadyInMinutes);
         dest.writeFloat(mServings);
         dest.writeString(mRecipeTitle);
+        dest.writeString(IngredientConverter.convertToString(mIngredients));
     }
 
     private Recipe(Parcel parcel) {
@@ -82,6 +93,7 @@ public class Recipe implements Parcelable {
         setReadyInMinutes(parcel.readInt());
         setServings(parcel.readFloat());
         setRecipeTitle(parcel.readString());
+        setIngredients(convertToIngredientArrayList(parcel.readString()));
     }
 
     @Override

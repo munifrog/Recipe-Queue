@@ -1,6 +1,7 @@
 package com.example.recipe_q.util;
 
 import com.example.recipe_q.BuildConfig;
+import com.example.recipe_q.model.Ingredient;
 import com.example.recipe_q.model.Recipe;
 
 import org.json.JSONArray;
@@ -21,6 +22,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
+import static com.example.recipe_q.model.IngredientConverter.convertToIngredientArrayList;
+
 public class Api {
     private static final String API_KEY = "apiKey=" + BuildConfig.API_KEY_SPOONACULAR;
     private static final String API_PROTOCOL = "https";
@@ -29,6 +32,11 @@ public class Api {
     private static final String JSON_TAG_IDENTIFIER = "id";
     private static final String JSON_TAG_IMAGE_MAIN = "image";
     private static final String JSON_TAG_IMAGE_LIST = "imageUrls";
+    public static final String JSON_TAG_INGREDIENT_AMOUNT = "amount";
+    public static final String JSON_TAG_INGREDIENT_IMAGE = "image";
+    private static final String JSON_TAG_INGREDIENTS_MISSED = "missedIngredients";
+    public static final String JSON_TAG_INGREDIENT_NAME = "name";
+    public static final String JSON_TAG_INGREDIENT_UNIT = "unit";
     private static final String JSON_TAG_INSTRUCTIONS_ANALYZED = "analyzedInstructions";
     private static final String JSON_TAG_JOKE_TEXT = "text";
     private static final String JSON_TAG_READY_MINUTES = "readyInMinutes";
@@ -420,6 +428,7 @@ public class Api {
             if (foundRecipes != null) {
                 int recipeCount = foundRecipes.length();
                 JSONObject currentRecipe;
+                JSONArray foundIngredients;
                 long currentId;
                 String currentSourceUrl;
                 String currentSourceUrlSpoonacular;
@@ -428,6 +437,7 @@ public class Api {
                 int currentServings;
                 String currentTitle;
                 Recipe oneRecipe;
+                ArrayList<Ingredient> ingredients;
                 for (int i =0; i < recipeCount; i++) {
                     currentRecipe = foundRecipes.getJSONObject(i);
                     currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
@@ -437,6 +447,8 @@ public class Api {
                     currentReadyInMinutes = currentRecipe.getInt(JSON_TAG_READY_MINUTES);
                     currentServings = currentRecipe.getInt(JSON_TAG_SERVINGS);
                     currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
+                    foundIngredients = currentRecipe.getJSONArray(JSON_TAG_INGREDIENTS_MISSED);
+                    ingredients = convertToIngredientArrayList(foundIngredients);
                     oneRecipe = new Recipe(
                             currentId,
                             currentSourceUrl,
@@ -444,7 +456,8 @@ public class Api {
                             currentImageUrl,
                             currentReadyInMinutes,
                             currentServings,
-                            currentTitle
+                            currentTitle,
+                            ingredients
                     );
                     recipes.add(oneRecipe);
                 }
