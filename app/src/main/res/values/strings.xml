@@ -2,6 +2,7 @@
     <string name="app_name">Recipe-Q</string>
     <string name="activity_list_title">ListActivity</string>
     <string name="activity_search_title">Search</string>
+    <string name="activity_results_title">Search Results</string>
     <string name="btn_show_list">Shopping List</string>
     <string name="btn_show_search">Start Search</string>
     <string name="btn_execute_search">Launch Search</string>
@@ -105,4 +106,6 @@
     <string name="search_nutrient_vitamin_e_title">Vitamin E</string>
     <string name="search_nutrient_vitamin_k_title">Vitamin K</string>
     <string name="search_nutrient_zinc_title">Zinc</string>
+
+    <string name="item_grid_image_description">Recipe Image</string>
 </resources>

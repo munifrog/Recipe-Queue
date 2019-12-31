@@ -13,6 +13,7 @@
     <dimen name="pad_horz_dialog">0dp</dimen>
 
     <dimen name="margin_button">16dp</dimen>
+    <dimen name="margin_grid_item_text">16dp</dimen>
 
     <dimen name="text_size_list_search_title">24sp</dimen>
     <dimen name="text_size_list_search_summary">16sp</dimen>
@@ -22,4 +23,5 @@
     <dimen name="text_size_list_name">32sp</dimen>
     <dimen name="text_size_list_amounts">18sp</dimen>
     <dimen name="text_size_item_origin">18sp</dimen>
+    <dimen name="text_size_list_grid_item">16sp</dimen>
 </resources>

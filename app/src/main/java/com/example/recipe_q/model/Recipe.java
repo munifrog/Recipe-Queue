@@ -1,6 +1,9 @@
 package com.example.recipe_q.model;
 
-public class Recipe {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Recipe implements Parcelable {
     private long mIdSpoonacular;
     private String mImage;
     private String mSourceUrl;
@@ -47,4 +50,42 @@ public class Recipe {
 
     public String getRecipeTitle() { return mRecipeTitle; }
     public void setRecipeTitle(String title) { this.mRecipeTitle = title; }
+
+    public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
+        @Override
+        public Recipe createFromParcel(Parcel source) {
+            return new Recipe(source);
+        }
+
+        @Override
+        public Recipe [] newArray(int size) {
+            return new Recipe[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mIdSpoonacular);
+        dest.writeString(mImage);
+        dest.writeString(mSourceUrl);
+        dest.writeString(mSourceUrlSpoonacular);
+        dest.writeInt(mReadyInMinutes);
+        dest.writeFloat(mServings);
+        dest.writeString(mRecipeTitle);
+    }
+
+    private Recipe(Parcel parcel) {
+        setIdSpoonacular(parcel.readLong());
+        setImage(parcel.readString());
+        setSourceUrl(parcel.readString());
+        setSourceUrlSpoonacular(parcel.readString());
+        setReadyInMinutes(parcel.readInt());
+        setServings(parcel.readFloat());
+        setRecipeTitle(parcel.readString());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 }

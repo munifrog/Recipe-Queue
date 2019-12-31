@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -139,7 +138,7 @@ public class Api {
     }
 
     public interface RecipeListener extends BaseListener {
-        void onRecipesReturned(List<Recipe> recipes);
+        void onRecipesReturned(ArrayList<Recipe> recipes);
     }
 
     public Api(BaseListener listener) {
@@ -247,7 +246,7 @@ public class Api {
         try {
             getRecipeInformation(new JSONObject(json));
         } catch (JSONException e) {
-
+            // TODO: Handle appropriately
         }
     }
     private void getRecipeInformation(JSONObject recipe) {
@@ -398,7 +397,7 @@ public class Api {
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
-                        List<Recipe> recipes = parseComplex(responseBody.string());
+                        ArrayList<Recipe> recipes = parseComplex(responseBody.string());
                         ((RecipeListener) mListener).onRecipesReturned(recipes);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
@@ -413,8 +412,8 @@ public class Api {
         });
     }
 
-    private List<Recipe> parseComplex(String json) {
-        List<Recipe> recipes = new ArrayList<>();
+    private ArrayList<Recipe> parseComplex(String json) {
+        ArrayList<Recipe> recipes = new ArrayList<>();
         try {
             JSONObject searchResults = new JSONObject(json);
             JSONArray foundRecipes = searchResults.getJSONArray(JSON_TAG_RESULTS_LIST);

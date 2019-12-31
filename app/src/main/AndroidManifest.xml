@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.ResultsActivity"
+            android:label="@string/activity_results_title" />
+        <activity
             android:name=".activity.SearchActivity"
-            android:label="@string/activity_search_title"></activity>
+            android:label="@string/activity_search_title" />
         <activity
             android:name=".activity.ListActivity"
             android:label="@string/activity_list_title"

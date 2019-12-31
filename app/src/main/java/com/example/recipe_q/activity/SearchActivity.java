@@ -1,5 +1,6 @@
 package com.example.recipe_q.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +15,11 @@ import com.example.recipe_q.fragment.SearchNutritionFragment;
 import com.example.recipe_q.model.Recipe;
 import com.example.recipe_q.util.Api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import static com.example.recipe_q.activity.ResultsActivity.RECIPES_PARCELABLE;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_COUNT_NUMBER;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INGREDIENTS_FILL;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_RECIPE_ADD_INFO;
@@ -162,7 +164,11 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
     }
 
     @Override
-    public void onRecipesReturned(List<Recipe> recipes) {
-        // TODO: Launch the view of the returned results, if any returned
+    public void onRecipesReturned(ArrayList<Recipe> recipes) {
+        if (recipes.size() > 0) {
+            Intent intent = new Intent(this, ResultsActivity.class);
+            intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, recipes);
+            startActivity(intent);
+        }
     }
 }
