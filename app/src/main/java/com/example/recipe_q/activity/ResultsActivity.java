@@ -14,7 +14,9 @@ import com.example.recipe_q.model.Recipe;
 
 import java.util.ArrayList;
 
-public class ResultsActivity extends AppCompatActivity {
+import static com.example.recipe_q.activity.RecipeActivity.RECIPE_PARCELABLE;
+
+public class ResultsActivity extends AppCompatActivity implements AdapterGridSearchResults.Listener {
     public static final String RECIPES_PARCELABLE = "recipe_parcelable_array";
 
     private static final int SPAN_LANDSCAPE = 3;
@@ -40,7 +42,14 @@ public class ResultsActivity extends AppCompatActivity {
         );
         RecyclerView rvFound = findViewById(R.id.rv_results);
         rvFound.setLayoutManager(new GridLayoutManager(this, spanCount));
-        AdapterGridSearchResults adapter = new AdapterGridSearchResults(recipes);
+        AdapterGridSearchResults adapter = new AdapterGridSearchResults(recipes, this);
         rvFound.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(Recipe recipe) {
+        Intent intent = new Intent(this, RecipeActivity.class);
+        intent.putExtra(RECIPE_PARCELABLE, recipe);
+        startActivity(intent);
     }
 }

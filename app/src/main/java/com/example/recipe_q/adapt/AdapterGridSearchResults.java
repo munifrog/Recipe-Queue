@@ -17,9 +17,15 @@ import java.util.List;
 
 public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSearchResults.ListItemHolder> {
     private List<Recipe> mRecipes;
+    private Listener mListener;
 
-    public AdapterGridSearchResults(List<Recipe> recipes) {
+    public AdapterGridSearchResults(List<Recipe> recipes, Listener listener) {
         mRecipes = recipes;
+        mListener = listener;
+    }
+
+    public interface Listener {
+        void onClick(Recipe recipe);
     }
 
     @NonNull
@@ -40,7 +46,7 @@ public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSe
         return mRecipes == null ? 0 : mRecipes.size();
     }
 
-    class ListItemHolder extends RecyclerView.ViewHolder {
+    class ListItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mRecipeImage;
         TextView mRecipeName;
 
@@ -48,12 +54,18 @@ public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSe
             super(itemView);
             mRecipeImage = itemView.findViewById(R.id.iv_recipe_image);
             mRecipeName = itemView.findViewById(R.id.tv_recipe_name);
+            itemView.setOnClickListener(this);
         }
 
         void bind(int position) {
             Recipe recipe = mRecipes.get(position);
             Picasso.get().load(recipe.getImage()).placeholder(R.drawable.ic_launcher_background).into(mRecipeImage);
             mRecipeName.setText(recipe.getRecipeTitle());
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onClick(mRecipes.get(getAdapterPosition()));
         }
     }
 }

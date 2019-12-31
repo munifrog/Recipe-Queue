@@ -3,6 +3,7 @@
     <string name="activity_list_title">ListActivity</string>
     <string name="activity_search_title">Search</string>
     <string name="activity_results_title">Search Results</string>
+    <string name="activity_recipe_title">Recipe Details</string>
     <string name="btn_show_list">Shopping List</string>
     <string name="btn_show_search">Start Search</string>
     <string name="btn_execute_search">Launch Search</string>
