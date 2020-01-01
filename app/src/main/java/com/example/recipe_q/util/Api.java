@@ -1,6 +1,7 @@
 package com.example.recipe_q.util;
 
 import com.example.recipe_q.BuildConfig;
+import com.example.recipe_q.model.DirectionGroup;
 import com.example.recipe_q.model.Ingredient;
 import com.example.recipe_q.model.Recipe;
 
@@ -22,6 +23,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
+import static com.example.recipe_q.model.DirectionConverter.convertToDirectionGroupArrayList;
 import static com.example.recipe_q.model.IngredientConverter.convertToIngredientArrayList;
 
 public class Api {
@@ -29,12 +31,16 @@ public class Api {
     private static final String API_PROTOCOL = "https";
     private static final String API_HOST = "api.spoonacular.com";
 
+    public static final String JSON_TAG_DIRECTION_GROUP_NAME = "name";
+    public static final String JSON_TAG_DIRECTION_GROUP_STEPS = "steps";
+    public static final String JSON_TAG_DIRECTION_SINGLE_STEP = "step";
     private static final String JSON_TAG_IDENTIFIER = "id";
     private static final String JSON_TAG_IMAGE_MAIN = "image";
     private static final String JSON_TAG_IMAGE_LIST = "imageUrls";
     public static final String JSON_TAG_INGREDIENT_AMOUNT = "amount";
     public static final String JSON_TAG_INGREDIENT_IMAGE = "image";
     private static final String JSON_TAG_INGREDIENTS_MISSED = "missedIngredients";
+    private static final String JSON_TAG_INGREDIENTS_EXTENDED = "extendedIngredients";
     public static final String JSON_TAG_INGREDIENT_NAME = "name";
     public static final String JSON_TAG_INGREDIENT_UNIT = "unit";
     private static final String JSON_TAG_INSTRUCTIONS_ANALYZED = "analyzedInstructions";
@@ -45,8 +51,6 @@ public class Api {
     private static final String JSON_TAG_SERVINGS = "servings";
     private static final String JSON_TAG_SOURCE_URL_ORIGINAL = "sourceUrl";
     private static final String JSON_TAG_SOURCE_URL_SPOONACULAR = "spoonacularSourceUrl";
-    private static final String JSON_TAG_STEP = "step";
-    private static final String JSON_TAG_STEPS_LIST = "steps";
     private static final String JSON_TAG_TITLE = "title";
 
     public static final String QUERY_COMPLEX_COUNT_NUMBER = "number";
@@ -250,49 +254,43 @@ public class Api {
         });
     }
 
-    private void getRecipeInformation(String json) {
+    private Recipe getRecipeInformation(String json) {
         try {
-            getRecipeInformation(new JSONObject(json));
+            return getRecipeInformation(new JSONObject(json));
         } catch (JSONException e) {
             // TODO: Handle appropriately
         }
+        return null;
     }
-    private void getRecipeInformation(JSONObject recipe) {
+    private Recipe getRecipeInformation(JSONObject recipe) {
+        Recipe newRecipe = null;
         try {
             long currentId = recipe.getLong(JSON_TAG_IDENTIFIER);
             String currentTitle = recipe.getString(JSON_TAG_TITLE);
             int currentReadyMin = recipe.getInt(JSON_TAG_READY_MINUTES);
             int currentServings = recipe.getInt(JSON_TAG_SERVINGS);
             String currentImage = recipe.getString(JSON_TAG_IMAGE_MAIN);
-
-            JSONArray currentJsonDirections;
-            int numMainDirections;
-            int numSubDirections;
-            String [][] currentDirections = null;
-            JSONObject currentMainDirection;
-            JSONArray currentSubDirections;
-
-            currentJsonDirections = recipe.getJSONArray(JSON_TAG_INSTRUCTIONS_ANALYZED);
-            if (currentJsonDirections != null) {
-                numMainDirections = currentJsonDirections.length();
-                currentDirections = new String [numMainDirections][];
-
-                for (int j = 0; j < numMainDirections; j++) {
-                    currentMainDirection = currentJsonDirections.getJSONObject(j);
-                    currentSubDirections = currentMainDirection.getJSONArray(JSON_TAG_STEPS_LIST);
-                    if (currentSubDirections != null) {
-                        numSubDirections = currentSubDirections.length();
-                        currentDirections[j] = new String[numSubDirections];
-                        for (int k = 0; k < numSubDirections; k++) {
-                            JSONObject obj = currentSubDirections.getJSONObject(k);
-                            currentDirections[j][k] = obj.getString(JSON_TAG_STEP);
-                        }
-                    }
-                }
-            }
+            String currentSourceUrl = recipe.getString(JSON_TAG_SOURCE_URL_ORIGINAL);
+            String currentSourceUrlSpoonacular = recipe.getString(JSON_TAG_SOURCE_URL_SPOONACULAR);
+            JSONArray currentIngredients = recipe.getJSONArray(JSON_TAG_INGREDIENTS_EXTENDED);
+            ArrayList<Ingredient> ingredients = convertToIngredientArrayList(currentIngredients);
+            JSONArray currentJsonDirections = recipe.getJSONArray(JSON_TAG_INSTRUCTIONS_ANALYZED);
+            ArrayList<DirectionGroup> directions = convertToDirectionGroupArrayList(currentJsonDirections);
+            newRecipe = new Recipe(
+                    currentId,
+                    currentSourceUrl,
+                    currentSourceUrlSpoonacular,
+                    currentImage,
+                    currentReadyMin,
+                    currentServings,
+                    currentTitle,
+                    ingredients,
+                    directions
+            );
         } catch (JSONException e) {
             // TODO: Handle appropriately
         }
+        return newRecipe;
     }
 
     public void getRecipesRandomPopular(int howMany) {
@@ -339,7 +337,7 @@ public class Api {
                 if (responseBody != null) {
                     try {
                         String jsonString = responseBody.string();
-                        getRecipeInformation(jsonString);
+                        Recipe recipe = getRecipeInformation(jsonString);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
                     }
@@ -429,6 +427,7 @@ public class Api {
                 int recipeCount = foundRecipes.length();
                 JSONObject currentRecipe;
                 JSONArray foundIngredients;
+                JSONArray foundDirections;
                 long currentId;
                 String currentSourceUrl;
                 String currentSourceUrlSpoonacular;
@@ -438,6 +437,7 @@ public class Api {
                 String currentTitle;
                 Recipe oneRecipe;
                 ArrayList<Ingredient> ingredients;
+                ArrayList<DirectionGroup> directions;
                 for (int i =0; i < recipeCount; i++) {
                     currentRecipe = foundRecipes.getJSONObject(i);
                     currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
@@ -449,6 +449,8 @@ public class Api {
                     currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
                     foundIngredients = currentRecipe.getJSONArray(JSON_TAG_INGREDIENTS_MISSED);
                     ingredients = convertToIngredientArrayList(foundIngredients);
+                    foundDirections = currentRecipe.getJSONArray(JSON_TAG_INSTRUCTIONS_ANALYZED);
+                    directions = convertToDirectionGroupArrayList(foundDirections);
                     oneRecipe = new Recipe(
                             currentId,
                             currentSourceUrl,
@@ -457,7 +459,8 @@ public class Api {
                             currentReadyInMinutes,
                             currentServings,
                             currentTitle,
-                            ingredients
+                            ingredients,
+                            directions
                     );
                     recipes.add(oneRecipe);
                 }

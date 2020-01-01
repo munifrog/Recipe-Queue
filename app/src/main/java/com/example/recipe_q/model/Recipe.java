@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
+import static com.example.recipe_q.model.DirectionConverter.convertToDirectionGroupArrayList;
 import static com.example.recipe_q.model.IngredientConverter.convertToIngredientArrayList;
 
 public class Recipe implements Parcelable {
@@ -16,6 +17,7 @@ public class Recipe implements Parcelable {
     private float mServings;
     private String mRecipeTitle;
     private ArrayList<Ingredient> mIngredients;
+    private ArrayList<DirectionGroup> mDirections;
 
     public Recipe(
             long id,
@@ -25,7 +27,8 @@ public class Recipe implements Parcelable {
             int readyInMinutes,
             float servings,
             String title,
-            ArrayList<Ingredient> ingredients
+            ArrayList<Ingredient> ingredients,
+            ArrayList<DirectionGroup> directions
     ) {
         mIdSpoonacular = id;
         mSourceUrl = sourceUrl;
@@ -35,6 +38,7 @@ public class Recipe implements Parcelable {
         mServings = servings;
         mRecipeTitle = title;
         mIngredients = ingredients;
+        mDirections = directions;
     }
 
     public long getIdSpoonacular() { return mIdSpoonacular; }
@@ -61,6 +65,9 @@ public class Recipe implements Parcelable {
     public ArrayList<Ingredient> getIngredients() { return mIngredients; }
     public void setIngredients(ArrayList<Ingredient> ingredients) { this.mIngredients = ingredients; }
 
+    public ArrayList<DirectionGroup> getDirections() { return mDirections; }
+    public void setDirections(ArrayList<DirectionGroup> directions) { this.mDirections = directions; }
+
     public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
         @Override
         public Recipe createFromParcel(Parcel source) {
@@ -83,6 +90,7 @@ public class Recipe implements Parcelable {
         dest.writeFloat(mServings);
         dest.writeString(mRecipeTitle);
         dest.writeString(IngredientConverter.convertToString(mIngredients));
+        dest.writeString(DirectionConverter.convertToString(mDirections));
     }
 
     private Recipe(Parcel parcel) {
@@ -94,6 +102,7 @@ public class Recipe implements Parcelable {
         setServings(parcel.readFloat());
         setRecipeTitle(parcel.readString());
         setIngredients(convertToIngredientArrayList(parcel.readString()));
+        setDirections(convertToDirectionGroupArrayList(parcel.readString()));
     }
 
     @Override
