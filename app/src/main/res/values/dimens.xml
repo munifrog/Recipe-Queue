@@ -14,6 +14,13 @@
 
     <dimen name="margin_button">16dp</dimen>
     <dimen name="margin_grid_item_text">16dp</dimen>
+    <dimen name="margin_icon_favorite">16dp</dimen>
+    <dimen name="margin_item_ingredient">16dp</dimen>
+
+    <dimen name="height_icon_favorite">56dp</dimen>
+    <dimen name="width_icon_favorite">@dimen/height_icon_favorite</dimen>
+    <dimen name="height_icon_ingredient">56dp</dimen>
+    <dimen name="width_icon_ingredient">@dimen/height_icon_ingredient</dimen>
 
     <dimen name="text_size_list_search_title">24sp</dimen>
     <dimen name="text_size_list_search_summary">16sp</dimen>
@@ -24,4 +31,11 @@
     <dimen name="text_size_list_amounts">18sp</dimen>
     <dimen name="text_size_item_origin">18sp</dimen>
     <dimen name="text_size_list_grid_item">16sp</dimen>
+
+    <dimen name="text_size_recipe_servings">24sp</dimen>
+    <dimen name="text_size_recipe_ready_in">24sp</dimen>
+    <dimen name="text_size_recipe_ingredients_label">32sp</dimen>
+    <dimen name="text_size_recipe_ingredients_item">20sp</dimen>
+    <dimen name="text_size_recipe_directions_label">32sp</dimen>
+    <dimen name="text_size_recipe_directions_header">24sp</dimen>
 </resources>

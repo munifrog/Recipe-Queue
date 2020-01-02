@@ -96,16 +96,18 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:baselineAligned="false"
         app:layout_constraintBottom_toTopOf="@+id/btn_show_original"
         app:layout_constraintTop_toBottomOf="@+id/tv_servings_label">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp" >
 
             <TextView
                 android:id="@+id/tv_ingredients_label"
@@ -131,19 +133,13 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_send_to_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/btn_recipe_send_to_list" />
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp" >
 
             <TextView
                 android:id="@+id/tv_directions_label"
@@ -170,6 +166,24 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <Button
+        android:id="@+id/btn_send_to_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/btn_recipe_send_to_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/iv_favorite"
         android:layout_width="@dimen/width_icon_favorite"
@@ -189,18 +203,18 @@
         android:layout_marginLeft="16dp"
         android:text="@string/btn_recipe_search_for_similar"
         app:layout_constraintBottom_toBottomOf="@+id/btn_show_original"
-        app:layout_constraintStart_toEndOf="@+id/btn_show_original"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
         app:layout_constraintTop_toTopOf="@+id/btn_show_original" />
 
     <Button
         android:id="@+id/btn_show_original"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btn_recipe_goto_original_source"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

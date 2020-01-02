@@ -9,6 +9,9 @@
     <string name="btn_execute_search">Launch Search</string>
     <string name="btn_add_recipe_01">Add Recipe #1</string>
     <string name="btn_add_recipe_02">Add Recipe #2</string>
+    <string name="btn_recipe_search_for_similar">Find Similar</string>
+    <string name="btn_recipe_goto_original_source">See Original</string>
+    <string name="btn_recipe_send_to_list">Send to List</string>
     <string name="switch_search_common">Common</string>
     <string name="switch_search_nutrition">Nutrition</string>
     <string name="switch_search_ingredient">Ingredient</string>
@@ -109,4 +112,13 @@
     <string name="search_nutrient_zinc_title">Zinc</string>
 
     <string name="item_grid_image_description">Recipe Image</string>
+    <string name="icon_favorite_description">Remember This Recipe</string>
+    <string name="ingredient_description">Ingredient Image</string>
+
+    <string name="recipe_servings_label">Servings:</string>
+    <string name="recipe_ready_in_label">Minutes Estimate:</string>
+    <string name="recipe_ingredients_label">Ingredients:</string>
+    <string name="recipe_ingredient_amount">%1$.2f %2$s</string>
+    <string name="recipe_directions_label">Directions:</string>
+    <string name="recipe_directions_instruction">%1$d.&#160;&#160;%2$s</string>
 </resources>

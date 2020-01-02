@@ -13,6 +13,7 @@
     <color name="white">#ffffffff</color>
     <color name="transparent">#00000000</color>
 
+    <color name="scrim_full">#60000000</color>
     <color name="scrim_darkest">#c0000000</color>
     <color name="scrim_lightest">@color/transparent</color>
     <color name="scrim_text">@color/white</color>
