@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
+import okhttp3.Headers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -142,8 +143,11 @@ public class Api {
     public static final String QUERY_COMPLEX_RECIPE_ADD_INFO = "addRecipeInformation";
     public static final String QUERY_COMPLEX_REQUIRE_INSTRUCTIONS = "instructionsRequired";
 
+    private static final String HEADER_QUOTA_USED_TODAY = "X-API-Quota-Used";
+
     private Spoonacular mSpoonacular;
     private BaseListener mListener;
+    private float mQuota;
 
     public interface BaseListener {
         void onInternetFailure(Throwable throwable);
@@ -169,6 +173,13 @@ public class Api {
                 .build();
 
         mSpoonacular = retrofit.create(Spoonacular.class);
+        mQuota = 0;
+    }
+
+    public float getQuotaUsed() { return mQuota; }
+    private void updateQuota(Headers headers) {
+        String quotaUsed = headers.get(HEADER_QUOTA_USED_TODAY);
+        mQuota = quotaUsed == null ? 0 : Float.parseFloat(quotaUsed);
     }
 
     private void onInternetFailure(Call<ResponseBody> call, Throwable throwable) {
@@ -185,6 +196,7 @@ public class Api {
         mSpoonacular.getRandomJoke().enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                updateQuota(response.headers());
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
@@ -212,6 +224,7 @@ public class Api {
         mSpoonacular.getRecipesSimilarTo(id, number).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                updateQuota(response.headers());
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
@@ -285,6 +298,7 @@ public class Api {
         mSpoonacular.getRecipesRandomPopular(howMany).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                updateQuota(response.headers());
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
@@ -325,6 +339,7 @@ public class Api {
         mSpoonacular.getRecipeSpecific(id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                updateQuota(response.headers());
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
@@ -357,6 +372,7 @@ public class Api {
         mSpoonacular.getRecipeSpecificList(commaSeparatedList).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                updateQuota(response.headers());
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
@@ -393,6 +409,7 @@ public class Api {
         mSpoonacular.getRecipesComplexSearch(searchTerms).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                updateQuota(response.headers());
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
