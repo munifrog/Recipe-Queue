@@ -35,6 +35,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     private ProgressBar mProgress;
     private AdapterLinearIngredients mAdapterIngredients;
     private AdapterLinearDirectionGroups mAdapterDirections;
+    private Button mBtnSendToList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +86,14 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
 
                 }
             });
-            Button btnSendToList = findViewById(R.id.btn_send_to_list);
-            btnSendToList.setOnClickListener(new View.OnClickListener() {
+            mBtnSendToList = findViewById(R.id.btn_send_to_list);
+            mBtnSendToList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                 }
             });
+            mBtnSendToList.setEnabled(ingredients.size() != 0);
             Button btnFindSimilar = findViewById(R.id.btn_find_similar);
             btnFindSimilar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,5 +145,6 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         mRecipe = recipe;
         mAdapterIngredients.setIngredients(recipe.getIngredients());
         mAdapterDirections.setDirections(recipe.getDirections());
+        mBtnSendToList.setEnabled(recipe.getIngredients().size() != 0);
     }
 }
