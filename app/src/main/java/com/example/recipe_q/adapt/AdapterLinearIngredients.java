@@ -25,6 +25,11 @@ public class AdapterLinearIngredients extends RecyclerView.Adapter<AdapterLinear
         mIngredients = ingredients;
     }
 
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        mIngredients = ingredients;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public IngredientHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

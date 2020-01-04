@@ -24,6 +24,11 @@ public class AdapterLinearDirectionGroups extends RecyclerView.Adapter<AdapterLi
         mDirectionGroups = directionGroups;
     }
 
+    public void setDirections(ArrayList<DirectionGroup> directionGroups) {
+        mDirectionGroups = directionGroups;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public DirectionGroupHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

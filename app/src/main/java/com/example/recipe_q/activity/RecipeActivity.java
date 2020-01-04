@@ -11,20 +11,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.recipe_q.R;
 import com.example.recipe_q.adapt.AdapterLinearDirectionGroups;
 import com.example.recipe_q.adapt.AdapterLinearIngredients;
 import com.example.recipe_q.model.Recipe;
+import com.example.recipe_q.util.Api;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
-public class RecipeActivity extends AppCompatActivity {
+import static com.example.recipe_q.activity.ResultsActivity.RECIPES_PARCELABLE;
+
+public class RecipeActivity extends AppCompatActivity implements Api.RecipeListener, Api.RecipeInfoListener {
+    private static final int ASSUMED_SIMILAR_LIMIT = 10;
+
     public static final String RECIPE_PARCELABLE = "recipe_parcelable_one";
 
     private Recipe mRecipe;
+    private ProgressBar mProgress;
+    private AdapterLinearIngredients mAdapterIngredients;
+    private AdapterLinearDirectionGroups mAdapterDirections;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +54,25 @@ public class RecipeActivity extends AppCompatActivity {
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
 
-            AdapterLinearIngredients adapterIngredients = new AdapterLinearIngredients(mRecipe.getIngredients());
+            mProgress = findViewById(R.id.progress_bar);
+
+            ArrayList ingredients = mRecipe.getIngredients();
+            mAdapterIngredients = new AdapterLinearIngredients(ingredients);
             RecyclerView rvIngredients = findViewById(R.id.rv_ingredients);
             rvIngredients.setLayoutManager(new LinearLayoutManager(this));
-            rvIngredients.setAdapter(adapterIngredients);
+            rvIngredients.setAdapter(mAdapterIngredients);
 
-            AdapterLinearDirectionGroups adapterDirections = new AdapterLinearDirectionGroups(mRecipe.getDirections());
+            ArrayList directions = mRecipe.getDirections();
+            mAdapterDirections = new AdapterLinearDirectionGroups(directions);
             RecyclerView rvDirections = findViewById(R.id.rv_directions);
             rvDirections.setLayoutManager(new LinearLayoutManager(this));
-            rvDirections.setAdapter(adapterDirections);
+            rvDirections.setAdapter(mAdapterDirections);
+
+            if (ingredients.size() == 0 && directions.size() == 0) {
+                Api api = new Api(this);
+                api.getRecipeSpecific(mRecipe.getIdSpoonacular());
+                mProgress.setVisibility(View.VISIBLE);
+            }
 
             TextView tvServings = findViewById(R.id.tv_servings_amount);
             tvServings.setText(String.format(Locale.getDefault(), "%1$.2f", mRecipe.getServings()));
@@ -76,7 +96,7 @@ public class RecipeActivity extends AppCompatActivity {
             btnFindSimilar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    launchSimilarSearch();
                 }
             });
             Button btnShowOriginal = findViewById(R.id.btn_show_original);
@@ -94,5 +114,34 @@ public class RecipeActivity extends AppCompatActivity {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mRecipe.getSourceUrl()));
             startActivity(browserIntent);
         }
+    }
+
+    private void launchSimilarSearch() {
+        if (mRecipe != null) {
+            Api api = new Api(this);
+            api.getRecipesSimilarTo(mRecipe.getIdSpoonacular(), ASSUMED_SIMILAR_LIMIT);
+        }
+    }
+
+    @Override
+    public void onInternetFailure(Throwable throwable) {
+        // TODO: Handle this appropriately
+    }
+
+    @Override
+    public void onRecipesReturned(ArrayList<Recipe> recipes) {
+        if (recipes.size() > 0) {
+            Intent intent = new Intent(this, ResultsActivity.class);
+            intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, recipes);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onInformationReturned(Recipe recipe) {
+        mProgress.setVisibility(View.GONE);
+        mRecipe = recipe;
+        mAdapterIngredients.setIngredients(recipe.getIngredients());
+        mAdapterDirections.setDirections(recipe.getDirections());
     }
 }

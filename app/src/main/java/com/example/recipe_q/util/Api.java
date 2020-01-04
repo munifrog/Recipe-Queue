@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -31,12 +32,15 @@ public class Api {
     private static final String API_PROTOCOL = "https";
     private static final String API_HOST = "api.spoonacular.com";
 
+    public static final String ENDPOINT_FREE_BASE = "https://spoonacular.com/";
+    public static final String ENDPOINT_IMAGE_INGREDIENT = "https://spoonacular.com/cdn/ingredients_100x100/%1$s";
+    private static final String ENDPOINT_IMAGE_RECIPE = "https://spoonacular.com/recipeImages/%1$d-556x370%2$s";
+
     public static final String JSON_TAG_DIRECTION_GROUP_NAME = "name";
     public static final String JSON_TAG_DIRECTION_GROUP_STEPS = "steps";
     public static final String JSON_TAG_DIRECTION_SINGLE_STEP = "step";
     private static final String JSON_TAG_IDENTIFIER = "id";
     private static final String JSON_TAG_IMAGE_MAIN = "image";
-    private static final String JSON_TAG_IMAGE_LIST = "imageUrls";
     public static final String JSON_TAG_INGREDIENT_AMOUNT = "amount";
     public static final String JSON_TAG_INGREDIENT_IMAGE = "image";
     private static final String JSON_TAG_INGREDIENTS_MISSED = "missedIngredients";
@@ -153,6 +157,10 @@ public class Api {
         void onRecipesReturned(ArrayList<Recipe> recipes);
     }
 
+    public interface RecipeInfoListener extends BaseListener {
+        void onInformationReturned(Recipe recipe);
+    }
+
     public Api(BaseListener listener) {
         mListener = listener;
         Retrofit retrofit = new Retrofit.Builder()
@@ -199,48 +207,17 @@ public class Api {
         });
     }
 
-    public void getRecipesSimilarTo(long id) { getRecipesSimilarTo(Long.toString(id)); }
-    public void getRecipesSimilarTo(String id) {
-        mSpoonacular.getRecipesSimilarTo(id).enqueue(new Callback<ResponseBody>() {
+    public void getRecipesSimilarTo(long id, int number) { getRecipesSimilarTo(Long.toString(id), number); }
+    public void getRecipesSimilarTo(String id, int number) {
+        mSpoonacular.getRecipesSimilarTo(id, number).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
                         String jsonString = responseBody.string();
-                        JSONArray jsonEntire = new JSONArray(jsonString);
-
-                        JSONObject currentObject;
-                        long currentId;
-                        String currentTitle;
-                        int currentReadyMin;
-                        int currentServings;
-                        String currentImage;
-                        JSONArray currentImageUrls;
-                        int currentImageListLength;
-                        String [] currentImageList;
-                        int arraySize = jsonEntire.length();
-                        for (int i = 0; i < arraySize; i++) {
-                            currentObject = jsonEntire.getJSONObject(i);
-                            if (currentObject != null) {
-                                currentId = currentObject.getLong(JSON_TAG_IDENTIFIER);
-                                currentTitle = currentObject.getString(JSON_TAG_TITLE);
-                                currentReadyMin = currentObject.getInt(JSON_TAG_READY_MINUTES);
-                                currentServings = currentObject.getInt(JSON_TAG_SERVINGS);
-                                currentImage = currentObject.getString(JSON_TAG_IMAGE_MAIN);
-                                currentImageUrls = currentObject.getJSONArray(JSON_TAG_IMAGE_LIST);
-
-                                if (currentImageUrls != null) {
-                                    currentImageListLength = currentImageUrls.length();
-                                    currentImageList = new String[currentImageListLength];
-                                    for (int j = 0; j < currentImageListLength; j++) {
-                                        currentImageList[j] = currentImageUrls.getString(j);
-                                    }
-                                }
-                            }
-                        }
-                    } catch (JSONException e) {
-                        // TODO: Handle appropriately
+                        ArrayList<Recipe> recipes = parseSimilar(jsonString);
+                        ((RecipeListener) mListener).onRecipesReturned(recipes);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
                     }
@@ -272,8 +249,19 @@ public class Api {
             String currentImage = recipe.getString(JSON_TAG_IMAGE_MAIN);
             String currentSourceUrl = recipe.getString(JSON_TAG_SOURCE_URL_ORIGINAL);
             String currentSourceUrlSpoonacular = recipe.getString(JSON_TAG_SOURCE_URL_SPOONACULAR);
-            JSONArray currentIngredients = recipe.getJSONArray(JSON_TAG_INGREDIENTS_EXTENDED);
-            ArrayList<Ingredient> ingredients = convertToIngredientArrayList(currentIngredients);
+            JSONArray currentIngredients;
+            ArrayList<Ingredient> ingredients;
+            try {
+                currentIngredients = recipe.getJSONArray(JSON_TAG_INGREDIENTS_EXTENDED);
+                ingredients = convertToIngredientArrayList(currentIngredients);
+            } catch (JSONException e) {
+                try {
+                    currentIngredients = recipe.getJSONArray(JSON_TAG_INGREDIENTS_MISSED);
+                    ingredients = convertToIngredientArrayList(currentIngredients);
+                } catch (JSONException ex) {
+                    ingredients = new ArrayList<>();
+                }
+            }
             JSONArray currentJsonDirections = recipe.getJSONArray(JSON_TAG_INSTRUCTIONS_ANALYZED);
             ArrayList<DirectionGroup> directions = convertToDirectionGroupArrayList(currentJsonDirections);
             newRecipe = new Recipe(
@@ -302,15 +290,13 @@ public class Api {
                     try {
                         String jsonString = responseBody.string();
                         JSONObject jsonEntire = new JSONObject(jsonString);
-                        if (jsonEntire != null) {
-                            JSONArray recipeArray = jsonEntire.getJSONArray(JSON_TAG_RECIPES_LIST);
-                            if (recipeArray != null) {
-                                int numRecipes = recipeArray.length();
-                                JSONObject currentObject;
-                                for (int i = 0; i < numRecipes; i++) {
-                                    currentObject = recipeArray.getJSONObject(i);
-                                    getRecipeInformation(currentObject);
-                                }
+                        JSONArray recipeArray = jsonEntire.getJSONArray(JSON_TAG_RECIPES_LIST);
+                        if (recipeArray != null) {
+                            int numRecipes = recipeArray.length();
+                            JSONObject currentObject;
+                            for (int i = 0; i < numRecipes; i++) {
+                                currentObject = recipeArray.getJSONObject(i);
+                                getRecipeInformation(currentObject);
                             }
                         }
                     } catch (JSONException e) {
@@ -328,9 +314,15 @@ public class Api {
         });
     }
 
-    public void getRecipesSpecific(long id) { getRecipesSpecific(Long.toString(id)); }
-    public void getRecipesSpecific(String id) {
-        mSpoonacular.getRecipesSpecific(id).enqueue(new Callback<ResponseBody>() {
+    public void getRecipeSpecific(long id) { getRecipeSpecific(Long.toString(id)); }
+    public void getRecipeSpecific(String id) {
+        if (!(mListener instanceof RecipeInfoListener)) {
+            throw new ClassCastException(mListener.getClass().getSimpleName() +
+                    " does not implement " + RecipeInfoListener.class.getName()
+            );
+        }
+
+        mSpoonacular.getRecipeSpecific(id).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 ResponseBody responseBody = response.body();
@@ -338,6 +330,7 @@ public class Api {
                     try {
                         String jsonString = responseBody.string();
                         Recipe recipe = getRecipeInformation(jsonString);
+                        ((RecipeInfoListener) mListener).onInformationReturned(recipe);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
                     }
@@ -351,17 +344,17 @@ public class Api {
         });
     }
 
-    public void getRecipesSpecificList(long [] idList) {
+    public void getRecipeSpecificList(long [] idList) {
         if (idList != null && idList.length > 0) {
             String list = Long.toString(idList[0]);
             for (int i = 1; i < idList.length; i++) {
                 list += "," + idList[i];
             }
-            getRecipesSpecificList(list);
+            getRecipeSpecificList(list);
         }
     }
-    public void getRecipesSpecificList(String commaSeparatedList) {
-        mSpoonacular.getRecipesSpecificList(commaSeparatedList).enqueue(new Callback<ResponseBody>() {
+    public void getRecipeSpecificList(String commaSeparatedList) {
+        mSpoonacular.getRecipeSpecificList(commaSeparatedList).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 ResponseBody responseBody = response.body();
@@ -426,42 +419,10 @@ public class Api {
             if (foundRecipes != null) {
                 int recipeCount = foundRecipes.length();
                 JSONObject currentRecipe;
-                JSONArray foundIngredients;
-                JSONArray foundDirections;
-                long currentId;
-                String currentSourceUrl;
-                String currentSourceUrlSpoonacular;
-                String currentImageUrl;
-                int currentReadyInMinutes;
-                int currentServings;
-                String currentTitle;
                 Recipe oneRecipe;
-                ArrayList<Ingredient> ingredients;
-                ArrayList<DirectionGroup> directions;
                 for (int i =0; i < recipeCount; i++) {
                     currentRecipe = foundRecipes.getJSONObject(i);
-                    currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
-                    currentSourceUrl = currentRecipe.getString(JSON_TAG_SOURCE_URL_ORIGINAL);
-                    currentSourceUrlSpoonacular = currentRecipe.getString(JSON_TAG_SOURCE_URL_SPOONACULAR);
-                    currentImageUrl = currentRecipe.getString(JSON_TAG_IMAGE_MAIN);
-                    currentReadyInMinutes = currentRecipe.getInt(JSON_TAG_READY_MINUTES);
-                    currentServings = currentRecipe.getInt(JSON_TAG_SERVINGS);
-                    currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
-                    foundIngredients = currentRecipe.getJSONArray(JSON_TAG_INGREDIENTS_MISSED);
-                    ingredients = convertToIngredientArrayList(foundIngredients);
-                    foundDirections = currentRecipe.getJSONArray(JSON_TAG_INSTRUCTIONS_ANALYZED);
-                    directions = convertToDirectionGroupArrayList(foundDirections);
-                    oneRecipe = new Recipe(
-                            currentId,
-                            currentSourceUrl,
-                            currentSourceUrlSpoonacular,
-                            currentImageUrl,
-                            currentReadyInMinutes,
-                            currentServings,
-                            currentTitle,
-                            ingredients,
-                            directions
-                    );
+                    oneRecipe = getRecipeInformation(currentRecipe);
                     recipes.add(oneRecipe);
                 }
             }
@@ -471,21 +432,65 @@ public class Api {
         return recipes;
     }
 
+    private ArrayList<Recipe> parseSimilar(String json) {
+        {
+            ArrayList<Recipe> recipes = new ArrayList<>();
+            try {
+                JSONArray foundRecipes = new JSONArray(json);
+                int recipeCount = foundRecipes.length();
+                JSONObject currentRecipe;
+                long currentId;
+                String currentImageUrl;
+                String currentImageName;
+                String currentImageExtension;
+                int currentReadyInMinutes;
+                int currentServings;
+                String currentTitle;
+                Recipe oneRecipe;
+                for (int i = 0; i < recipeCount; i++) {
+                    currentRecipe = foundRecipes.getJSONObject(i);
+                    currentId = currentRecipe.getLong(JSON_TAG_IDENTIFIER);
+                    currentImageName = currentRecipe.getString(JSON_TAG_IMAGE_MAIN);
+                    currentImageExtension = currentImageName.substring(currentImageName.lastIndexOf("."));
+                    currentImageUrl = String.format(Locale.getDefault(), ENDPOINT_IMAGE_RECIPE, currentId, currentImageExtension);
+                    currentReadyInMinutes = currentRecipe.getInt(JSON_TAG_READY_MINUTES);
+                    currentServings = currentRecipe.getInt(JSON_TAG_SERVINGS);
+                    currentTitle = currentRecipe.getString(JSON_TAG_TITLE);
+                    oneRecipe = new Recipe(
+                            currentId,
+                            null,
+                            null,
+                            currentImageUrl,
+                            currentReadyInMinutes,
+                            currentServings,
+                            currentTitle,
+                            new ArrayList<Ingredient>(),
+                            new ArrayList<DirectionGroup>()
+                    );
+                    recipes.add(oneRecipe);
+                }
+            } catch (JSONException e) {
+                // TODO: Handle appropriately
+            }
+            return recipes;
+        }
+    }
+
     private interface Spoonacular {
         @GET("food/jokes/random/?" + API_KEY)
         Call<ResponseBody> getRandomJoke();
 
         @GET("recipes/{id}/similar/?" + API_KEY)
-        Call<ResponseBody> getRecipesSimilarTo(@Path("id") String recipeId);
+        Call<ResponseBody> getRecipesSimilarTo(@Path("id") String recipeId, @Query("number") int howMany);
 
         @GET("recipes/random/?" + API_KEY)
         Call<ResponseBody> getRecipesRandomPopular(@Query("number") int howMany);
 
         @GET("recipes/{id}/information/?" + API_KEY)
-        Call<ResponseBody> getRecipesSpecific(@Path("id") String recipeId);
+        Call<ResponseBody> getRecipeSpecific(@Path("id") String recipeId);
 
         @GET("recipes/informationBulk/?" + API_KEY)
-        Call<ResponseBody> getRecipesSpecificList(@Query("ids") String idList);
+        Call<ResponseBody> getRecipeSpecificList(@Query("ids") String idList);
 
         @GET("recipes/complexSearch/?" + API_KEY)
         Call<ResponseBody> getRecipesComplexSearch(@QueryMap Map<String, String> queries);

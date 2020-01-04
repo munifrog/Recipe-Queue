@@ -21,6 +21,8 @@
     <dimen name="width_icon_favorite">@dimen/height_icon_favorite</dimen>
     <dimen name="height_icon_ingredient">56dp</dimen>
     <dimen name="width_icon_ingredient">@dimen/height_icon_ingredient</dimen>
+    <dimen name="height_icon_progress">150dp</dimen>
+    <dimen name="width_icon_progress">@dimen/height_icon_progress</dimen>
 
     <dimen name="text_size_list_search_title">24sp</dimen>
     <dimen name="text_size_list_search_summary">16sp</dimen>

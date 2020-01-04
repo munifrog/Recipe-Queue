@@ -7,7 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
+import static com.example.recipe_q.util.Api.ENDPOINT_FREE_BASE;
+import static com.example.recipe_q.util.Api.ENDPOINT_IMAGE_INGREDIENT;
 import static com.example.recipe_q.util.Api.JSON_TAG_INGREDIENT_AMOUNT;
 import static com.example.recipe_q.util.Api.JSON_TAG_INGREDIENT_IMAGE;
 import static com.example.recipe_q.util.Api.JSON_TAG_INGREDIENT_NAME;
@@ -64,6 +67,9 @@ public class IngredientConverter {
                 currentJsonObject = jsonArray.getJSONObject(i);
                 currentAmount = (float) currentJsonObject.getDouble(JSON_TAG_INGREDIENT_AMOUNT);
                 currentImage = currentJsonObject.getString(JSON_TAG_INGREDIENT_IMAGE);
+                if (!currentImage.startsWith(ENDPOINT_FREE_BASE)) {
+                    currentImage = String.format(Locale.getDefault(), ENDPOINT_IMAGE_INGREDIENT, currentImage);
+                }
                 currentName = currentJsonObject.getString(JSON_TAG_INGREDIENT_NAME);
                 currentUnit = currentJsonObject.getString(JSON_TAG_INGREDIENT_UNIT);
                 currentIngredient = new Ingredient(
