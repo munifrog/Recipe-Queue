@@ -13,18 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipe_q.R;
 import com.example.recipe_q.model.DirectionGroup;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterLinearDirectionGroups extends RecyclerView.Adapter<AdapterLinearDirectionGroups.DirectionGroupHolder> {
-    private ArrayList<DirectionGroup> mDirectionGroups;
+    private List<DirectionGroup> mDirectionGroups;
 
     public AdapterLinearDirectionGroups(
-            @NonNull ArrayList<DirectionGroup> directionGroups
+            @NonNull List<DirectionGroup> directionGroups
     ) {
         mDirectionGroups = directionGroups;
     }
 
-    public void setDirections(ArrayList<DirectionGroup> directionGroups) {
+    public void setDirections(List<DirectionGroup> directionGroups) {
         mDirectionGroups = directionGroups;
         notifyDataSetChanged();
     }

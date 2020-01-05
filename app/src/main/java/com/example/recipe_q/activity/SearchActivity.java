@@ -7,16 +7,20 @@ import android.widget.Button;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.recipe_q.R;
 import com.example.recipe_q.fragment.SearchCommonFragment;
 import com.example.recipe_q.fragment.SearchIngredientFragment;
 import com.example.recipe_q.fragment.SearchNutritionFragment;
 import com.example.recipe_q.model.Recipe;
+import com.example.recipe_q.model.ViewModel;
+import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.recipe_q.activity.ResultsActivity.RECIPES_PARCELABLE;
@@ -24,9 +28,12 @@ import static com.example.recipe_q.util.Api.QUERY_COMPLEX_COUNT_NUMBER;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INGREDIENTS_FILL;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_RECIPE_ADD_INFO;
 
-public class SearchActivity extends AppCompatActivity implements Api.RecipeListener {
-    private static final int RECIPE_COUNT_MAXIMUM = 20;
+public class SearchActivity extends AppCompatActivity implements Api.RecipeListener,
+        ViewModel.Listener
+{
+    private static final int RECIPE_COUNT_MAXIMUM = 5;
 
+    private ViewModel mViewModel;
     private Switch mSwitchCommon;
     private Switch mSwitchIngredient;
     private Switch mSwitchNutrition;
@@ -42,6 +49,8 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        setupViewModel();
 
         mFragmentCommon = new SearchCommonFragment();
         mFragmentIngredient = new SearchIngredientFragment();
@@ -98,6 +107,11 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
                 onLaunchClick();
             }
         });
+    }
+
+    private void setupViewModel() {
+        ViewModelFactory vmf = new ViewModelFactory(getApplication(), this);
+        mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
     }
 
     private void onCommonClick() {
@@ -164,10 +178,11 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
     }
 
     @Override
-    public void onRecipesReturned(ArrayList<Recipe> recipes) {
+    public void onRecipesReturned(List<Recipe> recipes) {
         if (recipes.size() > 0) {
+            mViewModel.storeRecipes(recipes);
             Intent intent = new Intent(this, ResultsActivity.class);
-            intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, recipes);
+            intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, (ArrayList<Recipe>) recipes);
             startActivity(intent);
         }
     }

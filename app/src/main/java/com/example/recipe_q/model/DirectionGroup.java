@@ -1,14 +1,14 @@
 package com.example.recipe_q.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DirectionGroup {
     private String mGroupName;
-    private ArrayList<Direction> mGroupSteps;
+    private List<Direction> mGroupSteps;
 
     public DirectionGroup (
             String groupName,
-            ArrayList<Direction> groupDirections
+            List<Direction> groupDirections
     ) {
         mGroupName = groupName;
         mGroupSteps = groupDirections;
@@ -17,8 +17,8 @@ public class DirectionGroup {
     public String getGroupName() { return mGroupName; }
     public void setGroupName(String groupName) { this.mGroupName = groupName; }
 
-    public ArrayList<Direction> getGroupSteps() { return mGroupSteps; }
-    public void setGroupSteps(ArrayList<Direction> groupSteps) {
+    public List<Direction> getGroupSteps() { return mGroupSteps; }
+    public void setGroupSteps(List<Direction> groupSteps) {
         this.mGroupSteps = groupSteps;
     }
 }

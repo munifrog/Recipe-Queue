@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -25,8 +26,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-import static com.example.recipe_q.model.DirectionConverter.convertToDirectionGroupArrayList;
-import static com.example.recipe_q.model.IngredientConverter.convertToIngredientArrayList;
+import static com.example.recipe_q.model.DirectionConverter.convertToDirectionGroupList;
+import static com.example.recipe_q.model.IngredientConverter.convertToIngredientList;
 
 public class Api {
     private static final String API_KEY = "apiKey=" + BuildConfig.API_KEY_SPOONACULAR;
@@ -158,7 +159,7 @@ public class Api {
     }
 
     public interface RecipeListener extends BaseListener {
-        void onRecipesReturned(ArrayList<Recipe> recipes);
+        void onRecipesReturned(List<Recipe> recipes);
     }
 
     public interface RecipeInfoListener extends BaseListener {
@@ -229,7 +230,7 @@ public class Api {
                 if (responseBody != null) {
                     try {
                         String jsonString = responseBody.string();
-                        ArrayList<Recipe> recipes = parseSimilar(jsonString);
+                        List<Recipe> recipes = parseSimilar(jsonString);
                         ((RecipeListener) mListener).onRecipesReturned(recipes);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
@@ -263,20 +264,20 @@ public class Api {
             String currentSourceUrl = recipe.getString(JSON_TAG_SOURCE_URL_ORIGINAL);
             String currentSourceUrlSpoonacular = recipe.getString(JSON_TAG_SOURCE_URL_SPOONACULAR);
             JSONArray currentIngredients;
-            ArrayList<Ingredient> ingredients;
+            List<Ingredient> ingredients;
             try {
                 currentIngredients = recipe.getJSONArray(JSON_TAG_INGREDIENTS_EXTENDED);
-                ingredients = convertToIngredientArrayList(currentIngredients);
+                ingredients = convertToIngredientList(currentIngredients);
             } catch (JSONException e) {
                 try {
                     currentIngredients = recipe.getJSONArray(JSON_TAG_INGREDIENTS_MISSED);
-                    ingredients = convertToIngredientArrayList(currentIngredients);
+                    ingredients = convertToIngredientList(currentIngredients);
                 } catch (JSONException ex) {
                     ingredients = new ArrayList<>();
                 }
             }
             JSONArray currentJsonDirections = recipe.getJSONArray(JSON_TAG_INSTRUCTIONS_ANALYZED);
-            ArrayList<DirectionGroup> directions = convertToDirectionGroupArrayList(currentJsonDirections);
+            List<DirectionGroup> directions = convertToDirectionGroupList(currentJsonDirections);
             newRecipe = new Recipe(
                     currentId,
                     currentSourceUrl,
@@ -413,7 +414,7 @@ public class Api {
                 ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     try {
-                        ArrayList<Recipe> recipes = parseComplex(responseBody.string());
+                        List<Recipe> recipes = parseComplex(responseBody.string());
                         ((RecipeListener) mListener).onRecipesReturned(recipes);
                     } catch (IOException e) {
                         // TODO: Handle appropriately
@@ -428,8 +429,8 @@ public class Api {
         });
     }
 
-    private ArrayList<Recipe> parseComplex(String json) {
-        ArrayList<Recipe> recipes = new ArrayList<>();
+    private List<Recipe> parseComplex(String json) {
+        List<Recipe> recipes = new ArrayList<>();
         try {
             JSONObject searchResults = new JSONObject(json);
             JSONArray foundRecipes = searchResults.getJSONArray(JSON_TAG_RESULTS_LIST);
@@ -449,9 +450,9 @@ public class Api {
         return recipes;
     }
 
-    private ArrayList<Recipe> parseSimilar(String json) {
+    private List<Recipe> parseSimilar(String json) {
         {
-            ArrayList<Recipe> recipes = new ArrayList<>();
+            List<Recipe> recipes = new ArrayList<>();
             try {
                 JSONArray foundRecipes = new JSONArray(json);
                 int recipeCount = foundRecipes.length();

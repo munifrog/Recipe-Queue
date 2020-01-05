@@ -1,12 +1,14 @@
 package com.example.recipe_q.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.TypeConverter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static com.example.recipe_q.util.Api.ENDPOINT_FREE_BASE;
@@ -17,7 +19,8 @@ import static com.example.recipe_q.util.Api.JSON_TAG_INGREDIENT_NAME;
 import static com.example.recipe_q.util.Api.JSON_TAG_INGREDIENT_UNIT;
 
 public class IngredientConverter {
-    public static String convertToString(@NonNull ArrayList<Ingredient> ingredients) {
+    @TypeConverter
+    public static String convertToString(@NonNull List<Ingredient> ingredients) {
         JSONArray jsonArray = new JSONArray();
         Ingredient current;
         JSONObject jsonObject;
@@ -43,18 +46,19 @@ public class IngredientConverter {
         return jsonObject;
     }
 
-    public static ArrayList<Ingredient> convertToIngredientArrayList(String json) {
+    @TypeConverter
+    public static List<Ingredient> convertToIngredientList(String json) {
         try {
             JSONArray jsonArray = new JSONArray(json);
-            return convertToIngredientArrayList(jsonArray);
+            return convertToIngredientList(jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
     }
 
-    public static ArrayList<Ingredient> convertToIngredientArrayList(JSONArray jsonArray) {
-        ArrayList<Ingredient> ingredients = new ArrayList<>();
+    public static List<Ingredient> convertToIngredientList(JSONArray jsonArray) {
+        List<Ingredient> ingredients = new ArrayList<>();
         try {
             JSONObject currentJsonObject;
             float currentAmount;

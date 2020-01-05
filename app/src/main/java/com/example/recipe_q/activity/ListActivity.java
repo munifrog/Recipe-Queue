@@ -26,7 +26,7 @@ import com.example.recipe_q.R;
 import static com.example.recipe_q.model.ListManager.LIST_FOUND;
 import static com.example.recipe_q.model.ListManager.LIST_SOUGHT;
 
-public class ListActivity extends AppCompatActivity implements ViewModel.Listener,
+public class ListActivity extends AppCompatActivity implements ViewModel.ListListener,
         AdapterLinearList.Listener
 {
     private static final int INVALID_INDEX = -1;

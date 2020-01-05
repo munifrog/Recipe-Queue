@@ -4,16 +4,25 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class ViewModel extends AndroidViewModel implements ListManager.Listener {
+public class ViewModel extends AndroidViewModel implements ListManager.Listener, RecipeManager.Listener {
     private ListManager mListManager;
     private Listener mListener;
+    private RecipeManager mRecipeManager;
 
     public interface Listener {
         void onInternetFailure(Throwable throwable);
+    }
+
+    public interface ListListener extends Listener {
         void onListDatabaseUpdated();
+    }
+
+    public interface RecipeListener extends Listener {
+        void onRecipeDatabaseUpdated();
     }
 
     ViewModel(@NonNull Application application, Listener listener) {
@@ -21,11 +30,14 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
         mListener = listener;
         ListManagerFactory lmf = new ListManagerFactory(application, this);
         mListManager = lmf.getInstance();
+        mRecipeManager = new RecipeManager(application, this);
     }
 
     @Override
     public void onListDatabaseUpdated() {
-        mListener.onListDatabaseUpdated();
+        if (mListener instanceof ListListener) {
+            ((ListListener) mListener).onListDatabaseUpdated();
+        }
     }
 
     public void addListItems(List<ListItem> listItems) {
@@ -65,6 +77,18 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener 
     public void clearList(int list) {
         if (mListManager != null) {
             mListManager.clearList(list);
+        }
+    }
+
+    public void storeRecipes(List<Recipe> recipes) { mRecipeManager.storeRecipes(recipes); }
+    public List<Recipe> getRecipes() { return mRecipeManager.getRecipes(); }
+    public LiveData<List<Recipe>> getLiveRecipes() { return mRecipeManager.getLiveRecipes(); }
+    public void loadRecipes() { mRecipeManager.loadRecipes(); }
+
+    @Override
+    public void onRecipeDatabaseUpdated() {
+        if (mListener instanceof RecipeListener) {
+            ((RecipeListener) mListener).onRecipeDatabaseUpdated();
         }
     }
 }

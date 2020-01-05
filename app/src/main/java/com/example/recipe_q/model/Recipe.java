@@ -3,22 +3,51 @@ package com.example.recipe_q.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
-import static com.example.recipe_q.model.DirectionConverter.convertToDirectionGroupArrayList;
-import static com.example.recipe_q.model.IngredientConverter.convertToIngredientArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import static com.example.recipe_q.model.DirectionConverter.convertToDirectionGroupList;
+import static com.example.recipe_q.model.IngredientConverter.convertToIngredientList;
+
+@Entity(tableName = "recipes")
 public class Recipe implements Parcelable {
+    @PrimaryKey
+    @ColumnInfo(name = "id_api")
     private long mIdSpoonacular;
-    private String mImage;
-    private String mSourceUrl;
-    private String mSourceUrlSpoonacular;
-    private int mReadyInMinutes;
-    private float mServings;
-    private String mRecipeTitle;
-    private ArrayList<Ingredient> mIngredients;
-    private ArrayList<DirectionGroup> mDirections;
 
+    @ColumnInfo(name = "image_url")
+    private String mImage;
+
+    @ColumnInfo(name = "source_orig")
+    private String mSourceUrl;
+
+    @ColumnInfo(name = "source_api")
+    private String mSourceUrlSpoonacular;
+
+    @ColumnInfo(name = "ready_in")
+    private int mReadyInMinutes;
+
+    @ColumnInfo(name = "servings")
+    private float mServings;
+
+    @ColumnInfo(name = "name")
+    private String mRecipeTitle;
+
+    @ColumnInfo(name = "ingredients")
+    private List<Ingredient> mIngredients;
+
+    @ColumnInfo(name = "directions")
+    private List<DirectionGroup> mDirections;
+
+    @ColumnInfo(name = "timestamp")
+    private long mRetrievalTime;
+
+    @Ignore
     public Recipe(
             long id,
             String sourceUrl,
@@ -27,18 +56,45 @@ public class Recipe implements Parcelable {
             int readyInMinutes,
             float servings,
             String title,
-            ArrayList<Ingredient> ingredients,
-            ArrayList<DirectionGroup> directions
+            List<Ingredient> ingredients,
+            List<DirectionGroup> directions
     ) {
-        mIdSpoonacular = id;
+        this(
+                id,
+                sourceUrl,
+                spoonacularSourceUrl,
+                image,
+                readyInMinutes,
+                servings,
+                title,
+                ingredients,
+                directions,
+                Calendar.getInstance().getTimeInMillis()
+        );
+    }
+
+    public Recipe(
+            long idSpoonacular,
+            String sourceUrl,
+            String sourceUrlSpoonacular,
+            String image,
+            int readyInMinutes,
+            float servings,
+            String recipeTitle,
+            List<Ingredient> ingredients,
+            List<DirectionGroup> directions,
+            long retrievalTime
+    ) {
+        mIdSpoonacular = idSpoonacular;
         mSourceUrl = sourceUrl;
-        mSourceUrlSpoonacular = spoonacularSourceUrl;
+        mSourceUrlSpoonacular = sourceUrlSpoonacular;
         mImage = image;
         mReadyInMinutes = readyInMinutes;
         mServings = servings;
-        mRecipeTitle = title;
+        mRecipeTitle = recipeTitle;
         mIngredients = ingredients;
         mDirections = directions;
+        mRetrievalTime = retrievalTime;
     }
 
     public long getIdSpoonacular() { return mIdSpoonacular; }
@@ -62,12 +118,16 @@ public class Recipe implements Parcelable {
     public String getRecipeTitle() { return mRecipeTitle; }
     public void setRecipeTitle(String title) { this.mRecipeTitle = title; }
 
-    public ArrayList<Ingredient> getIngredients() { return mIngredients; }
-    public void setIngredients(ArrayList<Ingredient> ingredients) { this.mIngredients = ingredients; }
+    public List<Ingredient> getIngredients() { return mIngredients; }
+    public void setIngredients(List<Ingredient> ingredients) { this.mIngredients = ingredients; }
 
-    public ArrayList<DirectionGroup> getDirections() { return mDirections; }
-    public void setDirections(ArrayList<DirectionGroup> directions) { this.mDirections = directions; }
+    public List<DirectionGroup> getDirections() { return mDirections; }
+    public void setDirections(List<DirectionGroup> directions) { this.mDirections = directions; }
 
+    public long getRetrievalTime() { return mRetrievalTime; }
+    public void setRetrievalTime(long timestamp) { this.mRetrievalTime = timestamp; }
+
+    @Ignore
     public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
         @Override
         public Recipe createFromParcel(Parcel source) {
@@ -80,6 +140,7 @@ public class Recipe implements Parcelable {
         }
     };
 
+    @Ignore
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mIdSpoonacular);
@@ -93,6 +154,7 @@ public class Recipe implements Parcelable {
         dest.writeString(DirectionConverter.convertToString(mDirections));
     }
 
+    @Ignore
     private Recipe(Parcel parcel) {
         setIdSpoonacular(parcel.readLong());
         setImage(parcel.readString());
@@ -101,10 +163,11 @@ public class Recipe implements Parcelable {
         setReadyInMinutes(parcel.readInt());
         setServings(parcel.readFloat());
         setRecipeTitle(parcel.readString());
-        setIngredients(convertToIngredientArrayList(parcel.readString()));
-        setDirections(convertToDirectionGroupArrayList(parcel.readString()));
+        setIngredients(convertToIngredientList(parcel.readString()));
+        setDirections(convertToDirectionGroupList(parcel.readString()));
     }
 
+    @Ignore
     @Override
     public int describeContents() {
         return 0;

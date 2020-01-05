@@ -17,48 +17,111 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_launch_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/btn_show_list"
-        app:layout_constraintEnd_toStartOf="@+id/btn_launch_search"
-        app:layout_constraintStart_toStartOf="@+id/hello_world"
-        app:layout_constraintTop_toBottomOf="@+id/hello_world" />
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false"
+        app:layout_constraintBottom_toTopOf="@+id/ll_test_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hello_world" >
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
 
-    <Button
-        android:id="@+id/btn_launch_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/btn_show_search"
-        app:layout_constraintEnd_toEndOf="@+id/hello_world"
-        app:layout_constraintStart_toEndOf="@+id/btn_launch_list"
-        app:layout_constraintTop_toBottomOf="@+id/hello_world" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_add_recipe_01"
-        android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_launch_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="8dp"
+                android:text="@string/btn_show_list" />
+
+            <Button
+                android:id="@+id/btn_show_joke"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:text="@string/btn_show_joke" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_launch_search"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="8dp"
+                android:text="@string/btn_show_search" />
+
+            <Button
+                android:id="@+id/btn_launch_history"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:text="@string/btn_show_history" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_test_buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="@string/btn_add_recipe_01"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add_recipe_02"
-        app:layout_constraintStart_toStartOf="@+id/hello_world"
-        app:layout_constraintTop_toBottomOf="@+id/btn_launch_list" />
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_buttons">
 
-    <Button
-        android:id="@+id/btn_add_recipe_02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/btn_add_recipe_02"
-        app:layout_constraintEnd_toEndOf="@+id/hello_world"
-        app:layout_constraintStart_toEndOf="@+id/btn_add_recipe_01"
-        app:layout_constraintTop_toBottomOf="@+id/btn_launch_list" />
+        <Button
+            android:id="@+id/btn_add_recipe_01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/btn_add_recipe_01" />
+
+        <Button
+            android:id="@+id/btn_add_recipe_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/btn_add_recipe_02" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

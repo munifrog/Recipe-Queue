@@ -19,13 +19,18 @@ public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSe
     private List<Recipe> mRecipes;
     private Listener mListener;
 
-    public AdapterGridSearchResults(List<Recipe> recipes, Listener listener) {
+    public AdapterGridSearchResults(@NonNull List<Recipe> recipes, Listener listener) {
         mRecipes = recipes;
         mListener = listener;
     }
 
     public interface Listener {
         void onClick(Recipe recipe);
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        mRecipes = recipes;
+        notifyDataSetChanged();
     }
 
     @NonNull

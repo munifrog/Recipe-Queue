@@ -2,6 +2,7 @@ package com.example.recipe_q.activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,19 +19,25 @@ import com.example.recipe_q.R;
 import com.example.recipe_q.adapt.AdapterLinearDirectionGroups;
 import com.example.recipe_q.adapt.AdapterLinearIngredients;
 import com.example.recipe_q.model.Recipe;
+import com.example.recipe_q.model.ViewModel;
+import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import static com.example.recipe_q.activity.ResultsActivity.RECIPES_PARCELABLE;
 
-public class RecipeActivity extends AppCompatActivity implements Api.RecipeListener, Api.RecipeInfoListener {
+public class RecipeActivity extends AppCompatActivity implements Api.RecipeListener,
+        Api.RecipeInfoListener, ViewModel.Listener
+{
     private static final int ASSUMED_SIMILAR_LIMIT = 10;
 
     public static final String RECIPE_PARCELABLE = "recipe_parcelable_one";
 
+    private ViewModel mViewModel;
     private Recipe mRecipe;
     private ProgressBar mProgress;
     private AdapterLinearIngredients mAdapterIngredients;
@@ -41,6 +48,8 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+
+        setupViewModel();
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -57,13 +66,15 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
 
             mProgress = findViewById(R.id.progress_bar);
 
-            ArrayList ingredients = mRecipe.getIngredients();
+            List ingredients = mRecipe.getIngredients();
+            // noinspection unchecked
             mAdapterIngredients = new AdapterLinearIngredients(ingredients);
             RecyclerView rvIngredients = findViewById(R.id.rv_ingredients);
             rvIngredients.setLayoutManager(new LinearLayoutManager(this));
             rvIngredients.setAdapter(mAdapterIngredients);
 
-            ArrayList directions = mRecipe.getDirections();
+            List directions = mRecipe.getDirections();
+            // noinspection unchecked
             mAdapterDirections = new AdapterLinearDirectionGroups(directions);
             RecyclerView rvDirections = findViewById(R.id.rv_directions);
             rvDirections.setLayoutManager(new LinearLayoutManager(this));
@@ -131,12 +142,18 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     }
 
     @Override
-    public void onRecipesReturned(ArrayList<Recipe> recipes) {
+    public void onRecipesReturned(List<Recipe> recipes) {
         if (recipes.size() > 0) {
+            mViewModel.storeRecipes(recipes);
             Intent intent = new Intent(this, ResultsActivity.class);
-            intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, recipes);
+            intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, (ArrayList<Recipe>) recipes);
             startActivity(intent);
         }
+    }
+
+    private void setupViewModel() {
+        ViewModelFactory vmf = new ViewModelFactory(getApplication(), this);
+        mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
     }
 
     @Override

@@ -1,19 +1,22 @@
 package com.example.recipe_q.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.TypeConverter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.recipe_q.util.Api.JSON_TAG_DIRECTION_GROUP_NAME;
 import static com.example.recipe_q.util.Api.JSON_TAG_DIRECTION_GROUP_STEPS;
 import static com.example.recipe_q.util.Api.JSON_TAG_DIRECTION_SINGLE_STEP;
 
 public class DirectionConverter {
-    public static String convertToString(@NonNull ArrayList<DirectionGroup> directionSteps) {
+    @TypeConverter
+    public static String convertToString(@NonNull List<DirectionGroup> directionSteps) {
         JSONArray oneJsonGroupArray = new JSONArray();
         try {
             JSONObject oneJsonGroupObject;
@@ -21,7 +24,7 @@ public class DirectionConverter {
             JSONArray oneJsonStepArray;
             DirectionGroup currentGroup;
             Direction currentStep;
-            ArrayList<Direction> steps;
+            List<Direction> steps;
             String groupName;
             String instruction;
             int numGroups = directionSteps.size();
@@ -51,23 +54,24 @@ public class DirectionConverter {
         return oneJsonGroupArray.toString();
     }
 
-    public static ArrayList<DirectionGroup> convertToDirectionGroupArrayList(String json) {
+    @TypeConverter
+    public static List<DirectionGroup> convertToDirectionGroupList(String json) {
         try {
             JSONArray jsonArray = new JSONArray(json);
-            return convertToDirectionGroupArrayList(jsonArray);
+            return convertToDirectionGroupList(jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return new ArrayList<>();
     }
 
-    public static ArrayList<DirectionGroup> convertToDirectionGroupArrayList(JSONArray jsonArray) {
-        ArrayList<DirectionGroup> directionGroups = new ArrayList<>();
+    public static List<DirectionGroup> convertToDirectionGroupList(JSONArray jsonArray) {
+        List<DirectionGroup> directionGroups = new ArrayList<>();
         try {
             JSONObject currentJsonGroup;
             JSONArray currentJsonSteps;
             JSONObject currentJsonStep;
-            ArrayList<Direction> oneGroup;
+            List<Direction> oneGroup;
             DirectionGroup group;
             Direction oneDirection;
             String groupName;

@@ -19,7 +19,7 @@ import com.example.recipe_q.util.Api;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Api.JokeListener, ViewModel.Listener {
+public class MainActivity extends AppCompatActivity implements Api.JokeListener, ViewModel.ListListener {
     ViewModel mViewModel;
 
     @Override
@@ -29,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
 
         setupViewModel();
 
-        new Api(this)
-//                .getRandomJoke()
-        ;
-
         Button launchShoppingList = findViewById(R.id.btn_launch_list);
         launchShoppingList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,11 +37,27 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
             }
         });
 
+        Button launchJokeRetrieval = findViewById(R.id.btn_show_joke);
+        launchJokeRetrieval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchJokeRetrieval();
+            }
+        });
+
         Button launchSearch = findViewById(R.id.btn_launch_search);
         launchSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchSearch();
+            }
+        });
+
+        Button launchHistory = findViewById(R.id.btn_launch_history);
+        launchHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchHistory();
             }
         });
 
@@ -109,6 +121,14 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
 
     private void launchSearch() {
         startActivity(new Intent(this, SearchActivity.class));
+    }
+
+    private void launchHistory() {
+        startActivity(new Intent(this, ResultsActivity.class));
+    }
+
+    private void launchJokeRetrieval() {
+        new Api(this).getRandomJoke();
     }
 
     private void addRecipe01() {

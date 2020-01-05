@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipe_q.R;
 import com.example.recipe_q.model.Direction;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterLinearDirections extends RecyclerView.Adapter<AdapterLinearDirections.DirectionHolder> {
-    private ArrayList<Direction> mDirections;
+    private List<Direction> mDirections;
 
     AdapterLinearDirections(
-            @NonNull ArrayList<Direction> directions
+            @NonNull List<Direction> directions
     ) {
         mDirections = directions;
     }

@@ -13,19 +13,19 @@ import com.example.recipe_q.R;
 import com.example.recipe_q.model.Ingredient;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterLinearIngredients extends RecyclerView.Adapter<AdapterLinearIngredients.IngredientHolder> {
-    private ArrayList<Ingredient> mIngredients;
+    private List<Ingredient> mIngredients;
     private String mTextQuantity;
 
     public AdapterLinearIngredients(
-            @NonNull ArrayList<Ingredient> ingredients
+            @NonNull List<Ingredient> ingredients
     ) {
         mIngredients = ingredients;
     }
 
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         mIngredients = ingredients;
         notifyDataSetChanged();
     }
