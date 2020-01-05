@@ -1,6 +1,6 @@
 package com.example.recipe_q.model;
 
-import android.content.Context;
+import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -21,8 +21,8 @@ public class RecipeManager {
         void onRecipeDatabaseUpdated();
     }
 
-    RecipeManager(Context context, Listener listener) {
-        mDatabase = RecipeDatabase.getInstance(context);
+    RecipeManager(Application application, Listener listener) {
+        mDatabase = RecipeDatabase.getInstance(application);
         mListener = listener;
         mObserver = new Observer<List<Recipe>>() {
             @Override

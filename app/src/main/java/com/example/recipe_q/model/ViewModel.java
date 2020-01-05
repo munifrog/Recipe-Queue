@@ -30,7 +30,8 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
         mListener = listener;
         ListManagerFactory lmf = new ListManagerFactory(application, this);
         mListManager = lmf.getInstance();
-        mRecipeManager = new RecipeManager(application, this);
+        RecipeManagerFactory rmf = new RecipeManagerFactory(application, this);
+        mRecipeManager = rmf.getInstance();
     }
 
     @Override

@@ -15,7 +15,6 @@ import com.example.recipe_q.model.Recipe;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.recipe_q.activity.RecipeActivity.RECIPE_PARCELABLE;
@@ -41,8 +40,7 @@ public class ResultsActivity extends AppCompatActivity implements AdapterGridSea
         List<Recipe> recipes;
         Intent launchingIntent = getIntent();
         if (launchingIntent == null || !launchingIntent.hasExtra(RECIPES_PARCELABLE)) {
-            recipes = new ArrayList<>();
-            mViewModel.loadRecipes();
+            recipes = mViewModel.getRecipes();
         } else {
             recipes = launchingIntent.getParcelableArrayListExtra(RECIPES_PARCELABLE);
         }
