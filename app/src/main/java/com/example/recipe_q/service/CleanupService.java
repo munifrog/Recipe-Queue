@@ -10,8 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 
 import com.example.recipe_q.db.RecipeDatabase;
+import com.example.recipe_q.model.Recipe;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static com.example.recipe_q.model.RecipeManager.RECIPE_CACHE_TIME_LIMIT_MILLIS;
 
@@ -56,6 +58,10 @@ public class CleanupService extends JobIntentService {
                 database.dao().removeExpired(
                         Calendar.getInstance().getTimeInMillis() - RECIPE_CACHE_TIME_LIMIT_MILLIS
                 );
+                List<Recipe> remaining = database.dao().loadRemainingRecipesImmediate();
+                if (remaining.size() > 0) {
+                    scheduleFutureRemoval(remaining.get(0).getRetrievalTime() + RECIPE_CACHE_TIME_LIMIT_MILLIS);
+                }
             }
         }).start();
     }
