@@ -82,6 +82,8 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
     }
 
     public void storeRecipes(List<Recipe> recipes) { mRecipeManager.storeRecipes(recipes); }
+    public void updateRecipe(Recipe recipe) { mRecipeManager.updateRecipe(recipe); }
+    public Recipe getRecipeMatch(long id) { return mRecipeManager.getRecipeMatch(id); }
     public List<Recipe> getRecipes() { return mRecipeManager.getRecipes(); }
     public LiveData<List<Recipe>> getLiveRecipes() { return mRecipeManager.getLiveRecipes(); }
     public void loadRecipes() { mRecipeManager.loadRecipes(); }

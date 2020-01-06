@@ -35,8 +35,10 @@ public class Api {
     private static final String API_HOST = "api.spoonacular.com";
 
     public static final String ENDPOINT_FREE_BASE = "https://spoonacular.com/";
+    private static final String ENDPOINT_IMAGE_SIZE_INFORMATION = "556x370";
+    private static final String ENDPOINT_IMAGE_SIZE_DESIRED = "312x231";
     public static final String ENDPOINT_IMAGE_INGREDIENT = "https://spoonacular.com/cdn/ingredients_100x100/%1$s";
-    private static final String ENDPOINT_IMAGE_RECIPE = "https://spoonacular.com/recipeImages/%1$d-556x370%2$s";
+    private static final String ENDPOINT_IMAGE_RECIPE = "https://spoonacular.com/recipeImages/%1$d-" + ENDPOINT_IMAGE_SIZE_DESIRED + "%2$s";
 
     public static final String JSON_TAG_DIRECTION_GROUP_NAME = "name";
     public static final String JSON_TAG_DIRECTION_GROUP_STEPS = "steps";
@@ -261,6 +263,7 @@ public class Api {
             int currentReadyMin = recipe.getInt(JSON_TAG_READY_MINUTES);
             int currentServings = recipe.getInt(JSON_TAG_SERVINGS);
             String currentImage = recipe.getString(JSON_TAG_IMAGE_MAIN);
+            currentImage = currentImage.replace(ENDPOINT_IMAGE_SIZE_INFORMATION, ENDPOINT_IMAGE_SIZE_DESIRED);
             String currentSourceUrl = recipe.getString(JSON_TAG_SOURCE_URL_ORIGINAL);
             String currentSourceUrlSpoonacular = recipe.getString(JSON_TAG_SOURCE_URL_SPOONACULAR);
             JSONArray currentIngredients;

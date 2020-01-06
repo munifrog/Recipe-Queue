@@ -67,24 +67,32 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
             mProgress = findViewById(R.id.progress_bar);
 
             List ingredients = mRecipe.getIngredients();
+            List directions = mRecipe.getDirections();
+            if (ingredients.size() == 0 && directions.size() == 0) {
+                Recipe recipeMatch = mViewModel.getRecipeMatch(mRecipe.getIdSpoonacular());
+                if (recipeMatch != null) {
+                    mRecipe = recipeMatch;
+                    ingredients = mRecipe.getIngredients();
+                    directions = mRecipe.getDirections();
+                }
+                if (ingredients.size() == 0 && directions.size() == 0) {
+                    Api api = new Api(this);
+                    api.getRecipeSpecific(mRecipe.getIdSpoonacular());
+                    mProgress.setVisibility(View.VISIBLE);
+                }
+            }
+
             // noinspection unchecked
             mAdapterIngredients = new AdapterLinearIngredients(ingredients);
             RecyclerView rvIngredients = findViewById(R.id.rv_ingredients);
             rvIngredients.setLayoutManager(new LinearLayoutManager(this));
             rvIngredients.setAdapter(mAdapterIngredients);
 
-            List directions = mRecipe.getDirections();
             // noinspection unchecked
             mAdapterDirections = new AdapterLinearDirectionGroups(directions);
             RecyclerView rvDirections = findViewById(R.id.rv_directions);
             rvDirections.setLayoutManager(new LinearLayoutManager(this));
             rvDirections.setAdapter(mAdapterDirections);
-
-            if (ingredients.size() == 0 && directions.size() == 0) {
-                Api api = new Api(this);
-                api.getRecipeSpecific(mRecipe.getIdSpoonacular());
-                mProgress.setVisibility(View.VISIBLE);
-            }
 
             TextView tvServings = findViewById(R.id.tv_servings_amount);
             tvServings.setText(String.format(Locale.getDefault(), "%1$.2f", mRecipe.getServings()));
@@ -163,5 +171,6 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         mAdapterIngredients.setIngredients(recipe.getIngredients());
         mAdapterDirections.setDirections(recipe.getDirections());
         mBtnSendToList.setEnabled(recipe.getIngredients().size() != 0);
+        mViewModel.updateRecipe(recipe);
     }
 }
