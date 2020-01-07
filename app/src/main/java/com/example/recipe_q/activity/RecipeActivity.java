@@ -141,15 +141,15 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     }
 
     private Recipe getRecipeInfo(long id) {
-        Recipe recipeMatch = mViewModel.getRecipeMatch(id);
-        if (recipeMatch != null) {
-            return recipeMatch;
-        } else {
+        Recipe toReturn = mViewModel.getRecipeMatch(id);
+        if (toReturn == null ||
+                (toReturn.getIngredients().size() == 0 && toReturn.getDirections().size() == 0))
+        {
             Api api = new Api(this);
             api.getRecipeSpecific(id);
             mProgress.setVisibility(View.VISIBLE);
-            return null;
         }
+        return toReturn;
     }
 
     private void launchBrowser() {
