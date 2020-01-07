@@ -3,14 +3,30 @@ package com.example.recipe_q.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
+@Entity(tableName = "favorites")
 public class FavoriteRecipe implements Parcelable {
+    @PrimaryKey
+    @ColumnInfo(name = "id_api")
     private long mIdSpoonacular;
+
+    @ColumnInfo(name = "title")
     private String mRecipeTitle;
+
+    @ColumnInfo(name = "image")
     private String mImage;
+
+    @ColumnInfo(name = "save_time")
     private long mFavoriteTime;
 
+    @Ignore
     public FavoriteRecipe(
             long id,
             String title,
@@ -48,6 +64,23 @@ public class FavoriteRecipe implements Parcelable {
     public long getFavoriteTime() { return mFavoriteTime; }
     public void setFavoriteTime(long favoriteTime) { this.mFavoriteTime = favoriteTime; }
 
+    @Ignore
+    public Recipe asFullRecipe() {
+        return new Recipe(
+                mIdSpoonacular,
+                null,
+                null,
+                mImage,
+                0,
+                0,
+                mRecipeTitle,
+                new ArrayList<Ingredient>(),
+                new ArrayList<DirectionGroup>(),
+                mFavoriteTime
+        );
+    }
+
+    @Ignore
     public static final Parcelable.Creator<FavoriteRecipe> CREATOR = new Parcelable.Creator<FavoriteRecipe>() {
         @Override
         public FavoriteRecipe createFromParcel(Parcel source) {
@@ -60,6 +93,7 @@ public class FavoriteRecipe implements Parcelable {
         }
     };
 
+    @Ignore
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mIdSpoonacular);
@@ -68,6 +102,7 @@ public class FavoriteRecipe implements Parcelable {
         dest.writeLong(mFavoriteTime);
     }
 
+    @Ignore
     private FavoriteRecipe(Parcel parcel) {
         setIdSpoonacular(parcel.readLong());
         setImage(parcel.readString());
@@ -75,6 +110,7 @@ public class FavoriteRecipe implements Parcelable {
         setFavoriteTime(parcel.readLong());
     }
 
+    @Ignore
     @Override
     public int describeContents() {
         return 0;

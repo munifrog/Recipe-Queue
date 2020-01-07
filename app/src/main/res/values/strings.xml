@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">Recipe-Q</string>
-    <string name="activity_list_title">ListActivity</string>
-    <string name="activity_search_title">Search</string>
-    <string name="activity_results_title">Search Results</string>
+    <string name="app_name">Recipe-Queue</string>
+    <string name="activity_favorites_title">Favorite Recipes</string>
+    <string name="activity_history_title">Search History</string>
+    <string name="activity_list_title">List</string>
     <string name="activity_recipe_title">Recipe Details</string>
+    <string name="activity_results_title">Search Results</string>
+    <string name="activity_search_title">Search Criteria</string>
+    <string name="btn_show_favorites">Show Favorites</string>
+    <string name="btn_show_history">2 Hour Cache</string>
     <string name="btn_show_joke">Display Joke</string>
     <string name="btn_show_list">Shopping List</string>
-    <string name="btn_show_history">2 Hour Cache</string>
     <string name="btn_show_search">Start Search</string>
     <string name="btn_execute_search">Launch Search</string>
     <string name="btn_add_recipe_01">Add Recipe #1</string>

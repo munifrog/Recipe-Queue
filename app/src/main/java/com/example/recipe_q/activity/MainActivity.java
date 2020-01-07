@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.recipe_q.R;
+import com.example.recipe_q.model.FavoriteRecipe;
 import com.example.recipe_q.model.ListItem;
 import com.example.recipe_q.model.ListItemCombined;
 import com.example.recipe_q.model.ViewModel;
@@ -18,6 +19,9 @@ import com.example.recipe_q.util.Api;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.recipe_q.activity.ResultsActivity.FAVORITE_PARCELABLE;
+import static com.example.recipe_q.activity.ResultsActivity.RECIPES_TITLE;
 
 public class MainActivity extends AppCompatActivity implements Api.JokeListener, ViewModel.ListListener {
     ViewModel mViewModel;
@@ -34,6 +38,14 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
             @Override
             public void onClick(View v) {
                 launchShoppingList();
+            }
+        });
+
+        Button launchFavoritesDisplay = findViewById(R.id.btn_launch_favorites);
+        launchFavoritesDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchFavoritesDisplay();
             }
         });
 
@@ -113,6 +125,16 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
             TextView tv = findViewById(R.id.hello_world);
             tv.setText(text);
         }
+    }
+
+    private void launchFavoritesDisplay() {
+        Intent intent = new Intent(this, ResultsActivity.class);
+        intent.putParcelableArrayListExtra(
+                FAVORITE_PARCELABLE,
+                (ArrayList<FavoriteRecipe>) mViewModel.getFavorites()
+        );
+        intent.putExtra(RECIPES_TITLE, R.string.activity_favorites_title);
+        startActivity(intent);
     }
 
     private void launchShoppingList() {

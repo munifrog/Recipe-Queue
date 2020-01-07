@@ -55,7 +55,7 @@ public class RecipeManager implements RecipeInserter.Listener, RecipeUpdater.Lis
         }
     }
 
-    void loadRecipes() {
+    private void loadRecipes() {
         stopObserving();
         mRecipesLive = mDatabase.dao().loadAllRecipesSignaled();
         // noinspection unchecked
@@ -111,5 +111,4 @@ public class RecipeManager implements RecipeInserter.Listener, RecipeUpdater.Lis
     }
 
     List<Recipe> getRecipes() { return mRecipes; }
-    LiveData<List<Recipe>> getLiveRecipes() { return mRecipesLive; }
 }

@@ -4,17 +4,23 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class ViewModel extends AndroidViewModel implements ListManager.Listener, RecipeManager.Listener {
+public class ViewModel extends AndroidViewModel implements ListManager.Listener,
+        RecipeManager.Listener, FavoritesManager.Listener
+{
     private ListManager mListManager;
     private Listener mListener;
     private RecipeManager mRecipeManager;
+    private FavoritesManager mFavoritesManager;
 
     public interface Listener {
         void onInternetFailure(Throwable throwable);
+    }
+
+    public interface FavoritesListener extends Listener {
+        void onFavoritesUpdated();
     }
 
     public interface ListListener extends Listener {
@@ -32,6 +38,8 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
         mListManager = lmf.getInstance();
         RecipeManagerFactory rmf = new RecipeManagerFactory(application, this);
         mRecipeManager = rmf.getInstance();
+        FavoritesManagerFactory fmf = new FavoritesManagerFactory(application, this);
+        mFavoritesManager = fmf.getInstance();
     }
 
     @Override
@@ -85,13 +93,23 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
     public void updateRecipe(Recipe recipe) { mRecipeManager.updateRecipe(recipe); }
     public Recipe getRecipeMatch(long id) { return mRecipeManager.getRecipeMatch(id); }
     public List<Recipe> getRecipes() { return mRecipeManager.getRecipes(); }
-    public LiveData<List<Recipe>> getLiveRecipes() { return mRecipeManager.getLiveRecipes(); }
-    public void loadRecipes() { mRecipeManager.loadRecipes(); }
 
     @Override
     public void onRecipeDatabaseUpdated() {
         if (mListener instanceof RecipeListener) {
             ((RecipeListener) mListener).onRecipeDatabaseUpdated();
+        }
+    }
+
+    public FavoriteRecipe getFavoriteMatch(long id) { return mFavoritesManager.getFavoriteMatch(id); }
+    public List<FavoriteRecipe> getFavorites() { return mFavoritesManager.getFavorites(); }
+    public void addFavorite(FavoriteRecipe favorite) { mFavoritesManager.addFavorite(favorite); }
+    public void removeFavorites(long [] ids) { mFavoritesManager.removeFavorites(ids); }
+
+    @Override
+    public void onFavoritesUpdated() {
+        if (mListener instanceof FavoritesListener) {
+            ((FavoritesListener) mListener).onFavoritesUpdated();
         }
     }
 }

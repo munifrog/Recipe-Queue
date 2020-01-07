@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.example.recipe_q.activity.ResultsActivity.RECIPES_PARCELABLE;
+import static com.example.recipe_q.activity.ResultsActivity.RECIPES_TITLE;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_COUNT_NUMBER;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_INGREDIENTS_FILL;
 import static com.example.recipe_q.util.Api.QUERY_COMPLEX_RECIPE_ADD_INFO;
@@ -183,6 +184,7 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
             mViewModel.storeRecipes(recipes);
             Intent intent = new Intent(this, ResultsActivity.class);
             intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, (ArrayList<Recipe>) recipes);
+            intent.putExtra(RECIPES_TITLE, R.string.activity_results_title);
             startActivity(intent);
         }
     }

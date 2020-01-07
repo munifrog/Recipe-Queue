@@ -52,12 +52,12 @@
                 android:text="@string/btn_show_list" />
 
             <Button
-                android:id="@+id/btn_show_joke"
+                android:id="@+id/btn_launch_favorites"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
-                android:text="@string/btn_show_joke" />
+                android:text="@string/btn_show_favorites" />
 
         </LinearLayout>
 
@@ -83,7 +83,16 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/btn_show_history" />
+
+            <Button
+                android:id="@+id/btn_show_joke"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"
+                android:text="@string/btn_show_joke" />
 
         </LinearLayout>
 
