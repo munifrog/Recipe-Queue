@@ -127,6 +127,14 @@ public class Recipe implements Parcelable {
     public long getRetrievalTime() { return mRetrievalTime; }
     public void setRetrievalTime(long timestamp) { this.mRetrievalTime = timestamp; }
 
+    public FavoriteRecipe asFavoriteRecipe() {
+        return new FavoriteRecipe(
+                mIdSpoonacular,
+                mRecipeTitle,
+                mImage
+        );
+    }
+
     @Ignore
     public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {
         @Override
