@@ -1,5 +1,6 @@
 package com.example.recipe_q.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -39,6 +40,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     private static final int ASSUMED_SIMILAR_LIMIT = 10;
 
     public static final String RECIPE_PARCELABLE = "recipe_parcelable_one";
+    public static final String SAVE_INGREDIENT_SENT_STATE = "ingredients_were_sent";
 
     private ViewModel mViewModel;
     private Recipe mRecipe;
@@ -49,6 +51,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     private boolean mIsFavorite;
     private TextView mTvServings;
     private TextView mTvReadyIn;
+    private boolean mIngredientsSent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,12 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         setContentView(R.layout.activity_recipe);
 
         setupViewModel();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(SAVE_INGREDIENT_SENT_STATE)) {
+            mIngredientsSent = savedInstanceState.getBoolean(SAVE_INGREDIENT_SENT_STATE);
+        } else {
+            mIngredientsSent = false;
+        }
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -125,6 +134,8 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
                 }
             });
             mBtnSendToList.setEnabled(ingredients.size() != 0);
+            setSendButtonText();
+
             Button btnFindSimilar = findViewById(R.id.btn_find_similar);
             btnFindSimilar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -171,25 +182,35 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
 
     private void sendIngredientsToList() {
         if (mRecipe != null) {
-            String recipeName = mRecipe.getRecipeTitle();
-            long id = mRecipe.getIdSpoonacular();
+            if (!mIngredientsSent) {
+                String recipeName = mRecipe.getRecipeTitle();
+                long id = mRecipe.getIdSpoonacular();
 
-            List<Ingredient> ingredients = mRecipe.getIngredients();
-            if (ingredients.size() > 0) {
-                List<ListItem> shoppingList = new ArrayList<>();
-                for (Ingredient ingredient : ingredients) {
-                    shoppingList.add(new ListItem(
-                            ingredient.getIngredientName(),
-                            ingredient.getUnit(),
-                            ingredient.getAmount(),
-                            0,
-                            recipeName,
-                            id
-                    ));
+                List<Ingredient> ingredients = mRecipe.getIngredients();
+                if (ingredients.size() > 0) {
+                    List<ListItem> shoppingList = new ArrayList<>();
+                    for (Ingredient ingredient : ingredients) {
+                        shoppingList.add(new ListItem(
+                                ingredient.getIngredientName(),
+                                ingredient.getUnit(),
+                                ingredient.getAmount(),
+                                0,
+                                recipeName,
+                                id
+                        ));
+                    }
+                    mViewModel.addListItems(shoppingList);
+                    mIngredientsSent = true;
+                    setSendButtonText();
                 }
-                mViewModel.addListItems(shoppingList);
+            } else {
+                startActivity(new Intent(this, ListActivity.class));
             }
         }
+    }
+
+    private void setSendButtonText() {
+        mBtnSendToList.setText(mIngredientsSent ? R.string.btn_recipe_open_list : R.string.btn_recipe_send_to_list);
     }
 
     @Override
@@ -255,6 +276,12 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         mBtnSendToList.setEnabled(recipe.getIngredients().size() != 0);
         mViewModel.updateRecipe(recipe);
         updateAmounts();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVE_INGREDIENT_SENT_STATE, mIngredientsSent);
     }
 
     @Override

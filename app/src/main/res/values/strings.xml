@@ -14,11 +14,10 @@
     <string name="btn_show_list">Shopping List</string>
     <string name="btn_show_search">Start Search</string>
     <string name="btn_execute_search">Launch Search</string>
-    <string name="btn_add_recipe_01">Add Recipe #1</string>
-    <string name="btn_add_recipe_02">Add Recipe #2</string>
     <string name="btn_recipe_search_for_similar">Find Similar</string>
     <string name="btn_recipe_goto_original_source">See Original</string>
     <string name="btn_recipe_send_to_list">Send to List</string>
+    <string name="btn_recipe_open_list">Open List</string>
 
     <string name="joke_caution">Caution: Returned jokes may contain mature content!</string>
 
