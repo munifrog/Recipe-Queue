@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">Recipe-Queue</string>
+
     <string name="activity_favorites_title">Favorite Recipes</string>
     <string name="activity_history_title">Search History</string>
     <string name="activity_list_title">List</string>
     <string name="activity_recipe_title">Recipe Details</string>
     <string name="activity_results_title">Search Results</string>
     <string name="activity_search_title">Search Criteria</string>
+
     <string name="btn_show_favorites">Show Favorites</string>
     <string name="btn_show_history">2 Hour Cache</string>
     <string name="btn_show_joke">Display Joke</string>
@@ -17,20 +19,25 @@
     <string name="btn_recipe_search_for_similar">Find Similar</string>
     <string name="btn_recipe_goto_original_source">See Original</string>
     <string name="btn_recipe_send_to_list">Send to List</string>
+
+    <string name="joke_caution">Caution: Returned jokes may contain mature content!</string>
+
     <string name="switch_search_common">Common</string>
     <string name="switch_search_nutrition">Nutrition</string>
     <string name="switch_search_ingredient">Ingredient</string>
-    <string name="list_label_sought">Looking for</string>
-    <string name="list_label_found">Found</string>
+
+    <string name="list_label_sought">In Progress</string>
+    <string name="list_label_found">Completed</string>
     <string name="list_item_name">%1$s &#8212;</string>
     <string name="list_item_quantity">%1$s</string>
     <string name="list_item_origin">(%1$s)</string>
     <string name="list_item_unit">%1$s</string>
+
     <string name="action_delete_all">Clear All Lists</string>
-    <string name="action_delete_found">Clear Found</string>
+    <string name="action_delete_found">Clear Completed</string>
     <string name="action_delete_list">Clear List</string>
     <string name="action_delete_selected">Remove Selected</string>
-    <string name="action_delete_sought">Clear Missing</string>
+    <string name="action_delete_sought">Clear In Progress</string>
 
     <string name="empty"/>
     <string name="summary_include">Include: %1$s</string>

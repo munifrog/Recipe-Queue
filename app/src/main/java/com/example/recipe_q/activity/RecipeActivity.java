@@ -19,6 +19,8 @@ import com.example.recipe_q.R;
 import com.example.recipe_q.adapt.AdapterLinearDirectionGroups;
 import com.example.recipe_q.adapt.AdapterLinearIngredients;
 import com.example.recipe_q.model.FavoriteRecipe;
+import com.example.recipe_q.model.Ingredient;
+import com.example.recipe_q.model.ListItem;
 import com.example.recipe_q.model.Recipe;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
@@ -119,7 +121,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
             mBtnSendToList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    sendIngredientsToList();
                 }
             });
             mBtnSendToList.setEnabled(ingredients.size() != 0);
@@ -164,6 +166,29 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         if (mRecipe != null) {
             Api api = new Api(this);
             api.getRecipesSimilarTo(mRecipe.getIdSpoonacular(), ASSUMED_SIMILAR_LIMIT);
+        }
+    }
+
+    private void sendIngredientsToList() {
+        if (mRecipe != null) {
+            String recipeName = mRecipe.getRecipeTitle();
+            long id = mRecipe.getIdSpoonacular();
+
+            List<Ingredient> ingredients = mRecipe.getIngredients();
+            if (ingredients.size() > 0) {
+                List<ListItem> shoppingList = new ArrayList<>();
+                for (Ingredient ingredient : ingredients) {
+                    shoppingList.add(new ListItem(
+                            ingredient.getIngredientName(),
+                            ingredient.getUnit(),
+                            ingredient.getAmount(),
+                            0,
+                            recipeName,
+                            id
+                    ));
+                }
+                mViewModel.addListItems(shoppingList);
+            }
         }
     }
 

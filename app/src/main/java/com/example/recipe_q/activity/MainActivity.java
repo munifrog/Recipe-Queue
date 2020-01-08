@@ -1,5 +1,6 @@
 package com.example.recipe_q.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -7,24 +8,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.recipe_q.R;
 import com.example.recipe_q.model.FavoriteRecipe;
-import com.example.recipe_q.model.ListItem;
-import com.example.recipe_q.model.ListItemCombined;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.example.recipe_q.activity.ResultsActivity.FAVORITE_PARCELABLE;
 import static com.example.recipe_q.activity.ResultsActivity.RECIPES_TITLE;
 
-public class MainActivity extends AppCompatActivity implements Api.JokeListener, ViewModel.ListListener {
-    ViewModel mViewModel;
+public class MainActivity extends AppCompatActivity implements Api.JokeListener, ViewModel.Listener {
+    private static final String LATEST_STORED_JOKE = "latest_stored_joke";
+
+    private ViewModel mViewModel;
+    private String mLatestJoke;
+    private TextView mTvJoke;
+    private ProgressBar mProgress;
+    private boolean mIsRetrieving;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,17 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
         setContentView(R.layout.activity_main);
 
         setupViewModel();
+
+        mTvJoke = findViewById(R.id.joke_display);
+        if (savedInstanceState != null && savedInstanceState.containsKey(LATEST_STORED_JOKE)) {
+            mLatestJoke = savedInstanceState.getString(LATEST_STORED_JOKE);
+        } else {
+            mLatestJoke = getString(R.string.joke_caution);
+        }
+        mTvJoke.setText(mLatestJoke);
+        mProgress = findViewById(R.id.progress_bar);
+        mIsRetrieving = false;
+        showProgressBar();
 
         Button launchShoppingList = findViewById(R.id.btn_launch_list);
         launchShoppingList.setOnClickListener(new View.OnClickListener() {
@@ -72,22 +88,6 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
                 launchHistory();
             }
         });
-
-        Button recipe01 = findViewById(R.id.btn_add_recipe_01);
-        recipe01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addRecipe01();
-            }
-        });
-
-        Button recipe02 = findViewById(R.id.btn_add_recipe_02);
-        recipe02.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addRecipe02();
-            }
-        });
     }
 
     private void setupViewModel() {
@@ -97,34 +97,20 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
 
     @Override
     public void onInternetFailure(Throwable throwable) {
-        // Do nothing for now
+        mIsRetrieving = false;
+        showProgressBar();
     }
 
     @Override
     public void onJokeRetrieved(String joke) {
-        TextView tv = findViewById(R.id.hello_world);
-        tv.setText(joke);
+        mIsRetrieving = false;
+        showProgressBar();
+        mLatestJoke = joke;
+        mTvJoke.setText(mLatestJoke);
     }
 
-    @Override
-    public void onListDatabaseUpdated() {
-        List<ListItemCombined> list = mViewModel.getSoughtListItems();
-
-        if (list != null) {
-            ListItemCombined current;
-            String text = "";
-            for (int i = 0; i < list.size(); i++) {
-                current = list.get(i);
-                text += "\n" +
-                        current.getQuantity() + " " +
-                        current.getUnit() + " " +
-                        current.getName() + " (" +
-                        current.getSourceName() + ")"
-                ;
-            }
-            TextView tv = findViewById(R.id.hello_world);
-            tv.setText(text);
-        }
+    private void showProgressBar() {
+        mProgress.setVisibility(mIsRetrieving ? View.VISIBLE : View.GONE);
     }
 
     private void launchFavoritesDisplay() {
@@ -150,81 +136,17 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
     }
 
     private void launchJokeRetrieval() {
-        new Api(this).getRandomJoke();
+        if (!mIsRetrieving) {
+            mIsRetrieving = true;
+            showProgressBar();
+            new Api(this).getRandomJoke();
+        }
     }
 
-    private void addRecipe01() {
-        // (2006) White & Farrow, "Best Ever Three & Four Ingredient Cookbook", p.231
-        String recipeName = "Penne with Cream and Smoked Salmon";
-        List<ListItem> newList = new ArrayList<>();
-        newList.add( new ListItem(
-                "dried penne",
-                "cups",
-                3,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "thinly sliced smoked salmon",
-                "oz",
-                4,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "fresh thyme",
-                "sprigs",
-                2.5f,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "extra-thick single cream",
-                "cup",
-                0.66667f,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "butter",
-                "tbsp",
-                2,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "salt and pepper",
-                "serving",
-                1,
-                recipeName
-        ));
-        mViewModel.addListItems(newList);
-    }
-
-    private void addRecipe02() {
-        // (2006) White & Farrow, "Best Ever Three & Four Ingredient Cookbook", p.432
-        String recipeName = "Pitta Bread";
-        List<ListItem> newList = new ArrayList<>();
-        newList.add( new ListItem(
-                "bread flour",
-                "cups",
-                5,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "easy-blend (rapid rise) dried yeast",
-                "tsp",
-                2.5f,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "olive oil",
-                "tbsp",
-                1,
-                recipeName
-        ));
-        newList.add( new ListItem(
-                "salt",
-                "tbsp",
-                1,
-                recipeName
-        ));
-        mViewModel.addListItems(newList);
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(LATEST_STORED_JOKE, mLatestJoke);
     }
 
     @Override
