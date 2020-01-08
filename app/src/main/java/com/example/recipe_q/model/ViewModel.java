@@ -11,7 +11,7 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
         RecipeManager.Listener, FavoritesManager.Listener
 {
     private ListManager mListManager;
-    private Listener mListener;
+    private ListenerManager mListenerManager;
     private RecipeManager mRecipeManager;
     private FavoritesManager mFavoritesManager;
 
@@ -33,7 +33,8 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
 
     ViewModel(@NonNull Application application, Listener listener) {
         super(application);
-        mListener = listener;
+        mListenerManager = ListenerManagerFactory.getInstance();
+        mListenerManager.addListener(listener);
         ListManagerFactory lmf = new ListManagerFactory(application, this);
         mListManager = lmf.getInstance();
         RecipeManagerFactory rmf = new RecipeManagerFactory(application, this);
@@ -44,8 +45,10 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
 
     @Override
     public void onListDatabaseUpdated() {
-        if (mListener instanceof ListListener) {
-            ((ListListener) mListener).onListDatabaseUpdated();
+        for (Listener listener : mListenerManager.getListeners()) {
+            if (listener instanceof ListListener) {
+                ((ListListener) listener).onListDatabaseUpdated();
+            }
         }
     }
 
@@ -96,8 +99,10 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
 
     @Override
     public void onRecipeDatabaseUpdated() {
-        if (mListener instanceof RecipeListener) {
-            ((RecipeListener) mListener).onRecipeDatabaseUpdated();
+        for (Listener listener : mListenerManager.getListeners()) {
+            if (listener instanceof RecipeListener) {
+                ((RecipeListener) listener).onRecipeDatabaseUpdated();
+            }
         }
     }
 
@@ -108,8 +113,12 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
 
     @Override
     public void onFavoritesUpdated() {
-        if (mListener instanceof FavoritesListener) {
-            ((FavoritesListener) mListener).onFavoritesUpdated();
+        for (Listener listener : mListenerManager.getListeners()) {
+            if (listener instanceof FavoritesListener) {
+                ((FavoritesListener) listener).onFavoritesUpdated();
+            }
         }
     }
+
+    public void removeListener(ViewModel.Listener listener) { mListenerManager.removeListener(listener); }
 }

@@ -226,4 +226,12 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
         ));
         mViewModel.addListItems(newList);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null) {
+            mViewModel.removeListener(this);
+        }
+    }
 }

@@ -227,4 +227,12 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
         }
         return false;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null) {
+            mViewModel.removeListener(this);
+        }
+    }
 }

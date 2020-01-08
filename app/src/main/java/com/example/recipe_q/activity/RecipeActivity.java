@@ -236,5 +236,8 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     protected void onDestroy() {
         super.onDestroy();
         commitFavoriteStatus();
+        if (mViewModel != null) {
+            mViewModel.removeListener(this);
+        }
     }
 }

@@ -106,11 +106,23 @@ public class ResultsActivity extends AppCompatActivity implements AdapterGridSea
 
     @Override
     public void onRecipeDatabaseUpdated() {
-        mAdapterSearch.setRecipes(mViewModel.getRecipes());
+        if (mAdapterSearch != null) {
+            mAdapterSearch.setRecipes(mViewModel.getRecipes());
+        }
     }
 
     @Override
     public void onFavoritesUpdated() {
-        mAdapterFavorites.setFavorites(mViewModel.getFavorites());
+        if (mAdapterFavorites != null) {
+            mAdapterFavorites.setFavorites(mViewModel.getFavorites());
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null) {
+            mViewModel.removeListener(this);
+        }
     }
 }

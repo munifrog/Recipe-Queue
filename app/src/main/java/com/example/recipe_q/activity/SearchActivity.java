@@ -188,4 +188,12 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
             startActivity(intent);
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null) {
+            mViewModel.removeListener(this);
+        }
+    }
 }
