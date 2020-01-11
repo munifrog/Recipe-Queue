@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import com.example.recipe_q.model.Recipe;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
+import com.example.recipe_q.widget.WidgetProvider;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -202,6 +205,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
                     mViewModel.addListItems(shoppingList);
                     mIngredientsSent = true;
                     setSendButtonText();
+                    notifyWidget();
                 }
             } else {
                 startActivity(new Intent(this, ListActivity.class));
@@ -260,6 +264,15 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         } else {
             mViewModel.removeFavorites(new long[] { mRecipe.getIdSpoonacular() });
         }
+    }
+
+    private void notifyWidget() {
+        int [] appWidgetIds = AppWidgetManager.getInstance(this).getAppWidgetIds(
+                new ComponentName(this, WidgetProvider.class)
+        );
+        Intent intent = new Intent(this, WidgetProvider.class);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        sendBroadcast(intent);
     }
 
     @Override

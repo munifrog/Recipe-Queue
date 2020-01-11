@@ -25,6 +25,7 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
 
     public interface ListListener extends Listener {
         void onListDatabaseUpdated();
+        void onSwipeComplete();
     }
 
     public interface RecipeListener extends Listener {
@@ -121,4 +122,13 @@ public class ViewModel extends AndroidViewModel implements ListManager.Listener,
     }
 
     public void removeListener(ViewModel.Listener listener) { mListenerManager.removeListener(listener); }
+
+    @Override
+    public void onSwipeComplete() {
+        for (Listener listener : mListenerManager.getListeners()) {
+            if (listener instanceof ListListener) {
+                ((ListListener) listener).onSwipeComplete();
+            }
+        }
+    }
 }

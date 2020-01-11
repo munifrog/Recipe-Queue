@@ -1,6 +1,6 @@
 package com.example.recipe_q.model;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -9,11 +9,12 @@ import com.example.recipe_q.db.ListDataBase;
 import com.example.recipe_q.thread.ListInserter;
 import com.example.recipe_q.thread.ListRemover;
 import com.example.recipe_q.thread.ListSwipeUpdater;
+import com.example.recipe_q.util.ListItemCombiner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListManager implements ListInserter.Listener {
+public class ListManager implements ListInserter.Listener, ListSwipeUpdater.Listener {
     public static final int LIST_SOUGHT = 1;
     public static final int LIST_FOUND = 2;
 
@@ -35,12 +36,13 @@ public class ListManager implements ListInserter.Listener {
 
     public interface Listener {
         void onListDatabaseUpdated();
+        void onSwipeComplete();
     }
 
-    ListManager(Application application, Listener listener) {
+    ListManager(Context context, Listener listener) {
         mListener = listener;
 
-        mDatabaseList = ListDataBase.getInstance(application);
+        mDatabaseList = ListDataBase.getInstance(context);
 
         mObserverSoughtList = new Observer<List<ListItem>>() {
             @Override
@@ -78,78 +80,11 @@ public class ListManager implements ListInserter.Listener {
     }
 
     private void combineSoughtItems() {
-        mSoughtListCombined = new ArrayList<>();
-
-        if (mSoughtListRaw.size() > 0) {
-            ListItem currentItem = mSoughtListRaw.get(0);
-            ArrayList currentGrouping = new ArrayList<>();
-            // noinspection unchecked
-            currentGrouping.add(currentItem);
-
-            String newName = currentItem.getName();
-            String oldName = newName;
-
-            int soughtSize = mSoughtListRaw.size();
-            for (int i = 1; i < soughtSize; i++) {
-                currentItem = mSoughtListRaw.get(i);
-                newName = currentItem.getName();
-                if (newName.equals(oldName)) {
-                    // noinspection unchecked
-                    currentGrouping.add(currentItem);
-                } else {
-                    // noinspection unchecked
-                    mSoughtListCombined.add(new ListItemCombined(currentGrouping));
-                    oldName = newName;
-                    currentGrouping = new ArrayList<>();
-                    // noinspection unchecked
-                    currentGrouping.add(currentItem);
-                }
-            }
-            if (soughtSize > 0) {
-                // noinspection unchecked
-                mSoughtListCombined.add(new ListItemCombined(currentGrouping));
-            }
-        }
+        mSoughtListCombined = ListItemCombiner.combineSimilar(mSoughtListRaw);
     }
 
     private void combineFoundItems() {
-        mFoundListCombined = new ArrayList<>();
-
-        if (mFoundListRaw.size() > 0) {
-            ListItem currentItem = mFoundListRaw.get(0);
-            ArrayList currentGrouping = new ArrayList<>();
-            // noinspection unchecked
-            currentGrouping.add(currentItem);
-
-            String newName = currentItem.getName();
-            String oldName = newName;
-            long newTimestamp = currentItem.getTimestamp();
-            long oldTimestamp = newTimestamp;
-
-            int foundSize = mFoundListRaw.size();
-            for (int i = 1; i < foundSize; i++) {
-                currentItem = mFoundListRaw.get(i);
-                newName = currentItem.getName();
-                newTimestamp = currentItem.getTimestamp();
-                // The timestamp and name must be the same to combine as similar items
-                if (newTimestamp == oldTimestamp && newName.equals(oldName)) {
-                    // noinspection unchecked
-                    currentGrouping.add(currentItem);
-                } else {
-                    // noinspection unchecked
-                    mFoundListCombined.add(new ListItemCombined(currentGrouping));
-                    oldName = newName;
-                    oldTimestamp = newTimestamp;
-                    currentGrouping = new ArrayList<>();
-                    // noinspection unchecked
-                    currentGrouping.add(currentItem);
-                }
-            }
-            if (foundSize > 0) {
-                // noinspection unchecked
-                mFoundListCombined.add(new ListItemCombined(currentGrouping));
-            }
-        }
+        mFoundListCombined = ListItemCombiner.combineSimilar(mFoundListRaw);
     }
 
     private void removeObserverSoughtList() {
@@ -182,30 +117,27 @@ public class ListManager implements ListInserter.Listener {
         mListFoundLive.observeForever(mObserverFoundList);
     }
 
-    public List<ListItemCombined> getSoughtListItems() { return mSoughtListCombined; }
-    public LiveData<List<ListItem>> getLiveSoughtListItems() { return mListSoughtLive; }
+    List<ListItemCombined> getSoughtListItems() { return mSoughtListCombined; }
+    List<ListItemCombined> getFoundListItems() { return mFoundListCombined; }
 
-    public List<ListItemCombined> getFoundListItems() { return mFoundListCombined; }
-    public LiveData<List<ListItem>> getLiveFoundListItems() { return mListFoundLive; }
-
-    public void addListItems(List<ListItem> listItems) {
+    void addListItems(List<ListItem> listItems) {
         // noinspection unchecked
         new ListInserter(mDatabaseList, this).execute(listItems);
     }
 
-    public void reloadList() {
+    private void reloadList() {
         loadSoughtList();
         loadFoundList();
     }
 
-    public void switchContainingList(int position, int list) {
+    void switchContainingList(int position, int list) {
         if (list == LIST_SOUGHT) {
             if (mSoughtListCombined != null) {
                 if (mSoughtListCombined.size() > position) {
                     ListItemCombined switched = mSoughtListCombined.remove(position);
                     switched.setTimestamp();
                     mFoundListCombined.add(insertionPoint(switched, LIST_FOUND), switched);
-                    new ListSwipeUpdater(mDatabaseList).execute(switched);
+                    new ListSwipeUpdater(mDatabaseList, this).execute(switched);
                 }
             }
         } else if (list == LIST_FOUND) {
@@ -214,7 +146,7 @@ public class ListManager implements ListInserter.Listener {
                     ListItemCombined switched = mFoundListCombined.remove(position);
                     switched.resetTimestamp();
                     mSoughtListCombined.add(insertionPoint(switched, LIST_SOUGHT), switched);
-                    new ListSwipeUpdater(mDatabaseList).execute(switched);
+                    new ListSwipeUpdater(mDatabaseList, this).execute(switched);
                 }
             }
         }
@@ -266,7 +198,7 @@ public class ListManager implements ListInserter.Listener {
         }
     }
 
-    public void removeFromList(int list, int position) {
+    void removeFromList(int list, int position) {
         if (list == LIST_SOUGHT) {
             if (mSoughtListCombined != null) {
                 if (mSoughtListCombined.size() > position) {
@@ -290,7 +222,7 @@ public class ListManager implements ListInserter.Listener {
         }
     }
 
-    public void clearList(int list) {
+    void clearList(int list) {
         if (list == LIST_SOUGHT) {
             if (mSoughtListCombined != null && mSoughtListCombined.size() > 0) {
                 List<ListItemCombined> toRemove = mSoughtListCombined;
@@ -311,5 +243,10 @@ public class ListManager implements ListInserter.Listener {
     @Override
     public void onListLoaded() {
         mListener.onListDatabaseUpdated();
+    }
+
+    @Override
+    public void onSwipeComplete() {
+        mListener.onSwipeComplete();
     }
 }

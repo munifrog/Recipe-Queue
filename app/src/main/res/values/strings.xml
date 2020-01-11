@@ -132,4 +132,7 @@
     <string name="recipe_ingredient_amount">%1$.2f %2$s</string>
     <string name="recipe_directions_label">Directions:</string>
     <string name="recipe_directions_instruction">%1$d.&#160;&#160;%2$s</string>
+
+    <string name="widget_title">Todo List</string>
+    <string name="widget_todo_empty">Nothing more to do! List empty!</string>
 </resources>

@@ -1,26 +1,33 @@
 package com.example.recipe_q.thread;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.example.recipe_q.db.ListDataBase;
 import com.example.recipe_q.model.ListItemCombined;
+import com.example.recipe_q.widget.WidgetProvider;
 
 public class ListSwipeUpdater extends AsyncTask<ListItemCombined, Void, Void> {
     private ListDataBase mDatabaseList;
+    private Listener mListener;
 
-    public ListSwipeUpdater(ListDataBase database) {
+    public interface Listener {
+        void onSwipeComplete();
+    }
+
+    public ListSwipeUpdater(ListDataBase database, Listener listener) {
         mDatabaseList = database;
+        mListener = listener;
     }
 
     @Override
     protected Void doInBackground(ListItemCombined... items) {
-        int lengthInputArray = items.length;
-        ListItemCombined currentItem;
         int lengthCurrentId;
         long [] currentIds;
         long currentTimeStamp;
-        for (int i = 0; i < lengthInputArray; i++) {
-            currentItem = items[i];
+
+        for (ListItemCombined currentItem : items) {
             currentIds = currentItem.getIndices();
             currentTimeStamp = currentItem.getTimestamp();
             lengthCurrentId = currentIds.length;
@@ -30,5 +37,11 @@ public class ListSwipeUpdater extends AsyncTask<ListItemCombined, Void, Void> {
         }
 
         return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void ignored) {
+        super.onPostExecute(ignored);
+        mListener.onSwipeComplete();
     }
 }

@@ -1,12 +1,15 @@
 package com.example.recipe_q.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class ListItemCombined {
+public class ListItemCombined implements Parcelable {
     private static final String LIST_SEPARATOR = ", ";
 
     private long [] mIndices;
@@ -17,7 +20,7 @@ public class ListItemCombined {
     private String mUnitCombined;
 
     // Assumption: to be grouped together, the name and timestamp should match
-    ListItemCombined (List<ListItem> grouping) {
+    public ListItemCombined (List<ListItem> grouping) {
         ListItem current = grouping.get(0);
 
         StringBuilder quantityBuilder = new StringBuilder();
@@ -93,11 +96,53 @@ public class ListItemCombined {
     }
 
     public String getName() { return mNameCombined; }
+    public void setName(String name) { this.mNameCombined = name; }
     public String getQuantity() { return mQuantityCombined; }
+    public void setQuantity(String quantity) { this.mQuantityCombined = quantity; }
     public String getSourceName() { return mOriginCombined; }
+    public void setOrigin(String origin) { this.mOriginCombined = origin; }
     public long getTimestamp() { return mTimestampCombined; }
     public void resetTimestamp() { mTimestampCombined = 0; }
     public void setTimestamp() { mTimestampCombined = Calendar.getInstance().getTimeInMillis(); }
+    public void setTimestamp(long time) { mTimestampCombined = time; }
     public String getUnit() { return mUnitCombined; }
+    public void setUnit(String unit) { this.mUnitCombined = unit; }
     public long [] getIndices() { return mIndices; }
+    public void setIndices(long[] indices) { this.mIndices = indices; }
+
+    public static final Parcelable.Creator<ListItemCombined> CREATOR = new Parcelable.Creator<ListItemCombined>() {
+        @Override
+        public ListItemCombined createFromParcel(Parcel source) {
+            return new ListItemCombined(source);
+        }
+
+        @Override
+        public ListItemCombined [] newArray(int size) {
+            return new ListItemCombined[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLongArray(mIndices);
+        dest.writeString(mNameCombined);
+        dest.writeString(mOriginCombined);
+        dest.writeString(mQuantityCombined);
+        dest.writeLong(mTimestampCombined);
+        dest.writeString(mUnitCombined);
+    }
+
+    private ListItemCombined(Parcel parcel) {
+        parcel.readLongArray(mIndices);
+        setName(parcel.readString());
+        setOrigin(parcel.readString());
+        setQuantity(parcel.readString());
+        setTimestamp(parcel.readLong());
+        setUnit(parcel.readString());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 }

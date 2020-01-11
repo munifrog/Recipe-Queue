@@ -1,26 +1,25 @@
 package com.example.recipe_q.model;
 
-import android.app.Application;
+import android.content.Context;
 
-class ListManagerFactory {
+public class ListManagerFactory {
     private static final Object LOCK = new Object();
     private static ListManager sInstance;
 
-    private Application mApplication;
+    private Context mContext;
     private ListManager.Listener mListener;
 
-    ListManagerFactory (Application application, ListManager.Listener listener) {
-        mApplication = application;
+    public ListManagerFactory (Context context, ListManager.Listener listener) {
+        mContext = context;
         mListener = listener;
     }
 
-    ListManager getInstance() {
+    public ListManager getInstance() {
         if (sInstance == null) {
             synchronized (LOCK) {
-                sInstance = new ListManager(mApplication, mListener);
+                sInstance = new ListManager(mContext, mListener);
             }
         }
         return sInstance;
     }
-
 }

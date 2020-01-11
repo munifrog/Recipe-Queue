@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_widget_item_horizontal"
+        android:layout_marginRight="@dimen/margin_widget_item_horizontal"
+        android:layout_marginTop="@dimen/margin_widget_item_vertical"
+        android:layout_marginBottom="@dimen/margin_widget_item_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_widget_item_horizontal"
+            android:layout_marginLeft="@dimen/margin_widget_item_horizontal"
+            android:textSize="@dimen/text_size_widget_item"
+            android:textColor="@color/scrim_text"
+            tool:text="Apples" />
+
+        <TextView
+            android:id="@+id/tv_item_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_widget_item_horizontal"
+            android:layout_marginLeft="@dimen/margin_widget_item_horizontal"
+            android:textSize="@dimen/text_size_widget_item"
+            android:textColor="@color/scrim_text"
+            tool:text="3" />
+
+        <TextView
+            android:id="@+id/tv_item_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_widget_item_horizontal"
+            android:layout_marginLeft="@dimen/margin_widget_item_horizontal"
+            android:textSize="@dimen/text_size_widget_item"
+            android:textColor="@color/scrim_text"
+            tool:text="oz." />
+
+    </LinearLayout>
+
+</LinearLayout>

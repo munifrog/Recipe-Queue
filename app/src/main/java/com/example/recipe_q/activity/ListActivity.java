@@ -1,10 +1,14 @@
 package com.example.recipe_q.activity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.recipe_q.adapt.AdapterLinearList;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
+import com.example.recipe_q.widget.WidgetProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
@@ -215,6 +219,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
     public void onListDatabaseUpdated() {
         mAdapterSought.onUpdated();
         mAdapterFound.onUpdated();
+        notifyWidgets();
     }
 
     @Override
@@ -226,6 +231,20 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onSwipeComplete() {
+        notifyWidgets();
+    }
+
+    private void notifyWidgets() {
+        int [] appWidgetIds = AppWidgetManager.getInstance(this).getAppWidgetIds(
+                new ComponentName(this, WidgetProvider.class)
+        );
+        Intent intent = new Intent(this, WidgetProvider.class);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+        sendBroadcast(intent);
     }
 
     @Override

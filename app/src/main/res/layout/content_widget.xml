@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/scrim_full" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_list_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/widget_title"
+            android:textSize="@dimen/text_size_widget_title"
+            android:textColor="@color/scrim_text"
+            android:background="@drawable/scrim_full"
+            android:padding="@dimen/margin_widget_title"
+            android:gravity="center" />
+
+        <ListView
+            android:id="@+id/lv_list_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_todo_empty"
+        android:textSize="@dimen/text_size_widget_item"
+        android:textColor="@color/scrim_text"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+</FrameLayout>
