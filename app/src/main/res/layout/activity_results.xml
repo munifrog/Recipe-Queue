@@ -12,4 +12,11 @@
         android:paddingStart="@dimen/pad_horz_list"
         android:paddingEnd="@dimen/pad_horz_list" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/width_icon_progress"
+        android:layout_height="@dimen/height_icon_progress"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 </FrameLayout>

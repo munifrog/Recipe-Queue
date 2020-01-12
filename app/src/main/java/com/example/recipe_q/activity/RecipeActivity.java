@@ -227,7 +227,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         if (recipes.size() > 0) {
             commitFavoriteStatus();
             mViewModel.storeRecipes(recipes);
-            Intent intent = new Intent(this, ResultsActivity.class);
+            Intent intent = new Intent(this, ResultsFlavorActivity.class);
             intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, (ArrayList<Recipe>) recipes);
             startActivity(intent);
         }

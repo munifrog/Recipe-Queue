@@ -182,7 +182,7 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
     public void onRecipesReturned(List<Recipe> recipes) {
         if (recipes.size() > 0) {
             mViewModel.storeRecipes(recipes);
-            Intent intent = new Intent(this, ResultsActivity.class);
+            Intent intent = new Intent(this, ResultsFlavorActivity.class);
             intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, (ArrayList<Recipe>) recipes);
             intent.putExtra(RECIPES_TITLE, R.string.activity_results_title);
             startActivity(intent);

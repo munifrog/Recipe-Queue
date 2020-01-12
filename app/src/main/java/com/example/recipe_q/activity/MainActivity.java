@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
     }
 
     private void launchFavoritesDisplay() {
-        Intent intent = new Intent(this, ResultsActivity.class);
+        Intent intent = new Intent(this, ResultsFlavorActivity.class);
         intent.putParcelableArrayListExtra(
                 FAVORITE_PARCELABLE,
                 (ArrayList<FavoriteRecipe>) mViewModel.getFavorites()
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
     }
 
     private void launchHistory() {
-        startActivity(new Intent(this, ResultsActivity.class));
+        startActivity(new Intent(this, ResultsFlavorActivity.class));
     }
 
     private void launchJokeRetrieval() {
