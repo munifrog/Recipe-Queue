@@ -19,7 +19,8 @@ import static com.example.recipe_q.service.CleanupService.ACTION_REMOVE_EXPIRED_
 import static com.example.recipe_q.service.CleanupService.EXTRA_TIMESTAMP_CUTOFF;
 
 public class RecipeManager implements RecipeInserter.Listener, RecipeUpdater.Listener {
-    public static long RECIPE_CACHE_TIME_LIMIT_MILLIS = 7200000; // 1000 ms/sec * 60 sec/min * 60 min/hr * 2 hr
+    // See https://spoonacular.com/food-api/terms
+    public static long RECIPE_CACHE_TIME_LIMIT_MILLIS = 3600000; // 1000 ms/sec * 60 sec/min * 60 min/hr * 1 hr
 
     private Application mApplication;
     private RecipeDatabase mDatabase;

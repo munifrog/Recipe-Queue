@@ -9,7 +9,7 @@
     <string name="activity_search_title">Search Criteria</string>
 
     <string name="btn_show_favorites">Show Favorites</string>
-    <string name="btn_show_history">2 Hour Cache</string>
+    <string name="btn_show_history">60 Minute Cache</string>
     <string name="btn_show_joke">Display Joke</string>
     <string name="btn_show_list">Shopping List</string>
     <string name="btn_show_search">Start Search</string>
