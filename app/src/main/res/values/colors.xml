@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="black">#ff000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="yellow">#ffd5c35c</color>
+    <color name="transparent">#00000000</color>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
@@ -10,10 +15,7 @@
     <color name="colorItemAmounts">@color/colorItemName</color>
     <color name="colorItemOrigin">#c0404040</color>
 
-    <color name="colorJokeDisplay">#000000</color>
-
-    <color name="white">#ffffffff</color>
-    <color name="transparent">#00000000</color>
+    <color name="colorJokeDisplay">@color/white</color>
 
     <color name="scrim_full">#60000000</color>
     <color name="scrim_darkest">#c0000000</color>

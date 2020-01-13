@@ -135,4 +135,8 @@
 
     <string name="widget_title">Todo List</string>
     <string name="widget_todo_empty">Nothing more to do! List empty!</string>
+
+    <string name="notify_firebase_channel_id">MessageFromFirebase</string>
+    <string name="notify_firebase_recipe_received_title">You have received a recipe recommendation!</string>
+    <string name="notify_firebase_recipe_received_body"/>
 </resources>

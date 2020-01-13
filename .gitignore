@@ -15,3 +15,4 @@
 .cxx
 *.swp
 my.keys
+app/google-services.json

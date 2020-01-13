@@ -80,12 +80,11 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
                 } else {
                     mRecipe = favorite.asFullRecipe();
                 }
-                mIsFavorite = true;
             } catch (RuntimeException e) {
                 mRecipe = intent.getParcelableExtra(RECIPE_PARCELABLE);
-                FavoriteRecipe favorite = mViewModel.getFavoriteMatch(mRecipe.getIdSpoonacular());
-                mIsFavorite = favorite != null;
             }
+            FavoriteRecipe favorite = mViewModel.getFavoriteMatch(mRecipe.getIdSpoonacular());
+            mIsFavorite = favorite != null;
             showFavoriteStatus();
 
             ImageView recipeImage = findViewById(R.id.iv_recipe_image);

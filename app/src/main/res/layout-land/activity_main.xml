@@ -53,49 +53,15 @@
                 android:id="@+id/btn_launch_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_marginBottom="8dp"
                 android:text="@string/btn_show_list" />
-
-            <FrameLayout
-                android:id="@+id/iv_pushed_recipe_frame"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_gravity="center"
-                android:visibility="gone" >
-
-                <ImageView
-                    android:id="@+id/iv_pushed_recipe"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/scrim_full" />
-
-                <TextView
-                    android:id="@+id/tv_recipe_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_margin="@dimen/margin_grid_item_text"
-                    android:textColor="@color/scrim_text"
-                    android:textSize="@dimen/text_size_list_grid_item"
-                    tools:text="Recipe Name" />
-
-            </FrameLayout>
 
             <Button
                 android:id="@+id/btn_launch_favorites"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:layout_marginTop="8dp"
                 android:text="@string/btn_show_favorites" />
 
@@ -117,14 +83,56 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/btn_show_search" />
 
-            <Button
-                android:id="@+id/btn_show_joke"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/btn_show_joke" />
+                android:orientation="horizontal" >
+
+                <FrameLayout
+                    android:id="@+id/iv_pushed_recipe_frame"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:id="@+id/iv_pushed_recipe"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/scrim_full" />
+
+                    <TextView
+                        android:id="@+id/tv_recipe_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/margin_grid_item_text"
+                        android:textColor="@color/scrim_text"
+                        android:textSize="@dimen/text_size_list_grid_item"
+                        tools:text="Recipe Name" />
+
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/btn_show_joke"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/btn_show_joke" />
+
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_launch_history"
