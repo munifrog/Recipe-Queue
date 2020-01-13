@@ -12,6 +12,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -288,6 +289,19 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         mBtnSendToList.setEnabled(recipe.getIngredients().size() != 0);
         mViewModel.updateRecipe(recipe);
         updateAmounts();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch(itemId) {
+            default:
+                return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                // https://stackoverflow.com/a/28691979
+                onBackPressed();
+                return true;
+        }
     }
 
     @Override

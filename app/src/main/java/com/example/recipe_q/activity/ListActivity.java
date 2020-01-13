@@ -12,6 +12,7 @@ import com.example.recipe_q.widget.WidgetProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -63,6 +64,12 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
                 onListDatabaseUpdated();
             }
         });
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.activity_list_title);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -88,6 +95,10 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
             case R.id.action_delete_sought:
                 mViewModel.clearList(LIST_SOUGHT);
                 onListDatabaseUpdated();
+                return true;
+            case android.R.id.home:
+                // https://stackoverflow.com/a/28691979
+                onBackPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

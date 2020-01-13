@@ -2,10 +2,12 @@ package com.example.recipe_q.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -108,6 +110,12 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
                 onLaunchClick();
             }
         });
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.activity_search_title);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void setupViewModel() {
@@ -186,6 +194,19 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
             intent.putParcelableArrayListExtra(RECIPES_PARCELABLE, (ArrayList<Recipe>) recipes);
             intent.putExtra(RECIPES_TITLE, R.string.activity_results_title);
             startActivity(intent);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch(itemId) {
+            default:
+                return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                // https://stackoverflow.com/a/28691979
+                onBackPressed();
+                return true;
         }
     }
 

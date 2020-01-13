@@ -3,6 +3,7 @@ package com.example.recipe_q.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -115,6 +116,19 @@ public class ResultsActivity extends AppCompatActivity implements AdapterGridSea
     public void onFavoritesUpdated() {
         if (mAdapterFavorites != null) {
             mAdapterFavorites.setFavorites(mViewModel.getFavorites());
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch(itemId) {
+            default:
+                return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+                // https://stackoverflow.com/a/28691979
+                onBackPressed();
+                return true;
         }
     }
 
