@@ -64,7 +64,7 @@ public class AdapterGridFavorites extends RecyclerView.Adapter<AdapterGridFavori
 
         void bind(int position) {
             FavoriteRecipe favorite = mFavorites.get(position);
-            Picasso.get().load(favorite.getImage()).placeholder(R.drawable.ic_launcher_background).into(mRecipeImage);
+            Picasso.get().load(favorite.getImage()).placeholder(R.drawable.preparation).into(mRecipeImage);
             mRecipeName.setText(favorite.getRecipeTitle());
         }
 

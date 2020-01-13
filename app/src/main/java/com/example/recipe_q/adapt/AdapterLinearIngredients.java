@@ -61,7 +61,7 @@ public class AdapterLinearIngredients extends RecyclerView.Adapter<AdapterLinear
 
         void bind(int position) {
             Ingredient bound = mIngredients.get(position);
-            Picasso.get().load(bound.getImage()).placeholder(R.drawable.ic_launcher_background).into(mIngredientImage);
+            Picasso.get().load(bound.getImage()).placeholder(R.drawable.preparation).into(mIngredientImage);
             mName.setText(bound.getIngredientName());
             mQuantity.setText(String.format(mTextQuantity, bound.getAmount(), bound.getUnit()));
         }

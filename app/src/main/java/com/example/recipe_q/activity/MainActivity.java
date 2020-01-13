@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
         retrieveRecipePushed();
         if (mFirebaseRecipeChanged) {
             if (mFirebaseRecipe != null) {
-                Picasso.get().load(mFirebaseRecipe.getImage()).placeholder(R.drawable.ic_launcher_background).into(mPushedRecipe);
+                Picasso.get().load(mFirebaseRecipe.getImage()).placeholder(R.drawable.preparation).into(mPushedRecipe);
                 mTvRecipeName.setText(mFirebaseRecipe.getRecipeTitle());
                 mFmPushedRecipe.setVisibility(View.VISIBLE);
             } else {

@@ -64,7 +64,7 @@ public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSe
 
         void bind(int position) {
             Recipe recipe = mRecipes.get(position);
-            Picasso.get().load(recipe.getImage()).placeholder(R.drawable.ic_launcher_background).into(mRecipeImage);
+            Picasso.get().load(recipe.getImage()).placeholder(R.drawable.preparation).into(mRecipeImage);
             mRecipeName.setText(recipe.getRecipeTitle());
         }
 

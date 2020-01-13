@@ -88,7 +88,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
             showFavoriteStatus();
 
             ImageView recipeImage = findViewById(R.id.iv_recipe_image);
-            Picasso.get().load(mRecipe.getImage()).placeholder(R.drawable.ic_launcher_background).into(recipeImage);
+            Picasso.get().load(mRecipe.getImage()).placeholder(R.drawable.preparation).into(recipeImage);
 
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) {
