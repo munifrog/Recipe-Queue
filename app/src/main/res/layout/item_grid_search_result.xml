@@ -36,6 +36,7 @@
         android:layout_margin="@dimen/margin_grid_item_text"
         android:textColor="@color/scrim_text"
         android:textSize="@dimen/text_size_list_grid_item"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

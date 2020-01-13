@@ -5,9 +5,9 @@
     <color name="yellow">#ffd5c35c</color>
     <color name="transparent">#00000000</color>
 
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#575757</color>
+    <color name="colorPrimaryDark">#3D3D3D</color>
+    <color name="colorAccent">@color/yellow</color>
 
     <color name="colorDivider">#575757</color>
 
