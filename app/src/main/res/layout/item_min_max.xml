@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorSearchBackground"
     android:orientation="vertical">
 
     <TextView
@@ -16,7 +17,7 @@
         android:paddingRight="@dimen/pad_horz_list"
         android:textStyle="bold"
         android:textSize="@dimen/text_size_list_search_title"
-        android:textColor="@color/colorItemOrigin"
+        android:textColor="@color/colorSearchSubTitle"
         tool:text="Nutrient" />
 
     <TextView
@@ -29,6 +30,7 @@
         android:paddingRight="@dimen/pad_horz_list"
         android:paddingBottom="@dimen/pad_vert_list"
         android:textSize="@dimen/text_size_list_search_summary"
+        android:textColor="@color/colorSearchSummary"
         tool:text="At most ##mg" />
 
 </LinearLayout>

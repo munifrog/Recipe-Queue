@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#ff000000</color>
+    <color name="grey_light">#A3A3A3</color>
+    <color name="grey_lighter">#BEBEBE</color>
     <color name="white">#ffffffff</color>
     <color name="yellow">#ffd5c35c</color>
     <color name="transparent">#00000000</color>
@@ -14,6 +16,11 @@
     <color name="colorItemName">#000000</color>
     <color name="colorItemAmounts">@color/colorItemName</color>
     <color name="colorItemOrigin">#c0404040</color>
+
+    <color name="colorSearchBackground">@color/black</color>
+    <color name="colorSearchTitle">@color/white</color>
+    <color name="colorSearchSubTitle">@color/grey_lighter</color>
+    <color name="colorSearchSummary">@color/grey_light</color>
 
     <color name="colorJokeDisplay">@color/white</color>
 

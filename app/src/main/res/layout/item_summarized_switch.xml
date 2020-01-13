@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/colorSearchBackground"
     android:padding="@dimen/pad_horz_list">
 
     <Switch
@@ -14,7 +15,7 @@
         android:layout_weight="1"
         android:textStyle="bold"
         android:textSize="@dimen/text_size_list_search_title"
-        android:textColor="@color/colorItemOrigin"
+        android:textColor="@color/colorSearchSubTitle"
         android:checked="false"
         tool:text="Title" />
 
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="@dimen/text_size_list_search_summary"
+        android:textColor="@color/colorSearchSummary"
         tool:text="Include: Option 01, Option 02" />
 
 </LinearLayout>

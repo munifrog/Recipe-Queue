@@ -42,7 +42,7 @@
             app:summaryCheckOff="@string/summary_no"
             app:summaryCheckOn="@string/summary_yes"
             app:criteriaTitle="@string/search_common_require_instructions_title"
-            app:criteriaChecked="false" />
+            app:criteriaChecked="true" />
 
     </LinearLayout>
 
