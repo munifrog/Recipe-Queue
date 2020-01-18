@@ -34,9 +34,7 @@
             android:id="@+id/rv_to_find"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="true"
-            android:paddingStart="@dimen/pad_horz_list"
-            android:paddingEnd="@dimen/pad_horz_list" />
+            android:clipToPadding="true" />
 
     </LinearLayout>
 
@@ -66,9 +64,7 @@
             android:id="@+id/rv_already_found"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="true"
-            android:paddingStart="@dimen/pad_horz_list"
-            android:paddingEnd="@dimen/pad_horz_list" />
+            android:clipToPadding="true" />
 
     </LinearLayout>
 

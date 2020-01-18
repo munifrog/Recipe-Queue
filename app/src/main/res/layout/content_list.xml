@@ -29,9 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:clipToPadding="true"
-        android:paddingStart="@dimen/pad_horz_list"
-        android:paddingEnd="@dimen/pad_horz_list" />
+        android:clipToPadding="true" />
 
     <View style="@style/DividerHorizontal" />
 
@@ -54,8 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:clipToPadding="true"
-        android:paddingStart="@dimen/pad_horz_list"
-        android:paddingEnd="@dimen/pad_horz_list" />
+        android:clipToPadding="true" />
 
 </LinearLayout>

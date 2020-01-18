@@ -20,11 +20,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 
 import com.example.recipe_q.R;
 
@@ -34,15 +34,9 @@ import static com.example.recipe_q.model.ListManager.LIST_SOUGHT;
 public class ListActivity extends AppCompatActivity implements ViewModel.ListListener,
         AdapterLinearList.Listener
 {
-    private static final int INVALID_INDEX = -1;
-
     private ViewModel mViewModel;
-    private ActionMode.Callback mContextMenuCallback;
     private AdapterLinearList mAdapterSought;
     private AdapterLinearList mAdapterFound;
-    private ActionMode mActionMode;
-    private int mSelectionListType;
-    private int mSelectionPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +46,6 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
         setSupportActionBar(toolbar);
 
         setupViewModel();
-        setupContextMenuCallback();
         setupFoundRecyclerView();
         setupSoughtRecyclerView();
 
@@ -110,59 +103,9 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
         mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
     }
 
-    private void setupContextMenuCallback() {
-        mActionMode = null;
-        mContextMenuCallback = new ActionMode.Callback() {
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                MenuInflater inflater = getMenuInflater();
-                inflater.inflate(R.menu.list_context, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                return false;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                int action = item.getItemId();
-                switch(action) {
-                    case R.id.action_delete_list:
-                        if (mSelectionListType == LIST_SOUGHT) {
-                            mViewModel.clearList(LIST_SOUGHT);
-                            onListDatabaseUpdated();
-                            mode.finish();
-                            return true;
-                        } else if (mSelectionListType == LIST_FOUND) {
-                            mViewModel.clearList(LIST_FOUND);
-                            onListDatabaseUpdated();
-                            mode.finish();
-                            return true;
-                        }
-                        return false;
-                    case R.id.action_delete_selected:
-                        if (mSelectionPosition != INVALID_INDEX) {
-                            mViewModel.removeFromList(mSelectionListType, mSelectionPosition);
-                            onListDatabaseUpdated();
-                            mode.finish();
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    default:
-                        return false;
-                }
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                mSelectionListType = INVALID_INDEX;
-                mSelectionPosition = INVALID_INDEX;
-                mActionMode = null;
-            }
-        };
+    private void performSwipe(int position, int list) {
+        mViewModel.switchContainingList(position, list);
+        onListDatabaseUpdated();
     }
 
     private void setupFoundRecyclerView() {
@@ -181,8 +124,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                mViewModel.switchContainingList(viewHolder.getAdapterPosition(), LIST_FOUND);
-                onListDatabaseUpdated();
+                performSwipe(viewHolder.getAdapterPosition(), LIST_FOUND);
             }
         });
 
@@ -209,8 +151,7 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                mViewModel.switchContainingList(viewHolder.getAdapterPosition(), LIST_SOUGHT);
-                onListDatabaseUpdated();
+                performSwipe(viewHolder.getAdapterPosition(), LIST_SOUGHT);
             }
         });
 
@@ -235,13 +176,8 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
 
     @Override
     public boolean onLongClick(int position, int list) {
-        if (mActionMode == null) {
-            mSelectionListType = list;
-            mSelectionPosition = position;
-            mActionMode = startActionMode(mContextMenuCallback);
-            return true;
-        }
-        return false;
+        performSwipe(position, list);
+        return true;
     }
 
     @Override
