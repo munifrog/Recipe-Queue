@@ -121,6 +121,14 @@ public class AdapterLinearList extends RecyclerView.Adapter<AdapterLinearList.Li
             mAmountsTable = itemView.findViewById(R.id.tl_item_table);
 
             itemView.setOnLongClickListener(this);
+
+            if (mListType == LIST_SOUGHT) {
+                itemView.setNextFocusRightId(R.id.rv_already_found);
+                itemView.setNextFocusLeftId(R.id.fab);
+            } else { //if (mListType == LIST_FOUND) {
+                itemView.setNextFocusRightId(R.id.fab);
+                itemView.setNextFocusLeftId(R.id.rv_to_find);
+            }
         }
 
         void bind(int position) {

@@ -24,7 +24,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
 
 import com.example.recipe_q.R;
 
@@ -57,6 +56,8 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
                 onListDatabaseUpdated();
             }
         });
+        fab.setNextFocusRightId(R.id.rv_to_find);
+        fab.setNextFocusLeftId(R.id.rv_already_found);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -132,6 +133,8 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
         rvFound.setLayoutManager(new LinearLayoutManager(this));
         mAdapterFound = new AdapterLinearList(mViewModel, LIST_FOUND, this);
         rvFound.setAdapter(mAdapterFound);
+        rvFound.setNextFocusRightId(R.id.fab);
+        rvFound.setNextFocusLeftId(R.id.rv_to_find);
         touchHelperFound.attachToRecyclerView(rvFound);
     }
 
@@ -159,6 +162,8 @@ public class ListActivity extends AppCompatActivity implements ViewModel.ListLis
         rvSought.setLayoutManager(new LinearLayoutManager(this));
         mAdapterSought = new AdapterLinearList(mViewModel, LIST_SOUGHT, this);
         rvSought.setAdapter(mAdapterSought);
+        rvSought.setNextFocusRightId(R.id.rv_already_found);
+        rvSought.setNextFocusLeftId(R.id.fab);
         touchHelperSought.attachToRecyclerView(rvSought);
     }
 
