@@ -55,6 +55,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:layout_marginBottom="8dp"
+                android:nextFocusUp="@+id/btn_launch_history"
+                android:nextFocusLeft="@+id/btn_launch_history"
+                android:nextFocusRight="@+id/btn_launch_search"
+                android:nextFocusDown="@+id/iv_pushed_recipe"
                 android:text="@string/btn_show_list" />
 
             <FrameLayout
@@ -71,6 +75,10 @@
                     android:id="@+id/iv_pushed_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:nextFocusUp="@+id/btn_launch_list"
+                    android:nextFocusDown="@+id/btn_launch_favorites"
+                    android:nextFocusRight="@+id/btn_show_joke"
+                    android:nextFocusLeft="@+id/btn_launch_search"
                     android:scaleType="centerCrop" />
 
                 <ImageView
@@ -97,6 +105,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:layout_marginTop="8dp"
+                android:nextFocusDown="@+id/btn_launch_search"
+                android:nextFocusUp="@+id/iv_pushed_recipe"
+                android:nextFocusRight="@+id/btn_launch_history"
+                android:nextFocusLeft="@+id/btn_show_joke"
                 android:text="@string/btn_show_favorites" />
 
         </LinearLayout>
@@ -115,6 +127,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginBottom="8dp"
+                android:nextFocusLeft="@+id/btn_launch_list"
+                android:nextFocusUp="@+id/btn_launch_favorites"
+                android:nextFocusDown="@+id/btn_show_joke"
+                android:nextFocusRight="@+id/iv_pushed_recipe"
                 android:text="@string/btn_show_search" />
 
             <Button
@@ -124,6 +140,10 @@
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:nextFocusUp="@+id/btn_launch_search"
+                android:nextFocusDown="@+id/btn_launch_history"
+                android:nextFocusRight="@+id/btn_launch_favorites"
+                android:nextFocusLeft="@+id/iv_pushed_recipe"
                 android:text="@string/btn_show_joke" />
 
             <Button
@@ -132,6 +152,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
+                android:nextFocusDown="@+id/btn_launch_list"
+                android:nextFocusUp="@+id/btn_show_joke"
+                android:nextFocusRight="@+id/btn_launch_list"
+                android:nextFocusLeft="@+id/btn_launch_favorites"
                 android:text="@string/btn_show_history" />
 
         </LinearLayout>
