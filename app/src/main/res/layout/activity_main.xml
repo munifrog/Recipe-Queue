@@ -55,6 +55,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:layout_marginBottom="8dp"
+                android:background="@drawable/select_button"
                 android:nextFocusUp="@+id/btn_launch_history"
                 android:nextFocusLeft="@+id/btn_launch_history"
                 android:nextFocusRight="@+id/btn_launch_search"
@@ -75,6 +76,7 @@
                     android:id="@+id/iv_pushed_recipe"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:contentDescription="@string/context_pushed_image"
                     android:nextFocusUp="@+id/btn_launch_list"
                     android:nextFocusDown="@+id/btn_launch_favorites"
                     android:nextFocusRight="@+id/btn_show_joke"
@@ -82,8 +84,10 @@
                     android:scaleType="centerCrop" />
 
                 <ImageView
+                    android:id="@+id/iv_pushed_scrim"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:contentDescription="@string/context_pushed_image"
                     android:background="@drawable/scrim_full" />
 
                 <TextView
@@ -105,6 +109,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/select_button"
                 android:nextFocusDown="@+id/btn_launch_search"
                 android:nextFocusUp="@+id/iv_pushed_recipe"
                 android:nextFocusRight="@+id/btn_launch_history"
@@ -127,6 +132,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginBottom="8dp"
+                android:background="@drawable/select_button"
                 android:nextFocusLeft="@+id/btn_launch_list"
                 android:nextFocusUp="@+id/btn_launch_favorites"
                 android:nextFocusDown="@+id/btn_show_joke"
@@ -140,6 +146,7 @@
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:background="@drawable/select_button"
                 android:nextFocusUp="@+id/btn_launch_search"
                 android:nextFocusDown="@+id/btn_launch_history"
                 android:nextFocusRight="@+id/btn_launch_favorites"
@@ -152,6 +159,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/select_button"
                 android:nextFocusDown="@+id/btn_launch_list"
                 android:nextFocusUp="@+id/btn_show_joke"
                 android:nextFocusRight="@+id/btn_launch_list"

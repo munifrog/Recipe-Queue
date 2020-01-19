@@ -139,4 +139,6 @@
     <string name="notify_firebase_channel_id">MessageFromFirebase</string>
     <string name="notify_firebase_recipe_received_title">You have received a recipe recommendation!</string>
     <string name="notify_firebase_recipe_received_body"/>
+
+    <string name="context_pushed_image">Recipe Suggestion</string>
 </resources>

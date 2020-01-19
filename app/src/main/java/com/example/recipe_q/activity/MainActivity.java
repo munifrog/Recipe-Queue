@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
     private FavoriteRecipe mFirebaseRecipe;
     private FrameLayout mFmPushedRecipe;
     private ImageView mPushedRecipe;
+    private ImageView mPushedScrim;
     private TextView mTvRecipeName;
     private boolean mFirebaseRecipeChanged;
 
@@ -56,12 +57,20 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
         setupViewModel();
 
         mFmPushedRecipe = findViewById(R.id.iv_pushed_recipe_frame);
+        mPushedScrim = findViewById(R.id.iv_pushed_scrim);
         mTvRecipeName = findViewById(R.id.tv_recipe_name);
         mPushedRecipe = findViewById(R.id.iv_pushed_recipe);
         mPushedRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                applyScrim(true);
                 launchPushed();
+            }
+        });
+        mPushedRecipe.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                applyScrim(false);
             }
         });
 
@@ -130,6 +139,21 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
                 mFmPushedRecipe.setVisibility(View.GONE);
             }
         }
+        applyScrim(false);
+    }
+
+    private void applyScrim(boolean clicked) {
+        int color;
+        if (mPushedRecipe.hasFocus()) {
+            if (clicked) {
+                color = R.color.scrim_pressed;
+            } else {
+                color = R.color.scrim_focused;
+            }
+        } else {
+            color = R.color.scrim_neutral;
+        }
+        mPushedScrim.setBackgroundColor(getResources().getColor(color));
     }
 
     private void retrieveRecipePushed() {
