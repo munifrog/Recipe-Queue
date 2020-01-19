@@ -137,6 +137,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
+            android:background="@drawable/select_button"
+            android:nextFocusRight="@+id/rv_directions"
+            android:nextFocusLeft="@+id/rv_ingredients"
+            android:nextFocusUp="@+id/rv_ingredients"
+            android:nextFocusDown="@+id/rv_directions"
             android:text="@string/btn_recipe_send_to_list" />
 
         <LinearLayout
@@ -177,6 +182,11 @@
         android:layout_margin="@dimen/margin_icon_favorite"
         android:alpha="0.7"
         android:contentDescription="@string/icon_favorite_description"
+        android:background="@drawable/select_favorite"
+        android:nextFocusRight="@+id/rv_ingredients"
+        android:nextFocusLeft="@+id/btn_find_similar"
+        android:nextFocusUp="@+id/btn_find_similar"
+        android:nextFocusDown="@+id/rv_ingredients"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/star_big_off" />
@@ -188,6 +198,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="@string/btn_recipe_search_for_similar"
+        android:background="@drawable/select_button"
+        android:nextFocusRight="@+id/iv_favorite"
+        android:nextFocusLeft="@+id/btn_show_original"
+        android:nextFocusUp="@+id/btn_show_original"
+        android:nextFocusDown="@+id/iv_favorite"
         app:layout_constraintBottom_toBottomOf="@+id/btn_show_original"
         app:layout_constraintStart_toEndOf="@+id/btn_show_original"
         app:layout_constraintTop_toTopOf="@+id/btn_show_original" />
@@ -200,6 +215,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btn_recipe_goto_original_source"
+        android:background="@drawable/select_button"
+        android:nextFocusRight="@+id/btn_find_similar"
+        android:nextFocusLeft="@+id/rv_directions"
+        android:nextFocusUp="@+id/rv_directions"
+        android:nextFocusDown="@+id/btn_find_similar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

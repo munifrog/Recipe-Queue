@@ -1,5 +1,6 @@
 package com.example.recipe_q.adapt;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,15 +49,34 @@ public class AdapterLinearIngredients extends RecyclerView.Adapter<AdapterLinear
     public int getItemCount() { return mIngredients.size(); }
 
     class IngredientHolder extends RecyclerView.ViewHolder {
-        ImageView mIngredientImage;
-        TextView mName;
-        TextView mQuantity;
+        private ImageView mIngredientImage;
+        private TextView mName;
+        private TextView mQuantity;
+        private View mFocusScrim;
+        private int mColorFocused;
+        private int mColorNeutral;
 
         IngredientHolder(@NonNull View itemView) {
             super(itemView);
+            Resources res = itemView.getResources();
+            mColorFocused = res.getColor(R.color.scrim_focused);
+            mColorNeutral = res.getColor(R.color.transparent);
+
             mIngredientImage = itemView.findViewById(R.id.iv_ingredient_image);
             mName = itemView.findViewById(R.id.iv_ingredient_name);
             mQuantity = itemView.findViewById(R.id.iv_ingredient_amount);
+            mFocusScrim = itemView.findViewById(R.id.iv_focus_scrim);
+
+            itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    applyScrim(v);
+                }
+            });
+        }
+
+        private void applyScrim(View v) {
+            mFocusScrim.setBackgroundColor(v.hasFocus() ? mColorFocused : mColorNeutral);
         }
 
         void bind(int position) {

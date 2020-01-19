@@ -122,14 +122,33 @@
 
             <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_ingredients"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="true"
-                android:textColor="@color/scrim_text" />
+                android:orientation="vertical" >
 
-            <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:clipToPadding="true"
+                    android:textColor="@color/scrim_text" />
+
+                <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
+
+                <Button
+                    android:id="@+id/btn_send_to_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/select_button"
+                    android:nextFocusRight="@+id/rv_directions"
+                    android:nextFocusLeft="@+id/rv_ingredients"
+                    android:nextFocusUp="@+id/rv_ingredients"
+                    android:nextFocusDown="@+id/rv_directions"
+                    android:text="@string/btn_recipe_send_to_list" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -173,17 +192,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <Button
-        android:id="@+id/btn_send_to_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/btn_recipe_send_to_list"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/iv_favorite"
         android:layout_width="@dimen/width_icon_favorite"
@@ -191,6 +199,11 @@
         android:layout_margin="@dimen/margin_icon_favorite"
         android:alpha="0.7"
         android:contentDescription="@string/icon_favorite_description"
+        android:background="@drawable/select_favorite"
+        android:nextFocusRight="@+id/rv_ingredients"
+        android:nextFocusLeft="@+id/btn_find_similar"
+        android:nextFocusUp="@+id/btn_find_similar"
+        android:nextFocusDown="@+id/rv_ingredients"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/star_big_off" />
@@ -202,6 +215,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="@string/btn_recipe_search_for_similar"
+        android:background="@drawable/select_button"
+        android:nextFocusRight="@+id/iv_favorite"
+        android:nextFocusLeft="@+id/btn_show_original"
+        android:nextFocusDown="@+id/iv_favorite"
+        android:nextFocusUp="@+id/btn_show_original"
         app:layout_constraintBottom_toBottomOf="@+id/btn_show_original"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
         app:layout_constraintTop_toTopOf="@+id/btn_show_original" />
@@ -214,6 +232,11 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btn_recipe_goto_original_source"
+        android:background="@drawable/select_button"
+        android:nextFocusLeft="@+id/rv_directions"
+        android:nextFocusRight="@+id/btn_find_similar"
+        android:nextFocusUp="@+id/rv_directions"
+        android:nextFocusDown="@+id/btn_find_similar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical" />
 

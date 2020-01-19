@@ -1,5 +1,6 @@
 package com.example.recipe_q.adapt;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,32 @@ public class AdapterLinearDirections extends RecyclerView.Adapter<AdapterLinearD
     }
 
     class DirectionHolder extends RecyclerView.ViewHolder {
-        TextView tvInstruction;
-        String mTextInstruction;
+        private TextView tvInstruction;
+        private String mTextInstruction;
+        private View mFocusScrim;
+        private int mColorFocused;
+        private int mColorNeutral;
 
         DirectionHolder(@NonNull View itemView) {
             super(itemView);
+            Resources res = itemView.getResources();
+            mColorFocused = res.getColor(R.color.scrim_focused);
+            mColorNeutral = res.getColor(R.color.transparent);
+
             tvInstruction = itemView.findViewById(R.id.tv_direction_instruction);
             mTextInstruction = itemView.getResources().getString(R.string.recipe_directions_instruction);
+            mFocusScrim = itemView.findViewById(R.id.iv_focus_scrim);
+
+            itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    applyScrim(v);
+                }
+            });
+        }
+
+        private void applyScrim(View v) {
+            mFocusScrim.setBackgroundColor(v.hasFocus() ? mColorFocused : mColorNeutral);
         }
 
         void bind(int position) {

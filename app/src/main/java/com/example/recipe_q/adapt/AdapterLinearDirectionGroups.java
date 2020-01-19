@@ -48,9 +48,9 @@ public class AdapterLinearDirectionGroups extends RecyclerView.Adapter<AdapterLi
     }
 
     class DirectionGroupHolder extends RecyclerView.ViewHolder {
-        TextView mName;
-        LinearLayout mHeader;
-        RecyclerView mRecyclerView;
+        private TextView mName;
+        private LinearLayout mHeader;
+        private RecyclerView mRecyclerView;
 
         DirectionGroupHolder(@NonNull View itemView) {
             super(itemView);

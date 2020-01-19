@@ -141,4 +141,5 @@
     <string name="notify_firebase_recipe_received_body"/>
 
     <string name="context_pushed_image">Recipe Suggestion</string>
+    <string name="context_focus_scrim">Selected Item</string>
 </resources>
