@@ -1,5 +1,6 @@
 package com.example.recipe_q.adapt;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,45 @@ public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSe
     }
 
     class ListItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView mRecipeImage;
-        TextView mRecipeName;
+        private ImageView mRecipeImage;
+        private TextView mRecipeName;
+        private View mRecipeScrim;
+        private int mColorFocused;
+        private int mColorPressed;
+        private int mColorNeutral;
 
         ListItemHolder(@NonNull View itemView) {
             super(itemView);
+            Resources res = itemView.getResources();
+            mColorFocused = res.getColor(R.color.scrim_focused);
+            mColorPressed = res.getColor(R.color.scrim_pressed);
+            mColorNeutral = res.getColor(R.color.scrim_neutral);
+
             mRecipeImage = itemView.findViewById(R.id.iv_recipe_image);
             mRecipeName = itemView.findViewById(R.id.tv_recipe_name);
+            mRecipeScrim = itemView.findViewById(R.id.iv_recipe_scrim);
+
             itemView.setOnClickListener(this);
+            itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    applyScrim(v, false);
+                }
+            });
+        }
+
+        private void applyScrim(View v, boolean clicked) {
+            int color;
+            if (v.hasFocus()) {
+                if (clicked) {
+                    color = mColorPressed;
+                } else {
+                    color = mColorFocused;
+                }
+            } else {
+                color = mColorNeutral;
+            }
+            mRecipeScrim.setBackgroundColor(color);
         }
 
         void bind(int position) {
@@ -70,6 +102,7 @@ public class AdapterGridSearchResults extends RecyclerView.Adapter<AdapterGridSe
 
         @Override
         public void onClick(View v) {
+            applyScrim(v,true);
             mListener.onClick(mRecipes.get(getAdapterPosition()));
         }
     }
