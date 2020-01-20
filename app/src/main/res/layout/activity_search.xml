@@ -1,91 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorSearchBackground" >
+    android:layout_height="match_parent" >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:background="@color/colorSearchBackground" >
 
-        <Switch
-            android:id="@+id/switch_search_common"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/switch_search_common"
-            android:textSize="@dimen/text_size_list_search_title"
-            android:textColor="@color/colorSearchTitle"
-            android:padding="@dimen/pad_horz_label"
-            android:textStyle="bold"
-            android:background="@drawable/select_custom"
-            android:nextFocusLeft="@+id/btn_execute_search"
-            android:nextFocusRight="@+id/switch_search_ingredient"
-            android:nextFocusUp="@+id/btn_execute_search"
-            android:checked="true" />
+            android:orientation="vertical" >
 
-        <FrameLayout
-            android:id="@+id/fragment_search_common"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Switch
+                android:id="@+id/switch_search_common"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/switch_search_common"
+                android:textSize="@dimen/text_size_list_search_title"
+                android:textColor="@color/colorSearchTitle"
+                android:padding="@dimen/pad_horz_label"
+                android:textStyle="bold"
+                android:background="@drawable/select_custom"
+                android:nextFocusLeft="@+id/btn_execute_search"
+                android:nextFocusRight="@+id/switch_search_ingredient"
+                android:nextFocusUp="@+id/btn_execute_search"
+                android:checked="true" />
 
-        <View style="@style/DividerHorizontal" android:background="@color/colorSearchTitle" />
+            <FrameLayout
+                android:id="@+id/fragment_search_common"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Switch
-            android:id="@+id/switch_search_ingredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/switch_search_ingredient"
-            android:textSize="@dimen/text_size_list_search_title"
-            android:textColor="@color/colorSearchTitle"
-            android:padding="@dimen/pad_horz_label"
-            android:textStyle="bold"
-            android:background="@drawable/select_custom"
-            android:nextFocusLeft="@+id/switch_search_common"
-            android:nextFocusRight="@+id/switch_search_nutrition"
-            android:checked="true" />
+            <View style="@style/DividerHorizontal" android:background="@color/colorSearchTitle" />
 
-        <FrameLayout
-            android:id="@+id/fragment_search_ingredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Switch
+                android:id="@+id/switch_search_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/switch_search_ingredient"
+                android:textSize="@dimen/text_size_list_search_title"
+                android:textColor="@color/colorSearchTitle"
+                android:padding="@dimen/pad_horz_label"
+                android:textStyle="bold"
+                android:background="@drawable/select_custom"
+                android:nextFocusLeft="@+id/switch_search_common"
+                android:nextFocusRight="@+id/switch_search_nutrition"
+                android:checked="true" />
 
-        <View style="@style/DividerHorizontal" android:background="@color/colorSearchTitle" />
+            <FrameLayout
+                android:id="@+id/fragment_search_ingredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Switch
-            android:id="@+id/switch_search_nutrition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/switch_search_nutrition"
-            android:textSize="@dimen/text_size_list_search_title"
-            android:textColor="@color/colorSearchTitle"
-            android:padding="@dimen/pad_horz_label"
-            android:textStyle="bold"
-            android:background="@drawable/select_custom"
-            android:nextFocusLeft="@+id/switch_search_ingredient"
-            android:nextFocusRight="@+id/btn_execute_search"
-            android:checked="true" />
+            <View style="@style/DividerHorizontal" android:background="@color/colorSearchTitle" />
 
-        <FrameLayout
-            android:id="@+id/fragment_search_nutrition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <Switch
+                android:id="@+id/switch_search_nutrition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/switch_search_nutrition"
+                android:textSize="@dimen/text_size_list_search_title"
+                android:textColor="@color/colorSearchTitle"
+                android:padding="@dimen/pad_horz_label"
+                android:textStyle="bold"
+                android:background="@drawable/select_custom"
+                android:nextFocusLeft="@+id/switch_search_ingredient"
+                android:nextFocusRight="@+id/btn_execute_search"
+                android:checked="true" />
 
-        <View style="@style/DividerHorizontal" android:background="@color/colorSearchTitle" />
+            <FrameLayout
+                android:id="@+id/fragment_search_nutrition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btn_execute_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/btn_execute_search"
-            android:background="@drawable/select_button"
-            android:nextFocusLeft="@+id/switch_search_nutrition"
-            android:nextFocusRight="@+id/switch_search_common"
-            android:nextFocusDown="@+id/switch_search_common"
-            android:layout_margin="@dimen/margin_button" />
+            <View style="@style/DividerHorizontal" android:background="@color/colorSearchTitle" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_execute_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/btn_execute_search"
+                android:background="@drawable/select_button"
+                android:nextFocusLeft="@+id/switch_search_nutrition"
+                android:nextFocusRight="@+id/switch_search_common"
+                android:nextFocusDown="@+id/switch_search_common"
+                android:layout_margin="@dimen/margin_button" />
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/width_icon_progress"
+        android:layout_height="@dimen/height_icon_progress"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

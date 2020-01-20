@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import androidx.appcompat.app.ActionBar;
@@ -47,6 +48,8 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
     private SearchIngredientFragment mFragmentIngredient;
     private SearchNutritionFragment mFragmentNutrition;
     private Api mApi;
+    private ProgressBar mProgress;
+    private boolean mProcessing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
         mFragmentIngredient = new SearchIngredientFragment();
         mFragmentNutrition = new SearchNutritionFragment();
         mApi = new Api(this);
+        mProgress = findViewById(R.id.progress_bar);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -178,16 +182,32 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
     }
 
     private void performSearch(Map<String, String> searchTerms) {
-        mApi.getRecipesComplexSearch(searchTerms);
+        if (!mProcessing) {
+            toggleProcessing();
+            mApi.getRecipesComplexSearch(searchTerms);
+        }
+    }
+
+    private void showProgressBar() {
+        mProgress.setVisibility(mProcessing ? View.VISIBLE : View.GONE);
+    }
+
+    private void toggleProcessing() {
+        mProcessing = !mProcessing;
+        showProgressBar();
     }
 
     @Override
     public void onInternetFailure(Throwable throwable) {
         // TODO: Handle appropriately
+        if (mProcessing) {
+            toggleProcessing();
+        }
     }
 
     @Override
     public void onRecipesReturned(List<Recipe> recipes) {
+        toggleProcessing();
         if (recipes.size() > 0) {
             mViewModel.storeRecipes(recipes);
             Intent intent = new Intent(this, ResultsFlavorActivity.class);
