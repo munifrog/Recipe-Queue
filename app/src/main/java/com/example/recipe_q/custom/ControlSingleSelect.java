@@ -1,6 +1,7 @@
 package com.example.recipe_q.custom;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -15,6 +16,9 @@ public class ControlSingleSelect extends LinearLayout implements DialogSingleSel
     private DialogSingleSelect mDialog;
     private TextView mTvSummary;
     private String mTextNoSelection;
+    private View mSelectScrim;
+    private int mColorFocused;
+    private int mColorNeutral;
 
     public ControlSingleSelect(Context context) {
         super(context);
@@ -46,7 +50,25 @@ public class ControlSingleSelect extends LinearLayout implements DialogSingleSel
         TextView tvTitle = view.findViewById(R.id.tv_title);
         tvTitle.setText(title);
         mTvSummary = view.findViewById(R.id.tv_summary);
+
+        Resources res = getResources();
+        mColorFocused = res.getColor(R.color.custom_focused);
+        mColorNeutral = res.getColor(R.color.custom_neutral);
+
+        mSelectScrim = view.findViewById(R.id.iv_custom_scrim);
+
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                applyScrim(hasFocus);
+            }
+        });
+
         updateSummary();
+    }
+
+    private void applyScrim(boolean hasFocus) {
+        mSelectScrim.setBackgroundColor(hasFocus ? mColorFocused : mColorNeutral);
     }
 
     public DialogSingleSelect getDialog() {

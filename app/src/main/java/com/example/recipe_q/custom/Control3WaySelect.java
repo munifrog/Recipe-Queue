@@ -1,6 +1,7 @@
 package com.example.recipe_q.custom;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -24,6 +25,9 @@ public class Control3WaySelect extends LinearLayout implements Dialog3WaySelect.
     private String mIncludedDefault;
     private String mSummaryExclude;
     private String mSummaryInclude;
+    private View mSelectScrim;
+    private int mColorFocused;
+    private int mColorNeutral;
 
     public Control3WaySelect(Context context) {
         super(context);
@@ -60,7 +64,24 @@ public class Control3WaySelect extends LinearLayout implements Dialog3WaySelect.
         mSummaryExclude = context.getString(R.string.summary_exclude);
         mSummaryInclude = context.getString(R.string.summary_include);
 
+        Resources res = getResources();
+        mColorFocused = res.getColor(R.color.custom_focused);
+        mColorNeutral = res.getColor(R.color.custom_neutral);
+
+        mSelectScrim = view.findViewById(R.id.iv_custom_scrim);
+
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                applyScrim(hasFocus);
+            }
+        });
+
         updateSummaries();
+    }
+
+    private void applyScrim(boolean hasFocus) {
+        mSelectScrim.setBackgroundColor(hasFocus ? mColorFocused : mColorNeutral);
     }
 
     public Dialog3WaySelect getDialog() {

@@ -19,6 +19,10 @@
             android:textColor="@color/colorSearchTitle"
             android:padding="@dimen/pad_horz_label"
             android:textStyle="bold"
+            android:background="@drawable/select_custom"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusRight="@+id/switch_search_ingredient"
+            android:nextFocusUp="@+id/btn_execute_search"
             android:checked="true" />
 
         <FrameLayout
@@ -37,6 +41,9 @@
             android:textColor="@color/colorSearchTitle"
             android:padding="@dimen/pad_horz_label"
             android:textStyle="bold"
+            android:background="@drawable/select_custom"
+            android:nextFocusLeft="@+id/switch_search_common"
+            android:nextFocusRight="@+id/switch_search_nutrition"
             android:checked="true" />
 
         <FrameLayout
@@ -55,6 +62,9 @@
             android:textColor="@color/colorSearchTitle"
             android:padding="@dimen/pad_horz_label"
             android:textStyle="bold"
+            android:background="@drawable/select_custom"
+            android:nextFocusLeft="@+id/switch_search_ingredient"
+            android:nextFocusRight="@+id/btn_execute_search"
             android:checked="true" />
 
         <FrameLayout
@@ -70,6 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/btn_execute_search"
+            android:background="@drawable/select_button"
+            android:nextFocusLeft="@+id/switch_search_nutrition"
+            android:nextFocusRight="@+id/switch_search_common"
+            android:nextFocusDown="@+id/switch_search_common"
             android:layout_margin="@dimen/margin_button" />
 
     </LinearLayout>

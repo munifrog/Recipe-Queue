@@ -1,36 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorSearchBackground"
-    android:orientation="vertical">
+    android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/tv_title"
+    <View
+        android:id="@+id/iv_custom_scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/context_focus_scrim"
+        android:background="@color/custom_neutral" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/pad_vert_list"
-        android:paddingLeft="@dimen/pad_horz_list"
-        android:paddingStart="@dimen/pad_horz_list"
-        android:paddingEnd="@dimen/pad_horz_list"
-        android:paddingRight="@dimen/pad_horz_list"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_list_search_title"
-        android:textColor="@color/colorSearchSubTitle"
-        tool:text="Nutrient" />
+        android:background="@color/custom_neutral"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_item_summary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/pad_horz_list"
-        android:paddingStart="@dimen/pad_horz_list"
-        android:paddingEnd="@dimen/pad_horz_list"
-        android:paddingRight="@dimen/pad_horz_list"
-        android:paddingBottom="@dimen/pad_vert_list"
-        android:textSize="@dimen/text_size_list_search_summary"
-        android:textColor="@color/colorSearchSummary"
-        tool:text="At most ##mg" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/pad_vert_list"
+            android:paddingLeft="@dimen/pad_horz_list"
+            android:paddingStart="@dimen/pad_horz_list"
+            android:paddingEnd="@dimen/pad_horz_list"
+            android:paddingRight="@dimen/pad_horz_list"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_list_search_title"
+            android:textColor="@color/colorSearchSubTitle"
+            tool:text="Nutrient" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_item_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/pad_horz_list"
+            android:paddingStart="@dimen/pad_horz_list"
+            android:paddingEnd="@dimen/pad_horz_list"
+            android:paddingRight="@dimen/pad_horz_list"
+            android:paddingBottom="@dimen/pad_vert_list"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:textColor="@color/colorSearchSummary"
+            tool:text="At most ##mg" />
+
+    </LinearLayout>
+
+</FrameLayout>

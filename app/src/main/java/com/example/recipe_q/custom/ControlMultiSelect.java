@@ -17,6 +17,9 @@ public class ControlMultiSelect extends LinearLayout implements DialogMultiSelec
     private TextView mTvSummary;
     private String mTextSummary;
     private String mTextEmptyList;
+    private View mSelectScrim;
+    private int mColorFocused;
+    private int mColorNeutral;
 
     public ControlMultiSelect(Context context) {
         super(context);
@@ -44,6 +47,8 @@ public class ControlMultiSelect extends LinearLayout implements DialogMultiSelec
         Resources res = context.getResources();
         mTextSummary = res.getString(summaryRef);
         mTextEmptyList = res.getString(R.string.search_common_selection_none);
+        mColorFocused = res.getColor(R.color.custom_focused);
+        mColorNeutral = res.getColor(R.color.custom_neutral);
 
         mDialog = new DialogMultiSelect(context, titleRef, optionsRef, this);
 
@@ -51,7 +56,21 @@ public class ControlMultiSelect extends LinearLayout implements DialogMultiSelec
         TextView tvTitle = view.findViewById(R.id.tv_title);
         tvTitle.setText(title);
         mTvSummary = view.findViewById(R.id.tv_summary);
+
+        mSelectScrim = view.findViewById(R.id.iv_custom_scrim);
+
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                applyScrim(hasFocus);
+            }
+        });
+
         updateSummary();
+    }
+
+    private void applyScrim(boolean hasFocus) {
+        mSelectScrim.setBackgroundColor(hasFocus ? mColorFocused : mColorNeutral);
     }
 
     public DialogMultiSelect getDialog() {

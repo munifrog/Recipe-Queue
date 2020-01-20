@@ -1,6 +1,7 @@
 package com.example.recipe_q.custom;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,6 +18,10 @@ public class ControlSwitch extends LinearLayout {
     private Switch mSwitch;
     private String mTextCheckOff;
     private String mTextCheckOn;
+    private View mSelectScrim;
+    private int mColorFocused;
+    private int mColorNeutral;
+    private boolean mChecked;
 
     public ControlSwitch(Context context) {
         super(context);
@@ -36,7 +41,7 @@ public class ControlSwitch extends LinearLayout {
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ControlSwitch);
         String title = a.getString(R.styleable.ControlSwitch_criteriaTitle);
-        boolean checked = a.getBoolean(R.styleable.ControlSwitch_criteriaChecked, false);
+        mChecked = a.getBoolean(R.styleable.ControlSwitch_criteriaChecked, false);
         mTextCheckOff = a.getString(R.styleable.ControlSwitch_summaryCheckOff);
         mTextCheckOn = a.getString(R.styleable.ControlSwitch_summaryCheckOn);
         a.recycle();
@@ -44,19 +49,55 @@ public class ControlSwitch extends LinearLayout {
         View view = inflate(context,R.layout.item_summarized_switch, this);
         mSwitch = view.findViewById(R.id.switch_title);
         mSwitch.setText(title);
-        mSwitch.setChecked(checked);
+        mSwitch.setChecked(mChecked);
         mSwitch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCommit();
+                whenClicked();
             }
         });
+
         mTvSummary = view.findViewById(R.id.tv_summary);
+
+        Resources res = getResources();
+        mColorFocused = res.getColor(R.color.custom_focused);
+        mColorNeutral = res.getColor(R.color.custom_neutral);
+
+        mSelectScrim = view.findViewById(R.id.iv_custom_scrim);
+
+        view.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whenClicked();
+            }
+        });
+
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                applyScrim(hasFocus);
+            }
+        });
+
         updateSummary();
     }
 
+    private void toggleChecked() {
+        mChecked = !mChecked;
+        mSwitch.setChecked(mChecked);
+    }
+
+    private void whenClicked() {
+        toggleChecked();
+        onCommit();
+    }
+
+    private void applyScrim(boolean hasFocus) {
+        mSelectScrim.setBackgroundColor(hasFocus ? mColorFocused : mColorNeutral);
+    }
+
     public boolean getChecked() {
-        return mSwitch.isChecked();
+        return mChecked;
     }
 
     private void updateSummary() {

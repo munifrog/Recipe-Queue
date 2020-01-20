@@ -40,4 +40,8 @@
     <color name="button_focused">@color/yellow_solid_semi</color>
     <color name="button_neutral">@android:drawable/btn_default</color>
     <color name="button_pressed">@color/yellow_solid_saturated</color>
+
+    <color name="custom_focused">@color/yellow_transparent</color>
+    <color name="custom_neutral">@color/transparent</color>
+    <color name="custom_pressed">@color/yellow_transparent_semi</color>
 </resources>

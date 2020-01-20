@@ -24,6 +24,9 @@ public class ControlMinMax extends LinearLayout implements DialogMinMax.Listener
     private String mSummaryExactly;
     private String mSummaryBetween;
     private String mSummaryAny;
+    private View mSelectScrim;
+    private int mColorFocused;
+    private int mColorNeutral;
 
     public ControlMinMax(Context context) {
         super(context);
@@ -70,12 +73,28 @@ public class ControlMinMax extends LinearLayout implements DialogMinMax.Listener
         mSummaryExactly = res.getString(R.string.min_max_summary_restrict_same);
         mSummaryBetween = res.getString(R.string.min_max_summary_restrict_both);
         mSummaryAny = res.getString(R.string.min_max_summary_no_restriction);
+        mColorFocused = res.getColor(R.color.custom_focused);
+        mColorNeutral = res.getColor(R.color.custom_neutral);
 
         View view = inflate(context, R.layout.item_min_max, this);
         TextView tvTitle = view.findViewById(R.id.tv_title);
         tvTitle.setText(title);
         mSummary = view.findViewById(R.id.tv_item_summary);
+
+        mSelectScrim = view.findViewById(R.id.iv_custom_scrim);
+
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                applyScrim(hasFocus);
+            }
+        });
+
         updateSummary();
+    }
+
+    private void applyScrim(boolean hasFocus) {
+        mSelectScrim.setBackgroundColor(hasFocus ? mColorFocused : mColorNeutral);
     }
 
     private void updateSummary() {
