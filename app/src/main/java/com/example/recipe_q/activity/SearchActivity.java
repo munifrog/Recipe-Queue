@@ -1,6 +1,7 @@
 package com.example.recipe_q.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.recipe_q.model.Recipe;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -199,10 +201,23 @@ public class SearchActivity extends AppCompatActivity implements Api.RecipeListe
 
     @Override
     public void onInternetFailure(Throwable throwable) {
-        // TODO: Handle appropriately
         if (mProcessing) {
             toggleProcessing();
         }
+        // https://www.androidhive.info/2015/09/android-material-design-snackbar-example/
+        Snackbar.make(
+                findViewById(R.id.sv_search_criteria),
+                getString(R.string.error_failure_internet),
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.error_retry_joke_search), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onLaunchClick();
+                    }
+                })
+                .setActionTextColor(Color.YELLOW)
+                .show()
+        ;
     }
 
     @Override

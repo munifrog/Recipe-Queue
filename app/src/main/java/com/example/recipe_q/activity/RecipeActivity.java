@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
 import com.example.recipe_q.widget.WidgetProvider;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,6 +44,10 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         Api.RecipeInfoListener, ViewModel.Listener
 {
     private static final int ASSUMED_SIMILAR_LIMIT = 10;
+
+    private static final int LAST_INTERNET_OPERATION_NONE = 0;
+    private static final int LAST_INTERNET_OPERATION_SIMILAR = 1;
+    private static final int LAST_INTERNET_OPERATION_INFORMATION = 2;
 
     public static final String RECIPE_PARCELABLE = "recipe_parcelable_one";
     public static final String SAVE_INGREDIENT_SENT_STATE = "ingredients_were_sent";
@@ -56,6 +62,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     private TextView mTvServings;
     private TextView mTvReadyIn;
     private boolean mIngredientsSent;
+    private int mLastInternetOperation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,8 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         } else {
             mIngredientsSent = false;
         }
+
+        mLastInternetOperation = LAST_INTERNET_OPERATION_NONE;
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -161,6 +170,8 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
         if (toReturn == null ||
                 (toReturn.getIngredients().size() == 0 && toReturn.getDirections().size() == 0))
         {
+            mLastInternetOperation = LAST_INTERNET_OPERATION_INFORMATION;
+
             Api api = new Api(this);
             api.getRecipeSpecific(id);
             mProgress.setVisibility(View.VISIBLE);
@@ -178,8 +189,11 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
 
     private void launchSimilarSearch() {
         if (mRecipe != null) {
+            mLastInternetOperation = LAST_INTERNET_OPERATION_SIMILAR;
+
             Api api = new Api(this);
             api.getRecipesSimilarTo(mRecipe.getIdSpoonacular(), ASSUMED_SIMILAR_LIMIT);
+            mProgress.setVisibility(View.VISIBLE);
         }
     }
 
@@ -219,11 +233,44 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
 
     @Override
     public void onInternetFailure(Throwable throwable) {
-        // TODO: Handle this appropriately
+        mProgress.setVisibility(View.INVISIBLE);
+        // https://www.androidhive.info/2015/09/android-material-design-snackbar-example/
+        Snackbar snackbar = Snackbar.make(
+                findViewById(R.id.frame_recipe_image),
+                getString(R.string.error_failure_internet),
+                Snackbar.LENGTH_INDEFINITE)
+                .setActionTextColor(Color.YELLOW)
+        ;
+        switch(mLastInternetOperation) {
+            default:
+            case LAST_INTERNET_OPERATION_NONE:
+                break;
+            case LAST_INTERNET_OPERATION_SIMILAR:
+                snackbar.setAction(getString(R.string.error_retry_joke_similar), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Currently cannot refresh when info fails; running again is cheap though
+                        getRecipeInfo(mRecipe.getIdSpoonacular());
+                        launchSimilarSearch();
+                    }
+                });
+                break;
+            case LAST_INTERNET_OPERATION_INFORMATION:
+                snackbar.setAction(getString(R.string.error_retry_joke_information), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getRecipeInfo(mRecipe.getIdSpoonacular());
+                    }
+                });
+                break;
+        }
+        snackbar.show();
     }
 
     @Override
     public void onRecipesReturned(List<Recipe> recipes) {
+        mProgress.setVisibility(View.GONE);
+        mLastInternetOperation = LAST_INTERNET_OPERATION_NONE;
         if (recipes.size() > 0) {
             commitFavoriteStatus();
             mViewModel.storeRecipes(recipes);
@@ -279,6 +326,7 @@ public class RecipeActivity extends AppCompatActivity implements Api.RecipeListe
     public void onInformationReturned(Recipe recipe) {
         mProgress.setVisibility(View.GONE);
         mRecipe = recipe;
+        mLastInternetOperation = LAST_INTERNET_OPERATION_NONE;
 
         List<Recipe> savedRecipe = new ArrayList<>();
         savedRecipe.add(mRecipe);

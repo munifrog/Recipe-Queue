@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.example.recipe_q.model.FavoriteRecipe;
 import com.example.recipe_q.model.ViewModel;
 import com.example.recipe_q.model.ViewModelFactory;
 import com.example.recipe_q.util.Api;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -204,10 +206,31 @@ public class MainActivity extends AppCompatActivity implements Api.JokeListener,
         mViewModel = ViewModelProviders.of(this, vmf).get(ViewModel.class);
     }
 
+    private void toggleProgress() {
+        mIsRetrieving = !mIsRetrieving;
+        showProgressBar();
+    }
+
     @Override
     public void onInternetFailure(Throwable throwable) {
-        mIsRetrieving = false;
-        showProgressBar();
+        if (mIsRetrieving) {
+            toggleProgress();
+        }
+
+        // https://www.androidhive.info/2015/09/android-material-design-snackbar-example/
+        Snackbar.make(
+                findViewById(R.id.ll_buttons),
+                getString(R.string.error_failure_internet),
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(getString(R.string.error_retry_joke_retrieval), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        launchJokeRetrieval();
+                    }
+                })
+                .setActionTextColor(Color.YELLOW)
+                .show()
+        ;
     }
 
     @Override

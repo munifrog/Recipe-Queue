@@ -142,4 +142,10 @@
 
     <string name="context_pushed_image">Recipe Suggestion</string>
     <string name="context_focus_scrim">Selected Item</string>
+
+    <string name="error_failure_internet">Internet not connected!</string>
+    <string name="error_retry_joke_information">RETRY DETAILS</string>
+    <string name="error_retry_joke_retrieval">RETRY JOKE</string>
+    <string name="error_retry_joke_search">RETRY SEARCH</string>
+    <string name="error_retry_joke_similar">RETRY SIMILAR</string>
 </resources>
