@@ -26,6 +26,7 @@
     <color name="colorSearchTitle">@color/white</color>
     <color name="colorSearchSubTitle">@color/grey_lighter</color>
     <color name="colorSearchSummary">@color/grey_light</color>
+    <color name="colorButtonDefault">#ffdfdfdf</color>
 
     <color name="colorJokeDisplay">@color/white</color>
 
@@ -38,7 +39,7 @@
     <color name="scrim_text">@color/white</color>
 
     <color name="button_focused">@color/yellow_solid_semi</color>
-    <color name="button_neutral">@android:drawable/btn_default</color>
+    <color name="button_neutral">@color/colorButtonDefault</color>
     <color name="button_pressed">@color/yellow_solid_saturated</color>
 
     <color name="custom_focused">@color/yellow_transparent</color>

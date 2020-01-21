@@ -3,3 +3,8 @@ api_spoonacular=
 ad_mobs_interstitial_testing=ca-app-pub-3940256099942544/1033173712
 ad_mobs_interstitial_release=
 ad_mobs_application_release=
+
+release_trust_key_alias=
+release_trust_key_secret=
+release_trust_store_file=
+release_trust_store_secret=

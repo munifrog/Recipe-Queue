@@ -8,6 +8,14 @@ keysProperties.load(new FileInputStream(keysFile))
 
 android {
     compileSdkVersion 28
+    signingConfigs {
+        release {
+            storeFile file(keysProperties['release_trust_store_file'])
+            storePassword keysProperties['release_trust_store_secret']
+            keyPassword keysProperties['release_trust_key_secret']
+            keyAlias keysProperties['release_trust_key_alias']
+        }
+    }
     defaultConfig {
         applicationId "com.example.recipe_q"
         minSdkVersion 17
@@ -24,7 +32,11 @@ android {
             buildConfigField 'String', 'ADMOB_KEY_INTERSTITIAL_CODE', '\"' + keysProperties['ad_mobs_interstitial_testing'] + '\"'
         }
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+            jniDebuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'ADMOB_KEY_INTERSTITIAL_CODE', '\"' + keysProperties['ad_mobs_interstitial_release'] + '\"'
         }

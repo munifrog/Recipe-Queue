@@ -1,0 +1,10 @@
+api_spoonacular=
+
+ad_mobs_interstitial_testing=ca-app-pub-3940256099942544/1033173712
+ad_mobs_interstitial_release=ca-app-pub-3940256099942544/1033173712
+ad_mobs_application_release=
+
+release_trust_key_alias=recipeq
+release_trust_key_secret=IPromiseNotToShareKey
+release_trust_store_file=../keystore
+release_trust_store_secret=IPromiseNotToShareTrust
