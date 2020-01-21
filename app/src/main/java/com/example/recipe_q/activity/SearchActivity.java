@@ -37,7 +37,7 @@ import static com.example.recipe_q.util.Api.QUERY_COMPLEX_RECIPE_ADD_INFO;
 public class SearchActivity extends AppCompatActivity implements Api.RecipeListener,
         ViewModel.Listener
 {
-    private static final int RECIPE_COUNT_MAXIMUM = 5;
+    private static final int RECIPE_COUNT_MAXIMUM = 10;
 
     private ViewModel mViewModel;
     private Switch mSwitchCommon;

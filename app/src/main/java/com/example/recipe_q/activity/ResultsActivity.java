@@ -33,9 +33,14 @@ public class ResultsActivity extends AppCompatActivity implements AdapterGridSea
     private static final int SPAN_LANDSCAPE = 3;
     private static final int SPAN_PORTRAIT = 1;
 
+    private static final int MODE_FAVORITES = 1;
+    private static final int MODE_HISTORY = 2;
+    private static final int MODE_FRESH_RESULTS = 3;
+
     private ViewModel mViewModel;
     private AdapterGridSearchResults mAdapterSearch;
     private AdapterGridFavorites mAdapterFavorites;
+    private int mMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,25 +60,30 @@ public class ResultsActivity extends AppCompatActivity implements AdapterGridSea
         List<Recipe> recipes;
         List<FavoriteRecipe> favorites;
         Intent launchingIntent = getIntent();
+
         int titleResource = launchingIntent.getIntExtra(RECIPES_TITLE, R.string.activity_history_title);
         switch (titleResource) {
             case R.string.activity_favorites_title:
+                mMode = MODE_FAVORITES;
                 favorites = launchingIntent.getParcelableArrayListExtra(FAVORITE_PARCELABLE);
                 mAdapterFavorites = new AdapterGridFavorites(favorites, this);
                 rvFound.setAdapter(mAdapterFavorites);
                 break;
             default:
             case R.string.activity_history_title:
+                mMode = MODE_HISTORY;
                 recipes = mViewModel.getRecipes();
                 mAdapterSearch = new AdapterGridSearchResults(recipes, this);
                 rvFound.setAdapter(mAdapterSearch);
                 break;
             case R.string.activity_results_title:
+                mMode = MODE_FRESH_RESULTS;
                 recipes = launchingIntent.getParcelableArrayListExtra(RECIPES_PARCELABLE);
                 mAdapterSearch = new AdapterGridSearchResults(recipes, this);
                 rvFound.setAdapter(mAdapterSearch);
                 break;
         }
+
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(titleResource);
@@ -102,12 +112,12 @@ public class ResultsActivity extends AppCompatActivity implements AdapterGridSea
 
     @Override
     public void onInternetFailure(Throwable throwable) {
-        // TODO: Handle this appropriately
+        // This should not happen; all recipes are provided through the launching intent
     }
 
     @Override
     public void onRecipeDatabaseUpdated() {
-        if (mAdapterSearch != null) {
+        if (mMode == MODE_HISTORY && mAdapterSearch != null) {
             mAdapterSearch.setRecipes(mViewModel.getRecipes());
         }
     }
