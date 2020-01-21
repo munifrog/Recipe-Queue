@@ -16,29 +16,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/pad_horz_list">
+        android:padding="@dimen/pad_horz_list" >
 
-        <Switch
-            android:id="@+id/switch_title"
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_list_search_title"
             android:textColor="@color/colorSearchSubTitle"
-            android:checked="false"
-            android:gravity="start"
+            android:gravity="end"
             tool:text="Title" />
 
         <TextView
-            android:id="@+id/tv_summary"
+            android:id="@+id/tv_summary_include"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="@dimen/text_size_list_search_summary"
             android:textColor="@color/colorSearchSummary"
-            android:gravity="start"
+            android:gravity="end"
             tool:text="Include: Option 01, Option 02" />
+
+        <TextView
+            android:id="@+id/tv_summary_exclude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/text_size_list_search_summary"
+            android:textColor="@color/colorSearchSummary"
+            android:gravity="end"
+            tool:text="Exclude: Option 03, Option 04" />
 
     </LinearLayout>
 

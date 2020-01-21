@@ -27,7 +27,7 @@
             android:textSize="@dimen/text_size_list_search_title"
             android:textColor="@color/colorSearchSubTitle"
             android:checked="false"
-            android:gravity="start"
+            android:gravity="end"
             tool:text="Title" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:textSize="@dimen/text_size_list_search_summary"
             android:textColor="@color/colorSearchSummary"
-            android:gravity="start"
+            android:gravity="end"
             tool:text="Include: Option 01, Option 02" />
 
     </LinearLayout>

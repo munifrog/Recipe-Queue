@@ -25,10 +25,10 @@
                 android:padding="@dimen/pad_horz_label"
                 android:textStyle="bold"
                 android:background="@drawable/select_custom"
-                android:nextFocusLeft="@+id/btn_execute_search"
-                android:nextFocusRight="@+id/switch_search_ingredient"
+                android:nextFocusRight="@+id/btn_execute_search"
+                android:nextFocusLeft="@+id/switch_search_ingredient"
                 android:nextFocusUp="@+id/btn_execute_search"
-                android:gravity="start"
+                android:gravity="end"
                 android:checked="true" />
 
             <FrameLayout
@@ -48,9 +48,9 @@
                 android:padding="@dimen/pad_horz_label"
                 android:textStyle="bold"
                 android:background="@drawable/select_custom"
-                android:nextFocusLeft="@+id/switch_search_common"
-                android:nextFocusRight="@+id/switch_search_nutrition"
-                android:gravity="start"
+                android:nextFocusRight="@+id/switch_search_common"
+                android:nextFocusLeft="@+id/switch_search_nutrition"
+                android:gravity="end"
                 android:checked="true" />
 
             <FrameLayout
@@ -70,9 +70,9 @@
                 android:padding="@dimen/pad_horz_label"
                 android:textStyle="bold"
                 android:background="@drawable/select_custom"
-                android:nextFocusLeft="@+id/switch_search_ingredient"
-                android:nextFocusRight="@+id/btn_execute_search"
-                android:gravity="start"
+                android:nextFocusRight="@+id/switch_search_ingredient"
+                android:nextFocusLeft="@+id/btn_execute_search"
+                android:gravity="end"
                 android:checked="true" />
 
             <FrameLayout
@@ -89,8 +89,8 @@
                 android:layout_gravity="center"
                 android:text="@string/btn_execute_search"
                 android:background="@drawable/select_button"
-                android:nextFocusLeft="@+id/switch_search_nutrition"
-                android:nextFocusRight="@+id/switch_search_common"
+                android:nextFocusRight="@+id/switch_search_nutrition"
+                android:nextFocusLeft="@+id/switch_search_common"
                 android:nextFocusDown="@+id/switch_search_common"
                 android:layout_margin="@dimen/margin_button" />
 

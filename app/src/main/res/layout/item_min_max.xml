@@ -30,6 +30,7 @@
             android:textStyle="bold"
             android:textSize="@dimen/text_size_list_search_title"
             android:textColor="@color/colorSearchSubTitle"
+            android:gravity="start"
             tool:text="Nutrient" />
 
         <TextView
@@ -43,6 +44,7 @@
             android:paddingBottom="@dimen/pad_vert_list"
             android:textSize="@dimen/text_size_list_search_summary"
             android:textColor="@color/colorSearchSummary"
+            android:gravity="start"
             tool:text="At most ##mg" />
 
     </LinearLayout>

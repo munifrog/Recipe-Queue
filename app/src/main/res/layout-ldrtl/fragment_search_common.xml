@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.example.recipe_q.custom.Control3WaySelect
+            android:id="@+id/custom_cuisine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_common"
+            android:nextFocusLeft="@+id/switch_search_ingredient"
+            android:nextFocusUp="@+id/switch_search_common"
+            android:nextFocusDown="@+id/custom_diet"
+            app:criteriaTitle="@string/search_common_cuisine_title"
+            app:criteriaIncluded="@string/search_common_selection_any"
+            app:criteriaExcluded="@string/search_common_selection_none"
+            app:criteriaItems="@array/search_common_cuisines" />
+
+        <com.example.recipe_q.custom.ControlSingleSelect
+            android:id="@+id/custom_diet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_common"
+            android:nextFocusLeft="@+id/switch_search_ingredient"
+            android:nextFocusUp="@+id/custom_cuisine"
+            android:nextFocusDown="@+id/custom_meal_type"
+            app:noSelectionText="@string/search_common_selection_any"
+            app:criteriaTitle="@string/search_common_diet_title"
+            app:criteriaItems="@array/search_common_diets" />
+
+        <com.example.recipe_q.custom.ControlSingleSelect
+            android:id="@+id/custom_meal_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_common"
+            android:nextFocusLeft="@+id/switch_search_ingredient"
+            android:nextFocusUp="@+id/custom_diet"
+            android:nextFocusDown="@+id/switch_require_instructions"
+            app:noSelectionText="@string/search_common_selection_any"
+            app:criteriaTitle="@string/search_common_meal_type_title"
+            app:criteriaItems="@array/search_common_meal_types" />
+
+        <com.example.recipe_q.custom.ControlSwitch
+            android:id="@+id/switch_require_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_common"
+            android:nextFocusLeft="@+id/switch_search_ingredient"
+            android:nextFocusUp="@+id/custom_meal_type"
+            android:nextFocusDown="@+id/switch_search_ingredient"
+            app:summaryCheckOff="@string/summary_no"
+            app:summaryCheckOn="@string/summary_yes"
+            app:criteriaTitle="@string/search_common_require_instructions_title"
+            app:criteriaChecked="true" />
+
+    </LinearLayout>
+
+</ScrollView>

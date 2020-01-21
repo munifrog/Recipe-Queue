@@ -92,17 +92,16 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:baselineAligned="false"
         app:layout_constraintBottom_toTopOf="@+id/btn_show_original"
         app:layout_constraintTop_toBottomOf="@+id/tv_servings_label">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginEnd="16dp" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tv_ingredients_label"
@@ -117,42 +116,35 @@
 
             <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ingredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:clipToPadding="true"
+                android:textColor="@color/scrim_text" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_ingredients"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:clipToPadding="true"
-                    android:textColor="@color/scrim_text" />
-
-                <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
-
-                <Button
-                    android:id="@+id/btn_send_to_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/select_button"
-                    android:nextFocusRight="@+id/rv_directions"
-                    android:nextFocusLeft="@+id/rv_ingredients"
-                    android:nextFocusUp="@+id/rv_ingredients"
-                    android:nextFocusDown="@+id/rv_directions"
-                    android:text="@string/btn_recipe_send_to_list" />
-
-            </LinearLayout>
+            <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/btn_send_to_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/select_button"
+            android:nextFocusLeft="@+id/rv_directions"
+            android:nextFocusRight="@+id/rv_ingredients"
+            android:nextFocusUp="@+id/rv_ingredients"
+            android:nextFocusDown="@+id/rv_directions"
+            android:text="@string/btn_recipe_send_to_list" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/tv_directions_label"
@@ -179,13 +171,6 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
-
     <ImageView
         android:id="@+id/iv_favorite"
         android:layout_width="@dimen/width_icon_favorite"
@@ -194,8 +179,8 @@
         android:alpha="0.7"
         android:contentDescription="@string/icon_favorite_description"
         android:background="@drawable/select_favorite"
-        android:nextFocusRight="@+id/rv_ingredients"
-        android:nextFocusLeft="@+id/btn_find_similar"
+        android:nextFocusLeft="@+id/rv_ingredients"
+        android:nextFocusRight="@+id/btn_find_similar"
         android:nextFocusUp="@+id/btn_find_similar"
         android:nextFocusDown="@+id/rv_ingredients"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -209,28 +194,28 @@
         android:layout_marginStart="16dp"
         android:text="@string/btn_recipe_search_for_similar"
         android:background="@drawable/select_button"
-        android:nextFocusRight="@+id/iv_favorite"
-        android:nextFocusLeft="@+id/btn_show_original"
-        android:nextFocusDown="@+id/iv_favorite"
+        android:nextFocusLeft="@+id/iv_favorite"
+        android:nextFocusRight="@+id/btn_show_original"
         android:nextFocusUp="@+id/btn_show_original"
+        android:nextFocusDown="@+id/iv_favorite"
         app:layout_constraintBottom_toBottomOf="@+id/btn_show_original"
-        app:layout_constraintStart_toStartOf="@+id/guideline_vertical"
+        app:layout_constraintStart_toEndOf="@+id/btn_show_original"
         app:layout_constraintTop_toTopOf="@+id/btn_show_original" />
 
     <Button
         android:id="@+id/btn_show_original"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btn_recipe_goto_original_source"
         android:background="@drawable/select_button"
-        android:nextFocusLeft="@+id/rv_directions"
-        android:nextFocusRight="@+id/btn_find_similar"
+        android:nextFocusLeft="@+id/btn_find_similar"
+        android:nextFocusRight="@+id/rv_directions"
         android:nextFocusUp="@+id/rv_directions"
         android:nextFocusDown="@+id/btn_find_similar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -15,30 +15,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/pad_horz_list">
+        android:background="@color/custom_neutral"
+        android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/switch_title"
+        <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:paddingTop="@dimen/pad_vert_list"
+            android:paddingLeft="@dimen/pad_horz_list"
+            android:paddingStart="@dimen/pad_horz_list"
+            android:paddingEnd="@dimen/pad_horz_list"
+            android:paddingRight="@dimen/pad_horz_list"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_list_search_title"
             android:textColor="@color/colorSearchSubTitle"
-            android:checked="false"
-            android:gravity="start"
-            tool:text="Title" />
+            android:gravity="end"
+            tool:text="Nutrient" />
 
         <TextView
-            android:id="@+id/tv_summary"
+            android:id="@+id/tv_item_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:paddingLeft="@dimen/pad_horz_list"
+            android:paddingStart="@dimen/pad_horz_list"
+            android:paddingEnd="@dimen/pad_horz_list"
+            android:paddingRight="@dimen/pad_horz_list"
+            android:paddingBottom="@dimen/pad_vert_list"
             android:textSize="@dimen/text_size_list_search_summary"
             android:textColor="@color/colorSearchSummary"
-            android:gravity="start"
-            tool:text="Include: Option 01, Option 02" />
+            android:gravity="end"
+            tool:text="At most ##mg" />
 
     </LinearLayout>
 

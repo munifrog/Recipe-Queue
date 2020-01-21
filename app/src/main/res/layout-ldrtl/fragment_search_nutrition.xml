@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_alcohol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/switch_search_nutrition"
+            android:nextFocusDown="@+id/mm_caffeine"
+            app:criteriaTitle="@string/search_nutrient_alcohol_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_caffeine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_alcohol"
+            android:nextFocusDown="@+id/mm_calcium"
+            app:criteriaTitle="@string/search_nutrient_caffeine_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_calcium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_caffeine"
+            android:nextFocusDown="@+id/mm_calories"
+            app:criteriaTitle="@string/search_nutrient_calcium_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_calories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_calcium"
+            android:nextFocusDown="@+id/mm_carbohydrates"
+            app:criteriaTitle="@string/search_nutrient_calories_title"
+            app:criteriaUnit="@string/search_nutrient_unit_calories"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_carbohydrates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_calories"
+            android:nextFocusDown="@+id/mm_cholesterol"
+            app:criteriaTitle="@string/search_nutrient_carbohydrates_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_cholesterol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_carbohydrates"
+            android:nextFocusDown="@+id/mm_choline"
+            app:criteriaTitle="@string/search_nutrient_cholesterol_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_choline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_cholesterol"
+            android:nextFocusDown="@+id/mm_copper"
+            app:criteriaTitle="@string/search_nutrient_choline_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_copper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_choline"
+            android:nextFocusDown="@+id/mm_fat"
+            app:criteriaTitle="@string/search_nutrient_copper_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_fat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_copper"
+            android:nextFocusDown="@+id/mm_fiber"
+            app:criteriaTitle="@string/search_nutrient_fat_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_fiber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_fat"
+            android:nextFocusDown="@+id/mm_fluoride"
+            app:criteriaTitle="@string/search_nutrient_fiber_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_fluoride"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_fiber"
+            android:nextFocusDown="@+id/mm_folate"
+            app:criteriaTitle="@string/search_nutrient_fluoride_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_folate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_fluoride"
+            android:nextFocusDown="@+id/mm_folic_acid"
+            app:criteriaTitle="@string/search_nutrient_folate_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_folic_acid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_folate"
+            android:nextFocusDown="@+id/mm_iodine"
+            app:criteriaTitle="@string/search_nutrient_folic_acid_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_iodine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_folic_acid"
+            android:nextFocusDown="@+id/mm_iron"
+            app:criteriaTitle="@string/search_nutrient_iodine_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_iron"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_iodine"
+            android:nextFocusDown="@+id/mm_magnesium"
+            app:criteriaTitle="@string/search_nutrient_iron_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_magnesium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_iron"
+            android:nextFocusDown="@+id/mm_manganese"
+            app:criteriaTitle="@string/search_nutrient_magnesium_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_manganese"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_magnesium"
+            android:nextFocusDown="@+id/mm_phosphorous"
+            app:criteriaTitle="@string/search_nutrient_manganese_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_phosphorous"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_manganese"
+            android:nextFocusDown="@+id/mm_potassium"
+            app:criteriaTitle="@string/search_nutrient_phosphorous_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_potassium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_phosphorous"
+            android:nextFocusDown="@+id/mm_protein"
+            app:criteriaTitle="@string/search_nutrient_potassium_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_protein"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_potassium"
+            android:nextFocusDown="@+id/mm_saturated_fat"
+            app:criteriaTitle="@string/search_nutrient_protein_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_saturated_fat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_protein"
+            android:nextFocusDown="@+id/mm_selenium"
+            app:criteriaTitle="@string/search_nutrient_saturated_fat_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_selenium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_saturated_fat"
+            android:nextFocusDown="@+id/mm_sodium"
+            app:criteriaTitle="@string/search_nutrient_selenium_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_sodium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_selenium"
+            android:nextFocusDown="@+id/mm_sugar"
+            app:criteriaTitle="@string/search_nutrient_sodium_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_sugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_sodium"
+            android:nextFocusDown="@+id/mm_vitamin_a"
+            app:criteriaTitle="@string/search_nutrient_sugar_title"
+            app:criteriaUnit="@string/search_nutrient_unit_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_sugar"
+            android:nextFocusDown="@+id/mm_vitamin_b01"
+            app:criteriaTitle="@string/search_nutrient_vitamin_a_title"
+            app:criteriaUnit="@string/search_nutrient_unit_international_units"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_b01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_a"
+            android:nextFocusDown="@+id/mm_vitamin_b02"
+            app:criteriaTitle="@string/search_nutrient_vitamin_b01_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_b02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_b01"
+            android:nextFocusDown="@+id/mm_vitamin_b03"
+            app:criteriaTitle="@string/search_nutrient_vitamin_b02_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_b03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_b02"
+            android:nextFocusDown="@+id/mm_vitamin_b05"
+            app:criteriaTitle="@string/search_nutrient_vitamin_b03_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_b05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_b03"
+            android:nextFocusDown="@+id/mm_vitamin_b06"
+            app:criteriaTitle="@string/search_nutrient_vitamin_b05_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_b06"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_b05"
+            android:nextFocusDown="@+id/mm_vitamin_b12"
+            app:criteriaTitle="@string/search_nutrient_vitamin_b06_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_b12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_b06"
+            android:nextFocusDown="@+id/mm_vitamin_c"
+            app:criteriaTitle="@string/search_nutrient_vitamin_b12_title"
+            app:criteriaUnit="@string/search_nutrient_unit_micro_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_b12"
+            android:nextFocusDown="@+id/mm_vitamin_d"
+            app:criteriaTitle="@string/search_nutrient_vitamin_c_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_c"
+            android:nextFocusDown="@+id/mm_vitamin_e"
+            app:criteriaTitle="@string/search_nutrient_vitamin_d_title"
+            app:criteriaUnit="@string/search_nutrient_unit_micro_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_e"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_d"
+            android:nextFocusDown="@+id/mm_vitamin_k"
+            app:criteriaTitle="@string/search_nutrient_vitamin_e_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_vitamin_k"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_e"
+            android:nextFocusDown="@+id/mm_zinc"
+            app:criteriaTitle="@string/search_nutrient_vitamin_k_title"
+            app:criteriaUnit="@string/search_nutrient_unit_micro_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+        <com.example.recipe_q.custom.ControlMinMax
+            android:id="@+id/mm_zinc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_nutrition"
+            android:nextFocusLeft="@+id/btn_execute_search"
+            android:nextFocusUp="@+id/mm_vitamin_k"
+            android:nextFocusDown="@+id/btn_execute_search"
+            app:criteriaTitle="@string/search_nutrient_zinc_title"
+            app:criteriaUnit="@string/search_nutrient_unit_milli_grams"
+            app:labelMaximum="@string/min_max_label_maximum"
+            app:labelMinimum="@string/min_max_label_minimum"
+            app:valueMaximum="@string/min_max_default_maximum"
+            app:valueMinimum="@string/min_max_default_minimum" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.example.recipe_q.custom.ControlMultiSelect
+            android:id="@+id/custom_intolerance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_ingredient"
+            android:nextFocusLeft="@+id/switch_search_nutrition"
+            android:nextFocusUp="@+id/switch_search_ingredient"
+            android:nextFocusDown="@+id/custom_ingredients"
+            app:criteriaTitle="@string/search_ingredient_intolerance_title"
+            app:criteriaSummary="@string/summary_intolerance"
+            app:criteriaItems="@array/search_common_intolerances" />
+
+        <com.example.recipe_q.custom.Control3WaySelect
+            android:id="@+id/custom_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_ingredient"
+            android:nextFocusLeft="@+id/switch_search_nutrition"
+            android:nextFocusUp="@+id/custom_intolerance"
+            android:nextFocusDown="@+id/switch_ignore_pantry"
+            app:criteriaTitle="@string/search_ingredient_ingredient_title"
+            app:criteriaIncluded="@string/search_common_selection_any"
+            app:criteriaExcluded="@string/search_common_selection_none"
+            app:criteriaItems="@array/search_ingredients" />
+
+        <com.example.recipe_q.custom.ControlSwitch
+            android:id="@+id/switch_ignore_pantry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusRight="@+id/switch_search_ingredient"
+            android:nextFocusLeft="@+id/switch_search_nutrition"
+            android:nextFocusUp="@+id/custom_ingredients"
+            android:nextFocusDown="@+id/switch_search_nutrition"
+            app:summaryCheckOff="@string/summary_no"
+            app:summaryCheckOn="@string/summary_yes"
+            app:criteriaTitle="@string/search_ingredient_ignore_pantry_title"
+            app:criteriaChecked="false" />
+
+    </LinearLayout>
+
+</ScrollView>

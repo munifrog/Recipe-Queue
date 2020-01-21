@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:nextFocusRight="@+id/btn_send_to_list"
+    android:nextFocusLeft="@+id/btn_show_original"
+    android:nextFocusUp="@+id/btn_send_to_list"
+    android:nextFocusDown="@+id/btn_show_original"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <View
+            android:id="@+id/iv_focus_scrim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/context_focus_scrim"
+            android:background="@color/transparent" />
+
+        <TextView
+            android:id="@+id/tv_direction_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_recipe_ingredients_item"
+            android:textColor="@color/scrim_text" />
+
+    </FrameLayout>
+
+    <View style="@style/DividerHorizontal" android:background="@color/scrim_text" />
+
+</LinearLayout>
